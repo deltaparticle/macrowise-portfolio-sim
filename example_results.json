@@ -1,0 +1,943 @@
+{
+  "01": {
+    "title": "Max Sharpe - sector mix (IT/Banks/Auto/Pharma/FMCG)",
+    "path": "examples/request_max_sharpe.json",
+    "config": {
+      "sectors": [
+        "IT",
+        "Banks",
+        "Auto",
+        "Pharma",
+        "FMCG"
+      ],
+      "primary_goal": "max_sharpe",
+      "w_min": 0.0,
+      "w_max": 0.3,
+      "lookback_years": 5,
+      "risk_free_rate": 0.065
+    },
+    "chosen_model": "risk_parity",
+    "feasible": true,
+    "reason": "",
+    "n_universe": 24,
+    "n_holdings": 24,
+    "metrics": {
+      "ann_return": 0.0097,
+      "ann_vol": 0.1412,
+      "sharpe": -0.3914,
+      "sortino": -0.5267,
+      "max_drawdown": 0.1536,
+      "cvar": 0.0211,
+      "calmar": 0.0634
+    },
+    "top_holdings": [
+      [
+        "nifty_fmcg",
+        0.0659
+      ],
+      [
+        "bse_fast_moving_consumer_goods",
+        0.062
+      ],
+      [
+        "nifty_pharma",
+        0.0525
+      ],
+      [
+        "nifty500_healthcare",
+        0.05
+      ],
+      [
+        "bse_healthcare",
+        0.0486
+      ],
+      [
+        "nifty_hospitals",
+        0.0483
+      ],
+      [
+        "nifty_private_bank",
+        0.0456
+      ],
+      [
+        "nifty_midsmall_healthcare",
+        0.0452
+      ]
+    ],
+    "candidates": [
+      {
+        "model": "risk_parity",
+        "feasible": true,
+        "ann_return": 0.0097,
+        "ann_vol": 0.1412,
+        "sharpe": -0.391,
+        "max_dd": 0.1536
+      },
+      {
+        "model": "min_variance",
+        "feasible": true,
+        "ann_return": -0.0209,
+        "ann_vol": 0.1171,
+        "sharpe": -0.733,
+        "max_dd": 0.1424
+      }
+    ]
+  },
+  "02": {
+    "title": "Target return 15% + vol cap 22%",
+    "path": "examples/request_target_return_vol_cap.json",
+    "config": {
+      "sectors": [
+        "IT",
+        "Banks",
+        "FinancialServices",
+        "Pharma",
+        "FMCG",
+        "Auto"
+      ],
+      "target_return": 0.18,
+      "max_volatility": 0.22,
+      "w_min": 0.0,
+      "w_max": 0.25,
+      "lookback_years": 5
+    },
+    "chosen_model": "max_return_for_vol",
+    "feasible": false,
+    "reason": "return 0.0519 < target 0.1800",
+    "n_universe": 35,
+    "n_holdings": 35,
+    "metrics": {
+      "ann_return": 0.0519,
+      "ann_vol": 0.1561,
+      "sharpe": -0.0836,
+      "sortino": -0.1154,
+      "max_drawdown": 0.1584,
+      "cvar": 0.0228,
+      "calmar": 0.3278
+    },
+    "top_holdings": [
+      [
+        "nifty_fmcg",
+        0.0296
+      ],
+      [
+        "bse_fast_moving_consumer_goods",
+        0.0295
+      ],
+      [
+        "nifty_pharma",
+        0.0293
+      ],
+      [
+        "nifty500_healthcare",
+        0.0292
+      ],
+      [
+        "bse_healthcare",
+        0.0292
+      ],
+      [
+        "nifty_hospitals",
+        0.0291
+      ],
+      [
+        "bse_teck",
+        0.0291
+      ],
+      [
+        "nifty_it",
+        0.029
+      ]
+    ],
+    "candidates": [
+      {
+        "model": "max_return_for_vol",
+        "feasible": false,
+        "ann_return": 0.0519,
+        "ann_vol": 0.1561,
+        "sharpe": -0.084,
+        "max_dd": 0.1584
+      }
+    ]
+  },
+  "03": {
+    "title": "Min drawdown cap 20% with 12% return floor",
+    "path": "examples/request_max_dd.json",
+    "config": {
+      "sectors": [
+        "Largecap",
+        "Broad",
+        "FMCG",
+        "Pharma"
+      ],
+      "primary_goal": "min_drawdown",
+      "max_drawdown": 0.2,
+      "target_return": 0.12,
+      "lookback_years": 5
+    },
+    "chosen_model": "min_max_drawdown",
+    "feasible": true,
+    "reason": "",
+    "n_universe": 50,
+    "n_holdings": 8,
+    "metrics": {
+      "ann_return": 0.148,
+      "ann_vol": 0.1264,
+      "sharpe": 0.6567,
+      "sortino": 0.923,
+      "max_drawdown": 0.08,
+      "cvar": 0.0182,
+      "calmar": 1.8496
+    },
+    "top_holdings": [
+      [
+        "nifty_pharma",
+        0.2174
+      ],
+      [
+        "nifty500_healthcare",
+        0.2115
+      ],
+      [
+        "bse_healthcare",
+        0.2104
+      ],
+      [
+        "nifty_midsmall_healthcare",
+        0.202
+      ],
+      [
+        "bse_500_quality_50",
+        0.0671
+      ],
+      [
+        "bse_500_dividend_leaders_50",
+        0.061
+      ],
+      [
+        "bse_sensex_next_50_tmc",
+        0.0178
+      ],
+      [
+        "bse_500_enhanced_value_50",
+        0.0128
+      ]
+    ],
+    "candidates": [
+      {
+        "model": "min_max_drawdown",
+        "feasible": true,
+        "ann_return": 0.148,
+        "ann_vol": 0.1264,
+        "sharpe": 0.657,
+        "max_dd": 0.08
+      },
+      {
+        "model": "risk_parity",
+        "feasible": false,
+        "ann_return": 0.0246,
+        "ann_vol": 0.1255,
+        "sharpe": -0.322,
+        "max_dd": 0.1323
+      },
+      {
+        "model": "min_variance",
+        "feasible": false,
+        "ann_return": -0.0038,
+        "ann_vol": 0.1054,
+        "sharpe": -0.653,
+        "max_dd": 0.1154
+      }
+    ]
+  },
+  "04": {
+    "title": "Black-Litterman with 2 views (IT bullish + Banks vs Pharma)",
+    "path": "examples/request_black_litterman.json",
+    "config": {
+      "sectors": [
+        "IT",
+        "Banks",
+        "Auto",
+        "Pharma",
+        "FMCG",
+        "Energy"
+      ],
+      "views": [
+        {
+          "asset": "nifty_it",
+          "return": 0.2,
+          "confidence": 0.65
+        },
+        {
+          "long": [
+            "nifty_bank"
+          ],
+          "short": [
+            "nifty_pharma"
+          ],
+          "return": 0.04,
+          "confidence": 0.5
+        }
+      ],
+      "bl_tau": 0.05,
+      "lookback_years": 5,
+      "w_max": 0.3
+    },
+    "chosen_model": "black_litterman",
+    "feasible": true,
+    "reason": "",
+    "n_universe": 32,
+    "n_holdings": 6,
+    "metrics": {
+      "ann_return": -0.1507,
+      "ann_vol": 0.202,
+      "sharpe": -1.0678,
+      "sortino": -1.4294,
+      "max_drawdown": 0.2894,
+      "cvar": 0.0304,
+      "calmar": -0.5207
+    },
+    "top_holdings": [
+      [
+        "nifty_it",
+        0.3
+      ],
+      [
+        "bse_focused_it",
+        0.3
+      ],
+      [
+        "nifty_india_internet",
+        0.1936
+      ],
+      [
+        "nifty_financial_services_ex_bank",
+        0.0923
+      ],
+      [
+        "bse_information_technology",
+        0.0765
+      ],
+      [
+        "bse_psu_bank",
+        0.0376
+      ]
+    ],
+    "candidates": [
+      {
+        "model": "black_litterman",
+        "feasible": true,
+        "ann_return": -0.1507,
+        "ann_vol": 0.202,
+        "sharpe": -1.068,
+        "max_dd": 0.2894
+      }
+    ]
+  },
+  "05": {
+    "title": "Balanced (Risk Parity/HRP) on Largecap+Midcap+Broad",
+    "path": "examples/request_balanced.json",
+    "config": {
+      "sectors": [
+        "Largecap",
+        "Midcap",
+        "Broad"
+      ],
+      "primary_goal": "balanced",
+      "lookback_years": 5
+    },
+    "chosen_model": "risk_parity",
+    "feasible": true,
+    "reason": "",
+    "n_universe": 52,
+    "n_holdings": 52,
+    "metrics": {
+      "ann_return": 0.0241,
+      "ann_vol": 0.1361,
+      "sharpe": -0.3002,
+      "sortino": -0.4028,
+      "max_drawdown": 0.1434,
+      "cvar": 0.0203,
+      "calmar": 0.1683
+    },
+    "top_holdings": [
+      [
+        "nifty50_shariah",
+        0.0268
+      ],
+      [
+        "nifty50_value_20",
+        0.0251
+      ],
+      [
+        "nifty100_low_volatility_30",
+        0.0237
+      ],
+      [
+        "nifty100_quality_30",
+        0.0237
+      ],
+      [
+        "bse_500_low_volatility_50",
+        0.0236
+      ],
+      [
+        "bse_sensex",
+        0.0211
+      ],
+      [
+        "nifty_50",
+        0.021
+      ],
+      [
+        "bse_sensex_50",
+        0.021
+      ]
+    ],
+    "candidates": [
+      {
+        "model": "risk_parity",
+        "feasible": true,
+        "ann_return": 0.0241,
+        "ann_vol": 0.1361,
+        "sharpe": -0.3,
+        "max_dd": 0.1434
+      },
+      {
+        "model": "hrp",
+        "feasible": true,
+        "ann_return": 0.017,
+        "ann_vol": 0.1338,
+        "sharpe": -0.359,
+        "max_dd": 0.1431
+      },
+      {
+        "model": "max_diversification",
+        "feasible": true,
+        "ann_return": -0.0027,
+        "ann_vol": 0.1327,
+        "sharpe": -0.51,
+        "max_dd": 0.1488
+      }
+    ]
+  },
+  "06": {
+    "title": "Min tail risk (CVaR cap 2.5%)",
+    "path": "examples/request_tail_risk.json",
+    "config": {
+      "sectors": [
+        "Broad",
+        "Largecap",
+        "FMCG",
+        "Pharma"
+      ],
+      "primary_goal": "min_tail_risk",
+      "max_cvar": 0.025,
+      "cvar_alpha": 0.05,
+      "target_return": 0.14,
+      "lookback_years": 5
+    },
+    "chosen_model": "min_cvar",
+    "feasible": false,
+    "reason": "return 0.0131 < target 0.1400",
+    "n_universe": 50,
+    "n_holdings": 4,
+    "metrics": {
+      "ann_return": 0.0131,
+      "ann_vol": 0.1061,
+      "sharpe": -0.489,
+      "sortino": -0.6433,
+      "max_drawdown": 0.1199,
+      "cvar": 0.0155,
+      "calmar": 0.1092
+    },
+    "top_holdings": [
+      [
+        "nifty500_healthcare",
+        0.4051
+      ],
+      [
+        "nifty50_value_20",
+        0.3357
+      ],
+      [
+        "nifty_fmcg",
+        0.2258
+      ],
+      [
+        "nifty_hospitals",
+        0.0334
+      ]
+    ],
+    "candidates": [
+      {
+        "model": "min_cvar",
+        "feasible": false,
+        "ann_return": 0.0131,
+        "ann_vol": 0.1061,
+        "sharpe": -0.489,
+        "max_dd": 0.1199
+      },
+      {
+        "model": "min_variance",
+        "feasible": false,
+        "ann_return": -0.0038,
+        "ann_vol": 0.1054,
+        "sharpe": -0.653,
+        "max_dd": 0.1154
+      },
+      {
+        "model": "min_variance",
+        "feasible": false,
+        "ann_return": -0.0038,
+        "ann_vol": 0.1054,
+        "sharpe": -0.653,
+        "max_dd": 0.1154
+      }
+    ]
+  },
+  "07": {
+    "title": "Min risk on broad Largecap universe",
+    "path": "examples/ex07_min_risk_broad.json",
+    "config": {
+      "sectors": [
+        "Largecap",
+        "Broad"
+      ],
+      "primary_goal": "min_risk",
+      "w_max": 0.25,
+      "lookback_years": 5
+    },
+    "chosen_model": "risk_parity",
+    "feasible": true,
+    "reason": "",
+    "n_universe": 43,
+    "n_holdings": 43,
+    "metrics": {
+      "ann_return": 0.0117,
+      "ann_vol": 0.1324,
+      "sharpe": -0.4023,
+      "sortino": -0.5365,
+      "max_drawdown": 0.1427,
+      "cvar": 0.0198,
+      "calmar": 0.0821
+    },
+    "top_holdings": [
+      [
+        "nifty50_shariah",
+        0.0312
+      ],
+      [
+        "nifty50_value_20",
+        0.0292
+      ],
+      [
+        "nifty100_quality_30",
+        0.0277
+      ],
+      [
+        "bse_500_low_volatility_50",
+        0.0277
+      ],
+      [
+        "nifty100_low_volatility_30",
+        0.0276
+      ],
+      [
+        "bse_500_dividend_leaders_50",
+        0.0247
+      ],
+      [
+        "bse_sensex",
+        0.0245
+      ],
+      [
+        "nifty_50",
+        0.0245
+      ]
+    ],
+    "candidates": [
+      {
+        "model": "risk_parity",
+        "feasible": true,
+        "ann_return": 0.0117,
+        "ann_vol": 0.1324,
+        "sharpe": -0.402,
+        "max_dd": 0.1427
+      },
+      {
+        "model": "min_variance",
+        "feasible": true,
+        "ann_return": -0.0429,
+        "ann_vol": 0.1134,
+        "sharpe": -0.951,
+        "max_dd": 0.1431
+      },
+      {
+        "model": "min_variance",
+        "feasible": true,
+        "ann_return": -0.0429,
+        "ann_vol": 0.1134,
+        "sharpe": -0.951,
+        "max_dd": 0.1431
+      }
+    ]
+  },
+  "08": {
+    "title": "Max Sortino on 6-sector universe",
+    "path": "examples/ex08_max_sortino.json",
+    "config": {
+      "sectors": [
+        "IT",
+        "Banks",
+        "FinancialServices",
+        "Auto",
+        "Pharma",
+        "FMCG"
+      ],
+      "primary_goal": "max_sortino",
+      "w_max": 0.25,
+      "lookback_years": 5
+    },
+    "chosen_model": "max_sortino",
+    "feasible": true,
+    "reason": "",
+    "n_universe": 35,
+    "n_holdings": 5,
+    "metrics": {
+      "ann_return": 0.245,
+      "ann_vol": 0.2018,
+      "sharpe": 0.8918,
+      "sortino": 1.2901,
+      "max_drawdown": 0.1433,
+      "cvar": 0.0284,
+      "calmar": 1.7088
+    },
+    "top_holdings": [
+      [
+        "nifty_midsmall_financial_services",
+        0.25
+      ],
+      [
+        "nifty_nbfc",
+        0.25
+      ],
+      [
+        "nifty_hospitals",
+        0.25
+      ],
+      [
+        "nifty_capital_markets",
+        0.1922
+      ],
+      [
+        "nifty_psu_bank",
+        0.0578
+      ]
+    ],
+    "candidates": [
+      {
+        "model": "max_sortino",
+        "feasible": true,
+        "ann_return": 0.245,
+        "ann_vol": 0.2018,
+        "sharpe": 0.892,
+        "max_dd": 0.1433
+      },
+      {
+        "model": "min_variance",
+        "feasible": true,
+        "ann_return": -0.0211,
+        "ann_vol": 0.1168,
+        "sharpe": -0.737,
+        "max_dd": 0.14
+      }
+    ]
+  },
+  "09": {
+    "title": "Max Diversification across size buckets",
+    "path": "examples/ex09_max_diversification.json",
+    "config": {
+      "sectors": [
+        "Largecap",
+        "Midcap",
+        "Smallcap",
+        "Broad"
+      ],
+      "primary_goal": "max_diversification",
+      "w_max": 0.15,
+      "lookback_years": 5
+    },
+    "chosen_model": "risk_parity",
+    "feasible": true,
+    "reason": "",
+    "n_universe": 59,
+    "n_holdings": 59,
+    "metrics": {
+      "ann_return": 0.0313,
+      "ann_vol": 0.1382,
+      "sharpe": -0.2436,
+      "sortino": -0.3279,
+      "max_drawdown": 0.1442,
+      "cvar": 0.0206,
+      "calmar": 0.2173
+    },
+    "top_holdings": [
+      [
+        "nifty50_shariah",
+        0.0243
+      ],
+      [
+        "nifty50_value_20",
+        0.0228
+      ],
+      [
+        "nifty100_low_volatility_30",
+        0.0214
+      ],
+      [
+        "nifty100_quality_30",
+        0.0213
+      ],
+      [
+        "bse_500_low_volatility_50",
+        0.0213
+      ],
+      [
+        "bse_sensex",
+        0.0191
+      ],
+      [
+        "nifty_50",
+        0.019
+      ],
+      [
+        "bse_sensex_50",
+        0.019
+      ]
+    ],
+    "candidates": [
+      {
+        "model": "risk_parity",
+        "feasible": true,
+        "ann_return": 0.0313,
+        "ann_vol": 0.1382,
+        "sharpe": -0.244,
+        "max_dd": 0.1442
+      },
+      {
+        "model": "max_diversification",
+        "feasible": true,
+        "ann_return": 0.0229,
+        "ann_vol": 0.1349,
+        "sharpe": -0.312,
+        "max_dd": 0.1418
+      }
+    ]
+  },
+  "10": {
+    "title": "Multi-constraint: return + vol + DD combined",
+    "path": "examples/ex10_multi_constraint.json",
+    "config": {
+      "sectors": [
+        "Largecap",
+        "Midcap",
+        "Broad",
+        "FMCG",
+        "Pharma"
+      ],
+      "target_return": 0.15,
+      "max_volatility": 0.18,
+      "max_drawdown": 0.25,
+      "w_max": 0.2,
+      "lookback_years": 5
+    },
+    "chosen_model": "min_max_drawdown",
+    "feasible": false,
+    "reason": "return 0.1470 < target 0.1500",
+    "n_universe": 59,
+    "n_holdings": 9,
+    "metrics": {
+      "ann_return": 0.147,
+      "ann_vol": 0.125,
+      "sharpe": 0.6562,
+      "sortino": 0.9227,
+      "max_drawdown": 0.0806,
+      "cvar": 0.018,
+      "calmar": 1.8237
+    },
+    "top_holdings": [
+      [
+        "nifty_pharma",
+        0.2
+      ],
+      [
+        "nifty500_healthcare",
+        0.1994
+      ],
+      [
+        "bse_healthcare",
+        0.1993
+      ],
+      [
+        "nifty_midsmall_healthcare",
+        0.1726
+      ],
+      [
+        "bse_500_dividend_leaders_50",
+        0.0732
+      ],
+      [
+        "nifty_hospitals",
+        0.0615
+      ],
+      [
+        "bse_500_quality_50",
+        0.044
+      ],
+      [
+        "nifty100_liquid_15",
+        0.0359
+      ]
+    ],
+    "candidates": [
+      {
+        "model": "min_max_drawdown",
+        "feasible": false,
+        "ann_return": 0.147,
+        "ann_vol": 0.125,
+        "sharpe": 0.656,
+        "max_dd": 0.0806
+      },
+      {
+        "model": "risk_parity",
+        "feasible": false,
+        "ann_return": 0.0335,
+        "ann_vol": 0.1293,
+        "sharpe": -0.243,
+        "max_dd": 0.1343
+      },
+      {
+        "model": "min_variance",
+        "feasible": false,
+        "ann_return": -0.005,
+        "ann_vol": 0.1063,
+        "sharpe": -0.659,
+        "max_dd": 0.1192
+      }
+    ]
+  },
+  "11": {
+    "title": "Factor-index universe (Momentum/Quality/LowVol/Value)",
+    "path": "examples/ex11_factor_indices.json",
+    "config": {
+      "sectors": [
+        "Momentum",
+        "Quality",
+        "LowVolatility",
+        "Value"
+      ],
+      "primary_goal": "max_sharpe",
+      "w_max": 0.2,
+      "lookback_years": 5
+    },
+    "chosen_model": "risk_parity",
+    "feasible": true,
+    "reason": "",
+    "n_universe": 31,
+    "n_holdings": 31,
+    "metrics": {
+      "ann_return": 0.0136,
+      "ann_vol": 0.1325,
+      "sharpe": -0.3884,
+      "sortino": -0.5146,
+      "max_drawdown": 0.1316,
+      "cvar": 0.0201,
+      "calmar": 0.103
+    },
+    "top_holdings": [
+      [
+        "nifty50_value_20",
+        0.0415
+      ],
+      [
+        "nifty_quality_low_volatility_30",
+        0.0397
+      ],
+      [
+        "bse_low_volatility_index",
+        0.0393
+      ],
+      [
+        "nifty100_low_volatility_30",
+        0.0389
+      ],
+      [
+        "nifty500_low_volatility_50",
+        0.0385
+      ],
+      [
+        "nifty_low_volatility_50",
+        0.0385
+      ],
+      [
+        "nifty_alpha_quality_value_low_volatility_30",
+        0.0385
+      ],
+      [
+        "bse_500_low_volatility_50",
+        0.0384
+      ]
+    ],
+    "candidates": [
+      {
+        "model": "risk_parity",
+        "feasible": true,
+        "ann_return": 0.0136,
+        "ann_vol": 0.1325,
+        "sharpe": -0.388,
+        "max_dd": 0.1316
+      },
+      {
+        "model": "min_variance",
+        "feasible": true,
+        "ann_return": -0.0208,
+        "ann_vol": 0.1125,
+        "sharpe": -0.762,
+        "max_dd": 0.1377
+      }
+    ]
+  },
+  "12": {
+    "title": "Degenerate universe - Defence sector (only 1 usable index)",
+    "path": "examples/ex12_defence_degenerate.json",
+    "config": {
+      "sectors": [
+        "Defence"
+      ],
+      "primary_goal": "max_sharpe",
+      "lookback_years": 5
+    },
+    "chosen_model": "single_asset_trivial",
+    "feasible": true,
+    "reason": "Universe reduced to a single index after history filtering.",
+    "n_universe": 1,
+    "n_holdings": 1,
+    "metrics": {
+      "ann_return": 0.6064,
+      "ann_vol": 0.2748,
+      "sharpe": 1.9702,
+      "sortino": 2.8968,
+      "max_drawdown": 0.3821,
+      "cvar": 0.0385,
+      "calmar": 1.5872
+    },
+    "top_holdings": [
+      [
+        "nifty_india_defence",
+        1.0
+      ]
+    ],
+    "candidates": []
+  }
+}

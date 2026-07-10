@@ -1,0 +1,98 @@
+[
+  {
+    "name": "test_max_sharpe_basic",
+    "file": "tests/test_max_sharpe_basic.json",
+    "success": true,
+    "execution_time": 2.4875147342681885,
+    "output": "\n=== PORTFOLIO OPTIMIZATION RESULT ===\n\nChosen model     : max_sharpe\nFeasible         : True  \nUniverse size    : 52 indices\n\nExpected return  : 14.99%\nVolatility (ann) : 17.70%\nSharpe           : 0.480\nSortino          : 0.681\nMax drawdown     : 16.05%\nCVaR 5% (daily)  : 2.48%\nCalmar           : 0.934\n\n--- Weights (top holdings) ---\n  nifty_midcap_select                                  70.23%\n  bse_next_250_microcap                                29.77%\n\n--- All candidate models ---\n  [max_sharpe               ]  feas=True  score=0.4798  ret=14.99%  vol=17.70%  dd=16.05%\n  [risk_parity              ]  feas=True  score=-0.3002  ret=2.41%  vol=13.61%  dd=14.34%\n",
+    "error": null
+  },
+  {
+    "name": "test_min_variance_basic",
+    "file": "tests/test_min_variance_basic.json",
+    "success": true,
+    "execution_time": 2.3775830268859863,
+    "output": "\n=== PORTFOLIO OPTIMIZATION RESULT ===\n\nChosen model     : min_variance\nFeasible         : True  \nUniverse size    : 52 indices\n\nExpected return  : -5.16%\nVolatility (ann) : 11.21%\nSharpe           : -1.039\nSortino          : -1.339\nMax drawdown     : 13.93%\nCVaR 5% (daily)  : 1.70%\nCalmar           : -0.370\n\n--- Weights (top holdings) ---\n  bse_500_low_volatility_50                            51.23%\n  nifty50_value_20                                     33.81%\n  nifty50_shariah                                      14.97%\n\n--- All candidate models ---\n  [min_variance             ]  feas=True  score=-0.1121  ret=-5.16%  vol=11.21%  dd=13.93%\n  [risk_parity              ]  feas=True  score=-0.1361  ret=2.41%  vol=13.61%  dd=14.34%\n",
+    "error": null
+  },
+  {
+    "name": "test_balanced_basic",
+    "file": "tests/test_balanced_basic.json",
+    "success": true,
+    "execution_time": 2.194554328918457,
+    "output": "\n=== PORTFOLIO OPTIMIZATION RESULT ===\n\nChosen model     : risk_parity\nFeasible         : True  \nUniverse size    : 52 indices\n\nExpected return  : 2.41%\nVolatility (ann) : 13.61%\nSharpe           : -0.300\nSortino          : -0.403\nMax drawdown     : 14.34%\nCVaR 5% (daily)  : 2.03%\nCalmar           : 0.168\n\n--- Weights (top holdings) ---\n  nifty50_shariah                                       2.68%\n  nifty50_value_20                                      2.51%\n  nifty100_low_volatility_30                            2.37%\n  nifty100_quality_30                                   2.37%\n  bse_500_low_volatility_50                             2.36%\n  bse_sensex                                            2.11%\n  nifty_50                                              2.10%\n  bse_sensex_50                                         2.10%\n  bse_500_dividend_leaders_50                           2.09%\n  bse_sensex_50_tmc                                     2.09%\n  bse_sensex_sixty                                      2.08%\n  bse_sensex_sixty_65_35                                2.06%\n  nifty50_equal_weight                                  2.04%\n  nifty100_esg_sector_leaders                           2.04%\n  bse_100_esg_index                                     2.03%\n  bse_500_quality_50                                    2.02%\n  bse_100_largecap_tmc                                  2.02%\n  bse_100                                               2.01%\n  nifty_100                                             2.01%\n  bse_sensex_equal_weight                               2.00%\n  bse_largecap                                          2.00%\n  bse_sensex_next_30                                    1.97%\n  bse_500_shariah                                       1.97%\n  bse_200                                               1.96%\n  nifty100_enhanced_esg                                 1.95%\n  ... 27 more, total = 1.0000\n\n--- All candidate models ---\n  [risk_parity              ]  feas=True  score=-0.3002  ret=2.41%  vol=13.61%  dd=14.34%\n  [hrp                      ]  feas=True  score=-0.3588  ret=1.70%  vol=13.38%  dd=14.31%\n",
+    "error": null
+  },
+  {
+    "name": "test_sector_it_banks",
+    "file": "tests/test_sector_it_banks.json",
+    "success": true,
+    "execution_time": 1.823889970779419,
+    "output": "\n=== PORTFOLIO OPTIMIZATION RESULT ===\n\nChosen model     : max_sharpe\nFeasible         : True  \nUniverse size    : 13 indices\n\nExpected return  : 19.13%\nVolatility (ann) : 21.82%\nSharpe           : 0.579\nSortino          : 0.813\nMax drawdown     : 18.51%\nCVaR 5% (daily)  : 3.16%\nCalmar           : 1.033\n\n--- Weights (top holdings) ---\n  nifty_financial_services_ex_bank                     40.00%\n  nifty_psu_bank                                       40.00%\n  bse_psu_bank                                         20.00%\n\n--- All candidate models ---\n  [max_sharpe               ]  feas=True  score=0.5787  ret=19.13%  vol=21.82%  dd=18.51%\n  [risk_parity              ]  feas=True  score=-0.5203  ret=-2.03%  vol=16.39%  dd=19.12%\n",
+    "error": null
+  },
+  {
+    "name": "test_sector_consumer_energy",
+    "file": "tests/test_sector_consumer_energy.json",
+    "success": true,
+    "execution_time": 1.9568874835968018,
+    "output": "\n=== PORTFOLIO OPTIMIZATION RESULT ===\n\nChosen model     : risk_parity\nFeasible         : True  \nUniverse size    : 18 indices\n\nExpected return  : -3.19%\nVolatility (ann) : 16.44%\nSharpe           : -0.589\nSortino          : -0.782\nMax drawdown     : 21.18%\nCVaR 5% (daily)  : 2.39%\nCalmar           : -0.150\n\n--- Weights (top holdings) ---\n  nifty_non_cyclical_consumer                           7.04%\n  nifty_india_consumption                               6.87%\n  bse_energy                                            6.22%\n  nifty_oil_and_gas                                     5.94%\n  nifty_midsmall_india_consumption                      5.77%\n  bse_power_and_energy                                  5.70%\n  bse_oil_and_gas                                       5.68%\n  nifty_energy                                          5.53%\n  bse_consumer_durables                                 5.47%\n  bse_consumer_discretionary                            5.26%\n  nifty_consumer_durables                               5.23%\n  nifty_india_new_age_consumption                       5.13%\n  nifty_retail                                          5.12%\n  bse_utilities                                         5.11%\n  bse_premium_consumption                               5.04%\n  bse_power                                             5.01%\n  nifty_power                                           4.97%\n  nifty_consumer_services                               4.91%\n\n--- All candidate models ---\n  [risk_parity              ]  feas=True  score=-0.5892  ret=-3.19%  vol=16.44%  dd=21.18%\n  [min_variance             ]  feas=True  score=-0.7749  ret=-4.46%  vol=14.15%  dd=17.95%\n",
+    "error": null
+  },
+  {
+    "name": "test_target_return",
+    "file": "tests/test_target_return.json",
+    "success": true,
+    "execution_time": 2.2886922359466553,
+    "output": "\n=== PORTFOLIO OPTIMIZATION RESULT ===\n\nChosen model     : min_variance_for_return\nFeasible         : True  \nUniverse size    : 52 indices\n\nExpected return  : 15.00%\nVolatility (ann) : 17.72%\nSharpe           : 0.480\nSortino          : 0.681\nMax drawdown     : 16.25%\nCVaR 5% (daily)  : 2.48%\nCalmar           : 0.923\n\n--- Weights (top holdings) ---\n  nifty_midcap_select                                  68.16%\n  bse_next_250_microcap                                31.84%\n\n--- All candidate models ---\n  [min_variance_for_return  ]  feas=True  score=0.4797  ret=15.00%  vol=17.72%  dd=16.25%\n  [max_return_for_vol       ]  feas=False  score=-1000000001.0000  ret=15.07%  vol=18.13%  dd=19.66%\n",
+    "error": null
+  },
+  {
+    "name": "test_max_drawdown",
+    "file": "tests/test_max_drawdown.json",
+    "success": true,
+    "execution_time": 41.38055372238159,
+    "output": "\n=== PORTFOLIO OPTIMIZATION RESULT ===\n\nChosen model     : min_max_drawdown\nFeasible         : True  \nUniverse size    : 52 indices\n\nExpected return  : 5.12%\nVolatility (ann) : 13.77%\nSharpe           : -0.100\nSortino          : -0.133\nMax drawdown     : 10.77%\nCVaR 5% (daily)  : 2.06%\nCalmar           : 0.475\n\n--- Weights (top holdings) ---\n  bse_500_dividend_leaders_50                          29.17%\n  bse_sensex_next_30                                   29.17%\n  bse_500_quality_50                                   27.63%\n  bse_sensex_next_50_tmc                                6.93%\n  bse_500_enhanced_value_50                             6.14%\n  nifty100_liquid_15                                    0.97%\n\n--- All candidate models ---\n  [min_max_drawdown         ]  feas=True  score=-0.1005  ret=5.12%  vol=13.77%  dd=10.77%\n  [risk_parity              ]  feas=True  score=-0.3002  ret=2.41%  vol=13.61%  dd=14.34%\n  [min_variance             ]  feas=True  score=-1.0394  ret=-5.16%  vol=11.21%  dd=13.93%\n",
+    "error": null
+  },
+  {
+    "name": "test_cvar",
+    "file": "tests/test_cvar.json",
+    "success": true,
+    "execution_time": 2.215578317642212,
+    "output": "\n=== PORTFOLIO OPTIMIZATION RESULT ===\n\nChosen model     : min_variance\nFeasible         : True  \nUniverse size    : 52 indices\n\nExpected return  : -5.16%\nVolatility (ann) : 11.21%\nSharpe           : -1.039\nSortino          : -1.339\nMax drawdown     : 13.93%\nCVaR 5% (daily)  : 1.70%\nCalmar           : -0.370\n\n--- Weights (top holdings) ---\n  bse_500_low_volatility_50                            51.23%\n  nifty50_value_20                                     33.81%\n  nifty50_shariah                                      14.97%\n\n--- All candidate models ---\n  [min_variance             ]  feas=True  score=-1.0394  ret=-5.16%  vol=11.21%  dd=13.93%\n  [min_cvar                 ]  feas=True  score=-1.1479  ret=-6.82%  vol=11.60%  dd=13.70%\n",
+    "error": null
+  },
+  {
+    "name": "test_black_litterman",
+    "file": "tests/test_black_litterman.json",
+    "success": true,
+    "execution_time": 1.9518744945526123,
+    "output": "\n=== PORTFOLIO OPTIMIZATION RESULT ===\n\nChosen model     : black_litterman\nFeasible         : True  \nUniverse size    : 22 indices\n\nExpected return  : -10.54%\nVolatility (ann) : 18.84%\nSharpe           : -0.905\nSortino          : -1.219\nMax drawdown     : 23.29%\nCVaR 5% (daily)  : 2.79%\nCalmar           : -0.453\n\n--- Weights (top holdings) ---\n  nifty_it                                             38.99%\n  nifty_auto                                           23.65%\n  bse_focused_it                                       16.19%\n  nifty_india_internet                                 12.12%\n  nifty_financial_services_ex_bank                      6.88%\n  bse_psu_bank                                          1.40%\n  bse_information_technology                            0.76%\n\n--- All candidate models ---\n  [black_litterman          ]  feas=True  score=-0.9045  ret=-10.54%  vol=18.84%  dd=23.29%\n",
+    "error": null
+  },
+  {
+    "name": "test_risk_parity",
+    "file": "tests/test_risk_parity.json",
+    "success": true,
+    "execution_time": 2.152289390563965,
+    "output": "\n=== PORTFOLIO OPTIMIZATION RESULT ===\n\nChosen model     : risk_parity\nFeasible         : True  \nUniverse size    : 52 indices\n\nExpected return  : 2.41%\nVolatility (ann) : 13.61%\nSharpe           : -0.300\nSortino          : -0.403\nMax drawdown     : 14.34%\nCVaR 5% (daily)  : 2.03%\nCalmar           : 0.168\n\n--- Weights (top holdings) ---\n  nifty50_shariah                                       2.68%\n  nifty50_value_20                                      2.51%\n  nifty100_low_volatility_30                            2.37%\n  nifty100_quality_30                                   2.37%\n  bse_500_low_volatility_50                             2.36%\n  bse_sensex                                            2.11%\n  nifty_50                                              2.10%\n  bse_sensex_50                                         2.10%\n  bse_500_dividend_leaders_50                           2.09%\n  bse_sensex_50_tmc                                     2.09%\n  bse_sensex_sixty                                      2.08%\n  bse_sensex_sixty_65_35                                2.06%\n  nifty50_equal_weight                                  2.04%\n  nifty100_esg_sector_leaders                           2.04%\n  bse_100_esg_index                                     2.03%\n  bse_500_quality_50                                    2.02%\n  bse_100_largecap_tmc                                  2.02%\n  bse_100                                               2.01%\n  nifty_100                                             2.01%\n  bse_sensex_equal_weight                               2.00%\n  bse_largecap                                          2.00%\n  bse_sensex_next_30                                    1.97%\n  bse_500_shariah                                       1.97%\n  bse_200                                               1.96%\n  nifty100_enhanced_esg                                 1.95%\n  ... 27 more, total = 1.0000\n\n--- All candidate models ---\n  [risk_parity              ]  feas=True  score=-0.3002  ret=2.41%  vol=13.61%  dd=14.34%\n  [hrp                      ]  feas=True  score=-0.3588  ret=1.70%  vol=13.38%  dd=14.31%\n",
+    "error": null
+  },
+  {
+    "name": "test_single_sector",
+    "file": "tests/test_single_sector.json",
+    "success": true,
+    "execution_time": 1.5551939010620117,
+    "output": "\n=== PORTFOLIO OPTIMIZATION RESULT ===\n\nChosen model     : risk_parity\nFeasible         : True  \nUniverse size    : 7 indices\n\nExpected return  : -10.16%\nVolatility (ann) : 18.95%\nSharpe           : -0.879\nSortino          : -1.185\nMax drawdown     : 29.95%\nCVaR 5% (daily)  : 2.83%\nCalmar           : -0.339\n\n--- Weights (top holdings) ---\n  bse_internet_economy                                 16.51%\n  bse_teck                                             15.78%\n  nifty_india_internet                                 14.60%\n  nifty_india_digital                                  14.56%\n  bse_information_technology                           12.99%\n  bse_focused_it                                       12.79%\n  nifty_it                                             12.75%\n\n--- All candidate models ---\n  [risk_parity              ]  feas=True  score=-0.8791  ret=-10.16%  vol=18.95%  dd=29.95%\n  [max_sharpe               ]  feas=False  score=-1000000001.0000  ret=-  vol=-  dd=-\n",
+    "error": null
+  },
+  {
+    "name": "test_extreme_constraints",
+    "file": "tests/test_extreme_constraints.json",
+    "success": true,
+    "execution_time": 2.2193946838378906,
+    "output": "\n=== PORTFOLIO OPTIMIZATION RESULT ===\n\nChosen model     : max_return_for_vol\nFeasible         : False  (solver status=infeasible)\nUniverse size    : 52 indices\n\nExpected return  : -\nVolatility (ann) : -\nSharpe           : 0.000\nSortino          : 0.000\nMax drawdown     : -\nCVaR 5% (daily)  : -\nCalmar           : 0.000\n\n--- Weights (top holdings) ---\n\n--- All candidate models ---\n  [max_return_for_vol       ]  feas=False  score=-1000000001.0000  ret=-  vol=-  dd=-\n  [min_variance_for_return  ]  feas=False  score=-1000000001.0000  ret=-  vol=-  dd=-\n",
+    "error": null
+  }
+]

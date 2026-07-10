@@ -1,0 +1,7 @@
+{
+  "sectors": ["Largecap", "Midcap", "Broad"],
+  "primary_goal": null,
+  "target_return": 0.30,
+  "max_volatility": 0.12,
+  "lookback_years": 5
+}

@@ -1,0 +1,7 @@
+{
+  "sectors": ["Largecap", "Broad", "FMCG", "Pharma"],
+  "primary_goal": "min_drawdown",
+  "max_drawdown": 0.20,
+  "target_return": 0.12,
+  "lookback_years": 5
+}

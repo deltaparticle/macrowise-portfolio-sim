@@ -1,0 +1,8 @@
+{
+  "sectors": ["Broad", "Largecap", "FMCG", "Pharma"],
+  "primary_goal": "min_tail_risk",
+  "max_cvar": 0.025,
+  "cvar_alpha": 0.05,
+  "target_return": 0.14,
+  "lookback_years": 5
+}

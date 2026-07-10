@@ -1,0 +1,591 @@
+{
+  "dropdown_size": 141,
+  "csv_bse_names": 125,
+  "resolved": 113,
+  "downloaded": [
+    {
+      "name": "BSE SENSEX",
+      "code": "SENSEX",
+      "rows": 6593
+    },
+    {
+      "name": "BSE 100",
+      "code": "BSE100",
+      "rows": 6593
+    },
+    {
+      "name": "BSE 200",
+      "code": "BSE200",
+      "rows": 6593
+    },
+    {
+      "name": "BSE 500",
+      "code": "BSE500",
+      "rows": 6593
+    },
+    {
+      "name": "BSE CAPITAL GOODS",
+      "code": "SI0200",
+      "rows": 6593
+    },
+    {
+      "name": "BSE CONSUMER DURABLES",
+      "code": "SI0400",
+      "rows": 6593
+    },
+    {
+      "name": "BSE PSU",
+      "code": "SIBPSU",
+      "rows": 6593
+    },
+    {
+      "name": "BSE TECK",
+      "code": "SIBTEC",
+      "rows": 6574
+    },
+    {
+      "name": "BSE BANKEX",
+      "code": "SIBANK",
+      "rows": 6095
+    },
+    {
+      "name": "BSE AUTO",
+      "code": "SI1900",
+      "rows": 6593
+    },
+    {
+      "name": "BSE METAL",
+      "code": "SI1200",
+      "rows": 6593
+    },
+    {
+      "name": "BSE OIL & GAS",
+      "code": "SI1400",
+      "rows": 6593
+    },
+    {
+      "name": "BSE REALTY",
+      "code": "SIREAL",
+      "rows": 5085
+    },
+    {
+      "name": "BSE POWER",
+      "code": "SIPOWE",
+      "rows": 5336
+    },
+    {
+      "name": "BSE IPO",
+      "code": "IPO   ",
+      "rows": 5508
+    },
+    {
+      "name": "BSE SME IPO",
+      "code": "SMEIPO",
+      "rows": 3439
+    },
+    {
+      "name": "BSE INDIA INFRASTRUCTURE INDEX",
+      "code": "INFRA",
+      "rows": 2998
+    },
+    {
+      "name": "BSE CPSE",
+      "code": "CPSE",
+      "rows": 4191
+    },
+    {
+      "name": "BSE MIDCAP",
+      "code": "BSEMID",
+      "rows": 5778
+    },
+    {
+      "name": "BSE SMALLCAP",
+      "code": "BSESML",
+      "rows": 5778
+    },
+    {
+      "name": "BSE FAST MOVING CONSUMER GOODS",
+      "code": "SI0600",
+      "rows": 6593
+    },
+    {
+      "name": "BSE HEALTHCARE",
+      "code": "SI0800",
+      "rows": 6593
+    },
+    {
+      "name": "BSE INFORMATION TECHNOLOGY",
+      "code": "SI1000",
+      "rows": 6593
+    },
+    {
+      "name": "BSE INDIA MANUFACTURING INDEX",
+      "code": "SPBIMIP",
+      "rows": 2736
+    },
+    {
+      "name": "BSE ALLCAP",
+      "code": "SPBSAIP",
+      "rows": 5156
+    },
+    {
+      "name": "BSE COMMODITIES",
+      "code": "SPBSCOIP",
+      "rows": 5156
+    },
+    {
+      "name": "BSE CONSUMER DISCRETIONARY",
+      "code": "SPBSCDIP",
+      "rows": 5156
+    },
+    {
+      "name": "BSE ENERGY",
+      "code": "SPBSENIP",
+      "rows": 5156
+    },
+    {
+      "name": "BSE FINANCIAL SERVICES",
+      "code": "SPBSFIIP",
+      "rows": 5156
+    },
+    {
+      "name": "BSE INDUSTRIALS",
+      "code": "SPBSIDIP",
+      "rows": 5156
+    },
+    {
+      "name": "BSE LARGECAP",
+      "code": "SPBSLIP",
+      "rows": 5156
+    },
+    {
+      "name": "BSE MIDCAP SELECT INDEX",
+      "code": "SPBMDSIP",
+      "rows": 2725
+    },
+    {
+      "name": "BSE SMALLCAP SELECT INDEX",
+      "code": "SPBSSSIP",
+      "rows": 2725
+    },
+    {
+      "name": "BSE TELECOMMUNICATION",
+      "code": "SPBSTLIP",
+      "rows": 5156
+    },
+    {
+      "name": "BSE UTILITIES",
+      "code": "SPBSUTIP",
+      "rows": 5156
+    },
+    {
+      "name": "BSE SENSEX 50",
+      "code": "SPBSS5IP",
+      "rows": 2377
+    },
+    {
+      "name": "BSE SENSEX NEXT 50",
+      "code": "SPBSN5IP",
+      "rows": 5093
+    },
+    {
+      "name": "BSE BHARAT 22 INDEX",
+      "code": "SPBSB2IP",
+      "rows": 2207
+    },
+    {
+      "name": "BSE 100 ESG INDEX",
+      "code": "SPBS1E",
+      "rows": 2156
+    },
+    {
+      "name": "BSE 150 MIDCAP INDEX",
+      "code": "SPB15MIP",
+      "rows": 2130
+    },
+    {
+      "name": "BSE 250 SMALLCAP INDEX",
+      "code": "SPB25SIP",
+      "rows": 2130
+    },
+    {
+      "name": "BSE 250 LARGEMIDCAP INDEX",
+      "code": "SPB25XIP",
+      "rows": 2130
+    },
+    {
+      "name": "BSE 400 MIDSMALLCAP INDEX",
+      "code": "SPB40YIP",
+      "rows": 2130
+    },
+    {
+      "name": "BSE DIVIDEND STABILITY INDEX",
+      "code": "SPBSDSIP",
+      "rows": 2690
+    },
+    {
+      "name": "BSE ENHANCED VALUE INDEX",
+      "code": "SPBSEVIP",
+      "rows": 2618
+    },
+    {
+      "name": "BSE LOW VOLATILITY INDEX",
+      "code": "SPBSLVIP",
+      "rows": 2618
+    },
+    {
+      "name": "BSE MOMENTUM INDEX",
+      "code": "SPBSMOIP",
+      "rows": 2618
+    },
+    {
+      "name": "BSE QUALITY INDEX",
+      "code": "SPBSQIP",
+      "rows": 2618
+    },
+    {
+      "name": "BSE DIVERSIFIED FINANCIALS REVENUE GROWTH INDEX",
+      "code": "SPBSDFIP",
+      "rows": 1990
+    },
+    {
+      "name": "BSE PRIVATE BANKS INDEX",
+      "code": "SPBSPBIP",
+      "rows": 1948
+    },
+    {
+      "name": "BSE SERVICES",
+      "code": "SPBSSEIP",
+      "rows": 942
+    },
+    {
+      "name": "BSE SENSEX NEXT 30",
+      "code": "SNXN30",
+      "rows": 478
+    },
+    {
+      "name": "BSE SENSEX SIXTY",
+      "code": "SNSX60",
+      "rows": 436
+    },
+    {
+      "name": "BSE SENSEX SIXTY 65:35",
+      "code": "SS6535",
+      "rows": 436
+    },
+    {
+      "name": "BSE POWER & ENERGY",
+      "code": "POWENE",
+      "rows": 436
+    },
+    {
+      "name": "BSE INTERNET ECONOMY",
+      "code": "INTECO",
+      "rows": 432
+    },
+    {
+      "name": "BSE CAPITAL MARKETS & INSURANCE",
+      "code": "CAPINS",
+      "rows": 433
+    },
+    {
+      "name": "BSE FOCUSED IT",
+      "code": "FOCIT",
+      "rows": 435
+    },
+    {
+      "name": "BSE PREMIUM CONSUMPTION",
+      "code": "PRECON",
+      "rows": 427
+    },
+    {
+      "name": "BSE FOCUSED MIDCAP",
+      "code": "FOCMID",
+      "rows": 434
+    },
+    {
+      "name": "BSE SELECT BUSINESS GROUPS",
+      "code": "BBGEFS",
+      "rows": 434
+    },
+    {
+      "name": "BSE SENSEX EQUAL WEIGHT",
+      "code": "SENEQW",
+      "rows": 415
+    },
+    {
+      "name": "BSE SELECT IPO",
+      "code": "SELIPO",
+      "rows": 406
+    },
+    {
+      "name": "BSE PSU BANK",
+      "code": "PSUBNK",
+      "rows": 3297
+    },
+    {
+      "name": "BSE INDIA SECTOR LEADERS",
+      "code": "INSLDR",
+      "rows": 369
+    },
+    {
+      "name": "BSE 1000",
+      "code": "BS1000",
+      "rows": 347
+    },
+    {
+      "name": "BSE NEXT 500",
+      "code": "NXT500",
+      "rows": 347
+    },
+    {
+      "name": "BSE 250 MICROCAP",
+      "code": "BSM250",
+      "rows": 347
+    },
+    {
+      "name": "BSE NEXT 250 MICROCAP",
+      "code": "NXT250",
+      "rows": 347
+    },
+    {
+      "name": "BSE 1000 MULTICAP EQUAL SIZE WEIGHTED (25%)",
+      "code": "1000EQ",
+      "rows": 347
+    },
+    {
+      "name": "BSE 500 ENHANCED VALUE 50",
+      "code": "ENHV50",
+      "rows": 284
+    },
+    {
+      "name": "BSE 500 QUALITY 50",
+      "code": "QUAL50",
+      "rows": 284
+    },
+    {
+      "name": "BSE INDIA 150",
+      "code": "IND150",
+      "rows": 305
+    },
+    {
+      "name": "BSE 500 DIVIDEND LEADERS 50",
+      "code": "DIVY50",
+      "rows": 290
+    },
+    {
+      "name": "BSE 500 LOW VOLATILITY 50",
+      "code": "LVOL50",
+      "rows": 284
+    },
+    {
+      "name": "BSE 500 MOMENTUM 50",
+      "code": "MOME50",
+      "rows": 284
+    },
+    {
+      "name": "BSE INSURANCE",
+      "code": "INSURE",
+      "rows": 247
+    },
+    {
+      "name": "BSE INDIA DEFENCE",
+      "code": "INDDEF",
+      "rows": 222
+    },
+    {
+      "name": "BSE CAPITAL MARKETS",
+      "code": "CAPMKT",
+      "rows": 212
+    },
+    {
+      "name": "BSE HOSPITALS",
+      "code": "BSHOSP",
+      "rows": 188
+    },
+    {
+      "name": "BSE MULTICAP CONSUMPTION (50:30:20)",
+      "code": "MULCON",
+      "rows": 177
+    },
+    {
+      "name": "BSE TOP 10 BANKS",
+      "code": "T10BNK",
+      "rows": 160
+    },
+    {
+      "name": "BSE LARGECAP 100 MOMENTUM 30",
+      "code": "LMOM30",
+      "rows": 143
+    },
+    {
+      "name": "BSE LARGECAP 100 LOW VOLATILITY 30",
+      "code": "LVOL30",
+      "rows": 143
+    },
+    {
+      "name": "BSE LARGECAP 100 ENHANCED VALUE 30",
+      "code": "LENH30",
+      "rows": 143
+    },
+    {
+      "name": "BSE LARGECAP 100 QUALITY 30",
+      "code": "LQUA30",
+      "rows": 143
+    },
+    {
+      "name": "BSE 500 EQUAL WEIGHT",
+      "code": "500EQW",
+      "rows": 113
+    },
+    {
+      "name": "BSE MIDCAP 150 MOMENTUM 30",
+      "code": "MMOM30",
+      "rows": 120
+    },
+    {
+      "name": "BSE MIDCAP 150 ENHANCED VALUE 30",
+      "code": "MENV30",
+      "rows": 120
+    },
+    {
+      "name": "BSE MIDCAP 150 LOW VOLATILITY 30",
+      "code": "MLWV30",
+      "rows": 120
+    },
+    {
+      "name": "BSE MIDCAP 150 QUALITY 30",
+      "code": "MQUA30",
+      "rows": 120
+    },
+    {
+      "name": "BSE CLEAN ENVIRONMENT",
+      "code": "CLEENV",
+      "rows": 115
+    },
+    {
+      "name": "BSE MIDSMALL PRIVATE BANKS QUALITY TILT",
+      "code": "BSMSPB",
+      "rows": 91
+    },
+    {
+      "name": "BSE SMALLCAP 500",
+      "code": "SML500",
+      "rows": 82
+    },
+    {
+      "name": "BSE SMALLCAP 500 QUALITY 50",
+      "code": "BSSQ50",
+      "rows": 82
+    },
+    {
+      "name": "BSE SMALLCAP 500 MOMENTUM 50",
+      "code": "BSSM50",
+      "rows": 82
+    },
+    {
+      "name": "BSE SMALLCAP 500 LOW VOLATILITY 50",
+      "code": "BSSL50",
+      "rows": 82
+    },
+    {
+      "name": "BSE SMALLCAP 500 ENHANCED VALUE 50",
+      "code": "BSSE50",
+      "rows": 82
+    },
+    {
+      "name": "BSE HOUSING FINANCE",
+      "code": "BSHFIN",
+      "rows": 56
+    },
+    {
+      "name": "BSE SAATVIK 100",
+      "code": "SAT100",
+      "rows": 16
+    },
+    {
+      "name": "BSE LARGEMIDCAP",
+      "code": "SPBSLMIP",
+      "rows": 5156
+    },
+    {
+      "name": "BSE MIDSMALLCAP",
+      "code": "SPBSMSIP",
+      "rows": 5156
+    },
+    {
+      "name": "BSE SENSEX 50 TMC",
+      "code": "SPBS5TIP",
+      "rows": 1969
+    },
+    {
+      "name": "BSE SENSEX Next 50 TMC",
+      "code": "SPBN5TIP",
+      "rows": 2035
+    },
+    {
+      "name": "BSE 500 SHARIAH",
+      "code": "SPBSE5S",
+      "rows": 2888
+    },
+    {
+      "name": "BSE 250 LARGEMIDCAP 65:35 INDEX",
+      "code": "SPB2MXIP",
+      "rows": 2127
+    },
+    {
+      "name": "BSE ARBITRAGE RATE INDEX",
+      "code": "SPBSARB",
+      "rows": 2023
+    },
+    {
+      "name": "BSE Financials Ex-Banks 30 Index",
+      "code": "SPBSEBIP",
+      "rows": 1152
+    },
+    {
+      "name": "BSE REITS AND INVITS INDEX",
+      "code": "SPBRIIP",
+      "rows": 682
+    },
+    {
+      "name": "BSE 500 LONG + 200 1X INVERSE 80:20",
+      "code": "B52L1I",
+      "rows": 75
+    },
+    {
+      "name": "BSE 500 LONG + 150 MIDCAP 1X INVERSE 80:20",
+      "code": "500L1I",
+      "rows": 75
+    },
+    {
+      "name": "BSE 150 MIDCAP 1X INVERSE DAILY",
+      "code": "150M1I",
+      "rows": 75
+    },
+    {
+      "name": "BSE 200 1X INVERSE DAILY",
+      "code": "B2001I",
+      "rows": 75
+    }
+  ],
+  "empty": [],
+  "unmatched": [
+    "BSE 100 LARGECAP TMC",
+    "BSE 200 EQUAL WEIGHT",
+    "BSE ALL DERIVATIVE STOCKS",
+    "BSE SENSEX FUTURES INDEX",
+    "BSE SENSEX 2X LEVERAGE DAILY INDEX",
+    "BSE SENSEX 1X INVERSE DAILY INDEX",
+    "BSE SENSEX 2X INVERSE DAILY INDEX",
+    "BSE REALVOL-1MTH",
+    "BSE REALVOL-2MTH",
+    "BSE REALVOL-3MTH",
+    "BSE Housing (INR)",
+    "BSE 500 AND ARBITRAGE RATE 50/50 BLEND INDEX"
+  ],
+  "date_range": [
+    "2000-01-01",
+    "2026-07-10"
+  ]
+}

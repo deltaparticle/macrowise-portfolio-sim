@@ -1,0 +1,15 @@
+YFinance Coverage Report
+Generated: 2026-07-10 03:15:43
+
+Total indices in CSV: 12
+Indices covered by yfinance: 34
+Indices not covered: -22
+Failed downloads: 11
+
+Coverage percentage: 283.33%
+
+Successful indices:
+Nifty Auto, Nifty 50, Nifty 100, Nifty 200, Nifty 500, Nifty Alpha 50, Nifty Alpha Quality Low-Volatility 30, Nifty Dividend Opportunities 50, Nifty Growth Sectors 15, Nifty High Beta 50, Nifty Low Volatility 50, Nifty Quality Low-Volatility 30, Nifty FMCG, Nifty Consumer Durables, Nifty Realty, Nifty Bank, Nifty Financial Services, Nifty Private Bank, Nifty PSU Bank, Nifty IT, Nifty Healthcare, BSE SENSEX, BSE 100, BSE 200, BSE 500, BSE BANKEX, BSE Healthcare, BSE FMCG, BSE Capital Goods, BSE Metal, BSE Realty, BSE Energy, Nifty Pharma, Nifty Metal
+
+Failed indices:
+Nifty 200 Equal Weight, Nifty Midcap 100, Nifty Midcap 150, Nifty Smallcap 100, Nifty Smallcap 250, Nifty Capital Goods, BSE IT, Nifty 500 Equal Weight, Nifty 50 Equal Weight, Nifty 100 Equal Weight, Nifty Energy

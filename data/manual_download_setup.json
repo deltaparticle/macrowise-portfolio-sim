@@ -1,0 +1,15 @@
+{
+  "setup_completed": true,
+  "package_created": true,
+  "total_manual_packages": 6,
+  "indices_requiring_manual_download": [
+    "Nifty Auto",
+    "Nifty Bank",
+    "Nifty Oil & Gas",
+    "Nifty Private Bank",
+    "Nifty PSU Bank",
+    "Nifty Cement"
+  ],
+  "instructions_created": true,
+  "created_date": "2026-07-10T04:46:45.255288"
+}

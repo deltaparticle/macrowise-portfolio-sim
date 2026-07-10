@@ -1,0 +1,6 @@
+{
+  "sectors": ["Largecap", "Broad"],
+  "primary_goal": "min_risk",
+  "w_max": 0.25,
+  "lookback_years": 5
+}

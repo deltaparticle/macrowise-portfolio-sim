@@ -1,0 +1,6 @@
+{
+  "sectors": ["IT"],
+  "primary_goal": "max_sharpe",
+  "lookback_years": 5,
+  "w_max": 0.5
+}

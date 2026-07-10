@@ -1,0 +1,1724 @@
+[
+  {
+    "index_name": "Nifty Next 50",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty Next 50 Index",
+    "instruction": "Download Nifty Next 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Midcap 50",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty Midcap 50 Index",
+    "instruction": "Download Nifty Midcap 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Midcap 100",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty Midcap 100 Index",
+    "instruction": "Download Nifty Midcap 100 from nse.com"
+  },
+  {
+    "index_name": "Nifty Smallcap 50",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty Smallcap 50 Index",
+    "instruction": "Download Nifty Smallcap 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Smallcap 100",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty Smallcap 100 Index",
+    "instruction": "Download Nifty Smallcap 100 from nse.com"
+  },
+  {
+    "index_name": "Nifty Smallcap 500",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty Smallcap 500 Index",
+    "instruction": "Download Nifty Smallcap 500 from nse.com"
+  },
+  {
+    "index_name": "Nifty LargeMidcap 250",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty LargeMidcap 250 Index",
+    "instruction": "Download Nifty LargeMidcap 250 from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Multicap 50:25:25",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty500 Multicap 50:25:25 Index",
+    "instruction": "Download Nifty500 Multicap 50:25:25 from nse.com"
+  },
+  {
+    "index_name": "Nifty Microcap 250",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty Microcap 250 Index",
+    "instruction": "Download Nifty Microcap 250 from nse.com"
+  },
+  {
+    "index_name": "Nifty Total Market",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty Total Market Index",
+    "instruction": "Download Nifty Total Market from nse.com"
+  },
+  {
+    "index_name": "Nifty MidSmallcap 400",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty MidSmallcap 400 Index",
+    "instruction": "Download Nifty MidSmallcap 400 from nse.com"
+  },
+  {
+    "index_name": "Nifty MidSmallcap400 50:50",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty MidSmallcap400 50:50 Index",
+    "instruction": "Download Nifty MidSmallcap400 50:50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Midcap Select",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty Midcap Select Index",
+    "instruction": "Download Nifty Midcap Select from nse.com"
+  },
+  {
+    "index_name": "Nifty500 LargeMidSmall Equal-Cap Weighted",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty500 LargeMidSmall Equal-Cap Weighted Index",
+    "instruction": "Download Nifty500 LargeMidSmall Equal-Cap Weighted from nse.com"
+  },
+  {
+    "index_name": "Nifty India FPI 150",
+    "exchange": "NSE",
+    "category": "Other Equity",
+    "full_name": "Nifty India FPI 150 Index",
+    "instruction": "Download Nifty India FPI 150 from nse.com"
+  },
+  {
+    "index_name": "Nifty Financial Services 25/50",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Financial Services 25/50 Index",
+    "instruction": "Download Nifty Financial Services 25/50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Financial Services Ex-Bank",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Financial Services Ex-Bank Index",
+    "instruction": "Download Nifty Financial Services Ex-Bank from nse.com"
+  },
+  {
+    "index_name": "Nifty Healthcare Index",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Healthcare Index",
+    "instruction": "Download Nifty Healthcare Index from nse.com"
+  },
+  {
+    "index_name": "Nifty India Infrastructure & Logistics",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Infrastructure & Logistics Index",
+    "instruction": "Download Nifty India Infrastructure & Logistics from nse.com"
+  },
+  {
+    "index_name": "Nifty MidSmall Financial Services",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty MidSmall Financial Services Index",
+    "instruction": "Download Nifty MidSmall Financial Services from nse.com"
+  },
+  {
+    "index_name": "Nifty MidSmall Healthcare",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty MidSmall Healthcare Index",
+    "instruction": "Download Nifty MidSmall Healthcare from nse.com"
+  },
+  {
+    "index_name": "Nifty MidSmall IT & Telecom",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty MidSmall IT & Telecom Index",
+    "instruction": "Download Nifty MidSmall IT & Telecom from nse.com"
+  },
+  {
+    "index_name": "Nifty REITs & Realty",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty REITs & Realty Index",
+    "instruction": "Download Nifty REITs & Realty from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Healthcare",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty500 Healthcare Index",
+    "instruction": "Download Nifty500 Healthcare from nse.com"
+  },
+  {
+    "index_name": "Nifty Alpha 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Alpha 50 Index",
+    "instruction": "Download Nifty Alpha 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Alpha Low-Volatility 30",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Alpha Low-Volatility 30 Index",
+    "instruction": "Download Nifty Alpha Low-Volatility 30 from nse.com"
+  },
+  {
+    "index_name": "Nifty Alpha Quality Low-Volatility 30",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Alpha Quality Low-Volatility 30 Index",
+    "instruction": "Download Nifty Alpha Quality Low-Volatility 30 from nse.com"
+  },
+  {
+    "index_name": "Nifty Alpha Quality Value Low-Volatility 30",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Alpha Quality Value Low-Volatility 30 Index",
+    "instruction": "Download Nifty Alpha Quality Value Low-Volatility 30 from nse.com"
+  },
+  {
+    "index_name": "Nifty Dividend Opportunities 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Dividend Opportunities 50 Index",
+    "instruction": "Download Nifty Dividend Opportunities 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Growth Sectors 15",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Growth Sectors 15 Index",
+    "instruction": "Download Nifty Growth Sectors 15 from nse.com"
+  },
+  {
+    "index_name": "Nifty High Beta 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty High Beta 50 Index",
+    "instruction": "Download Nifty High Beta 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Low Volatility 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Low Volatility 50 Index",
+    "instruction": "Download Nifty Low Volatility 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Midcap150 Momentum 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Midcap150 Momentum 50 Index",
+    "instruction": "Download Nifty Midcap150 Momentum 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Midcap150 Quality 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Midcap150 Quality 50 Index",
+    "instruction": "Download Nifty Midcap150 Quality 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty MidSmallcap400 Momentum Quality 100",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty MidSmallcap400 Momentum Quality 100 Index",
+    "instruction": "Download Nifty MidSmallcap400 Momentum Quality 100 from nse.com"
+  },
+  {
+    "index_name": "Nifty Quality Low-Volatility 30",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Quality Low-Volatility 30 Index",
+    "instruction": "Download Nifty Quality Low-Volatility 30 from nse.com"
+  },
+  {
+    "index_name": "Nifty Smallcap250 Momentum Quality 100",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Smallcap250 Momentum Quality 100 Index",
+    "instruction": "Download Nifty Smallcap250 Momentum Quality 100 from nse.com"
+  },
+  {
+    "index_name": "Nifty Smallcap250 Quality 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Smallcap250 Quality 50 Index",
+    "instruction": "Download Nifty Smallcap250 Quality 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Top 10 Equal Weight",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Top 10 Equal Weight Index",
+    "instruction": "Download Nifty Top 10 Equal Weight from nse.com"
+  },
+  {
+    "index_name": "Nifty Top 15 Equal Weight",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Top 15 Equal Weight Index",
+    "instruction": "Download Nifty Top 15 Equal Weight from nse.com"
+  },
+  {
+    "index_name": "Nifty Top 20 Equal Weight",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Top 20 Equal Weight Index",
+    "instruction": "Download Nifty Top 20 Equal Weight from nse.com"
+  },
+  {
+    "index_name": "Nifty Total Market Momentum Quality 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty Total Market Momentum Quality 50 Index",
+    "instruction": "Download Nifty Total Market Momentum Quality 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty100 Alpha 30",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty100 Alpha 30 Index",
+    "instruction": "Download Nifty100 Alpha 30 from nse.com"
+  },
+  {
+    "index_name": "Nifty100 Equal Weight",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty100 Equal Weight Index",
+    "instruction": "Download Nifty100 Equal Weight from nse.com"
+  },
+  {
+    "index_name": "Nifty100 Low Volatility 30",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty100 Low Volatility 30 Index",
+    "instruction": "Download Nifty100 Low Volatility 30 from nse.com"
+  },
+  {
+    "index_name": "Nifty100 Quality 30",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty100 Quality 30 Index",
+    "instruction": "Download Nifty100 Quality 30 from nse.com"
+  },
+  {
+    "index_name": "Nifty200 Alpha 30",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty200 Alpha 30 Index",
+    "instruction": "Download Nifty200 Alpha 30 from nse.com"
+  },
+  {
+    "index_name": "Nifty200 Momentum 30",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty200 Momentum 30 Index",
+    "instruction": "Download Nifty200 Momentum 30 from nse.com"
+  },
+  {
+    "index_name": "Nifty200 Quality 30",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty200 Quality 30 Index",
+    "instruction": "Download Nifty200 Quality 30 from nse.com"
+  },
+  {
+    "index_name": "Nifty200 Value 30",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty200 Value 30 Index",
+    "instruction": "Download Nifty200 Value 30 from nse.com"
+  },
+  {
+    "index_name": "Nifty50 Equal Weight",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty50 Equal Weight Index",
+    "instruction": "Download Nifty50 Equal Weight from nse.com"
+  },
+  {
+    "index_name": "Nifty50 Value 20",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty50 Value 20 Index",
+    "instruction": "Download Nifty50 Value 20 from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Equal Weight",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty500 Equal Weight Index",
+    "instruction": "Download Nifty500 Equal Weight from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Flexicap Quality 30",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty500 Flexicap Quality 30 Index",
+    "instruction": "Download Nifty500 Flexicap Quality 30 from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Low Volatility 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty500 Low Volatility 50 Index",
+    "instruction": "Download Nifty500 Low Volatility 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Momentum 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty500 Momentum 50 Index",
+    "instruction": "Download Nifty500 Momentum 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Multicap Momentum Quality 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty500 Multicap Momentum Quality 50 Index",
+    "instruction": "Download Nifty500 Multicap Momentum Quality 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Multifactor MQVLv 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty500 Multifactor MQVLv 50 Index",
+    "instruction": "Download Nifty500 Multifactor MQVLv 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Quality 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty500 Quality 50 Index",
+    "instruction": "Download Nifty500 Quality 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Value 50",
+    "exchange": "NSE",
+    "category": "Strategy / Factor",
+    "full_name": "Nifty500 Value 50 Index",
+    "instruction": "Download Nifty500 Value 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Capital Markets",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty Capital Markets Index",
+    "instruction": "Download Nifty Capital Markets from nse.com"
+  },
+  {
+    "index_name": "Nifty Chemicals",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Chemicals Index",
+    "instruction": "Download Nifty Chemicals from nse.com"
+  },
+  {
+    "index_name": "Nifty Commodities",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty Commodities Index",
+    "instruction": "Download Nifty Commodities from nse.com"
+  },
+  {
+    "index_name": "Nifty Conglomerate 50",
+    "exchange": "NSE",
+    "category": "Other Equity",
+    "full_name": "Nifty Conglomerate 50 Index",
+    "instruction": "Download Nifty Conglomerate 50 from nse.com"
+  },
+  {
+    "index_name": "Nifty Core Housing",
+    "exchange": "NSE",
+    "category": "Other Equity",
+    "full_name": "Nifty Core Housing Index",
+    "instruction": "Download Nifty Core Housing from nse.com"
+  },
+  {
+    "index_name": "Nifty CPSE",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty CPSE Index",
+    "instruction": "Download Nifty CPSE from nse.com"
+  },
+  {
+    "index_name": "Nifty Energy",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty Energy Index",
+    "instruction": "Download Nifty Energy from nse.com"
+  },
+  {
+    "index_name": "Nifty EV & New Age Automotive",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty EV & New Age Automotive Index",
+    "instruction": "Download Nifty EV & New Age Automotive from nse.com"
+  },
+  {
+    "index_name": "Nifty Housing",
+    "exchange": "NSE",
+    "category": "Other Equity",
+    "full_name": "Nifty Housing Index",
+    "instruction": "Download Nifty Housing from nse.com"
+  },
+  {
+    "index_name": "Nifty India Consumption",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Consumption Index",
+    "instruction": "Download Nifty India Consumption from nse.com"
+  },
+  {
+    "index_name": "Nifty India Corporate Group Index - Aditya Birla Group",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Corporate Group Index - Aditya Birla Group",
+    "instruction": "Download Nifty India Corporate Group Index - Aditya Birla Group from nse.com"
+  },
+  {
+    "index_name": "Nifty India Corporate Group Index - Mahindra Group",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Corporate Group Index - Mahindra Group",
+    "instruction": "Download Nifty India Corporate Group Index - Mahindra Group from nse.com"
+  },
+  {
+    "index_name": "Nifty India Corporate Group Index - Tata Group",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Corporate Group Index - Tata Group",
+    "instruction": "Download Nifty India Corporate Group Index - Tata Group from nse.com"
+  },
+  {
+    "index_name": "Nifty India Corporate Group Index - Tata Group 25% Cap",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Corporate Group Index - Tata Group 25% Cap",
+    "instruction": "Download Nifty India Corporate Group Index - Tata Group 25% Cap from nse.com"
+  },
+  {
+    "index_name": "Nifty India Defence",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Defence Index",
+    "instruction": "Download Nifty India Defence from nse.com"
+  },
+  {
+    "index_name": "Nifty India Digital",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Digital Index",
+    "instruction": "Download Nifty India Digital from nse.com"
+  },
+  {
+    "index_name": "Nifty India Internet",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Internet Index",
+    "instruction": "Download Nifty India Internet from nse.com"
+  },
+  {
+    "index_name": "Nifty India Manufacturing",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Manufacturing Index",
+    "instruction": "Download Nifty India Manufacturing from nse.com"
+  },
+  {
+    "index_name": "Nifty India New Age Consumption",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India New Age Consumption Index",
+    "instruction": "Download Nifty India New Age Consumption from nse.com"
+  },
+  {
+    "index_name": "Nifty India Railways PSU",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Railways PSU Index",
+    "instruction": "Download Nifty India Railways PSU from nse.com"
+  },
+  {
+    "index_name": "Nifty India Select 5 Corporate Groups (MAATR)",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Select 5 Corporate Groups (MAATR) Index",
+    "instruction": "Download Nifty India Select 5 Corporate Groups (MAATR) from nse.com"
+  },
+  {
+    "index_name": "Nifty India Tourism",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty India Tourism Index",
+    "instruction": "Download Nifty India Tourism from nse.com"
+  },
+  {
+    "index_name": "Nifty Infrastructure",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty Infrastructure Index",
+    "instruction": "Download Nifty Infrastructure from nse.com"
+  },
+  {
+    "index_name": "Nifty IPO",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty IPO Index",
+    "instruction": "Download Nifty IPO from nse.com"
+  },
+  {
+    "index_name": "Nifty Midcap Liquid 15",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty Midcap Liquid 15 Index",
+    "instruction": "Download Nifty Midcap Liquid 15 from nse.com"
+  },
+  {
+    "index_name": "Nifty MidSmall India Consumption",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty MidSmall India Consumption Index",
+    "instruction": "Download Nifty MidSmall India Consumption from nse.com"
+  },
+  {
+    "index_name": "Nifty MNC",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty MNC Index",
+    "instruction": "Download Nifty MNC from nse.com"
+  },
+  {
+    "index_name": "Nifty Mobility",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty Mobility Index",
+    "instruction": "Download Nifty Mobility from nse.com"
+  },
+  {
+    "index_name": "Nifty Non-Cyclical Consumer",
+    "exchange": "NSE",
+    "category": "Other Equity",
+    "full_name": "Nifty Non-Cyclical Consumer Index",
+    "instruction": "Download Nifty Non-Cyclical Consumer from nse.com"
+  },
+  {
+    "index_name": "Nifty PSE",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty PSE Index",
+    "instruction": "Download Nifty PSE from nse.com"
+  },
+  {
+    "index_name": "Nifty REITs & InvITs",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty REITs & InvITs Index",
+    "instruction": "Download Nifty REITs & InvITs from nse.com"
+  },
+  {
+    "index_name": "Nifty Rural",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty Rural Index",
+    "instruction": "Download Nifty Rural from nse.com"
+  },
+  {
+    "index_name": "Nifty Services Sector",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Services Sector Index",
+    "instruction": "Download Nifty Services Sector from nse.com"
+  },
+  {
+    "index_name": "Nifty Shariah 25",
+    "exchange": "NSE",
+    "category": "ESG / Shariah / Ethical",
+    "full_name": "Nifty Shariah 25 Index",
+    "instruction": "Download Nifty Shariah 25 from nse.com"
+  },
+  {
+    "index_name": "Nifty SME EMERGE",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty SME EMERGE Index",
+    "instruction": "Download Nifty SME EMERGE from nse.com"
+  },
+  {
+    "index_name": "Nifty Transportation & Logistics",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty Transportation & Logistics Index",
+    "instruction": "Download Nifty Transportation & Logistics from nse.com"
+  },
+  {
+    "index_name": "Nifty Waves",
+    "exchange": "NSE",
+    "category": "Other Equity",
+    "full_name": "Nifty Waves Index",
+    "instruction": "Download Nifty Waves from nse.com"
+  },
+  {
+    "index_name": "Nifty100 Enhanced ESG",
+    "exchange": "NSE",
+    "category": "ESG / Shariah / Ethical",
+    "full_name": "Nifty100 Enhanced ESG Index",
+    "instruction": "Download Nifty100 Enhanced ESG from nse.com"
+  },
+  {
+    "index_name": "Nifty100 ESG",
+    "exchange": "NSE",
+    "category": "ESG / Shariah / Ethical",
+    "full_name": "Nifty100 ESG Index",
+    "instruction": "Download Nifty100 ESG from nse.com"
+  },
+  {
+    "index_name": "Nifty100 ESG Sector Leaders",
+    "exchange": "NSE",
+    "category": "ESG / Shariah / Ethical",
+    "full_name": "Nifty100 ESG Sector Leaders Index",
+    "instruction": "Download Nifty100 ESG Sector Leaders from nse.com"
+  },
+  {
+    "index_name": "Nifty100 Liquid 15",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty100 Liquid 15 Index",
+    "instruction": "Download Nifty100 Liquid 15 from nse.com"
+  },
+  {
+    "index_name": "Nifty50 Shariah",
+    "exchange": "NSE",
+    "category": "ESG / Shariah / Ethical",
+    "full_name": "Nifty50 Shariah Index",
+    "instruction": "Download Nifty50 Shariah from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Multicap India Manufacturing 50:30:20",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty500 Multicap India Manufacturing 50:30:20 Index",
+    "instruction": "Download Nifty500 Multicap India Manufacturing 50:30:20 from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Multicap Infrastructure 50:30:20",
+    "exchange": "NSE",
+    "category": "Thematic",
+    "full_name": "Nifty500 Multicap Infrastructure 50:30:20 Index",
+    "instruction": "Download Nifty500 Multicap Infrastructure 50:30:20 from nse.com"
+  },
+  {
+    "index_name": "Nifty500 Shariah",
+    "exchange": "NSE",
+    "category": "ESG / Shariah / Ethical",
+    "full_name": "Nifty500 Shariah Index",
+    "instruction": "Download Nifty500 Shariah from nse.com"
+  },
+  {
+    "index_name": "Nifty50 USD",
+    "exchange": "NSE",
+    "category": "Broad Market",
+    "full_name": "Nifty50 USD Index",
+    "instruction": "Download Nifty50 USD from nse.com"
+  },
+  {
+    "index_name": "Nifty 50 Futures Index",
+    "exchange": "NSE",
+    "category": "Derivative / Strategy",
+    "full_name": "Nifty 50 Futures Index",
+    "instruction": "Download Nifty 50 Futures Index from nse.com"
+  },
+  {
+    "index_name": "Nifty 50 Futures TR Index",
+    "exchange": "NSE",
+    "category": "Derivative / Strategy",
+    "full_name": "Nifty 50 Futures TR Index",
+    "instruction": "Download Nifty 50 Futures TR Index from nse.com"
+  },
+  {
+    "index_name": "Nifty50 Dividend Points",
+    "exchange": "NSE",
+    "category": "Derivative / Strategy",
+    "full_name": "Nifty50 Dividend Points",
+    "instruction": "Download Nifty50 Dividend Points from nse.com"
+  },
+  {
+    "index_name": "Nifty50 PR 1x Inverse",
+    "exchange": "NSE",
+    "category": "Derivative / Strategy",
+    "full_name": "Nifty50 PR 1x Inverse Index",
+    "instruction": "Download Nifty50 PR 1x Inverse from nse.com"
+  },
+  {
+    "index_name": "Nifty50 PR 2x Leverage",
+    "exchange": "NSE",
+    "category": "Derivative / Strategy",
+    "full_name": "Nifty50 PR 2x Leverage Index",
+    "instruction": "Download Nifty50 PR 2x Leverage from nse.com"
+  },
+  {
+    "index_name": "Nifty50 TR 1x Inverse",
+    "exchange": "NSE",
+    "category": "Derivative / Strategy",
+    "full_name": "Nifty50 TR 1x Inverse Index",
+    "instruction": "Download Nifty50 TR 1x Inverse from nse.com"
+  },
+  {
+    "index_name": "Nifty50 TR 2x Leverage",
+    "exchange": "NSE",
+    "category": "Derivative / Strategy",
+    "full_name": "Nifty50 TR 2x Leverage Index",
+    "instruction": "Download Nifty50 TR 2x Leverage from nse.com"
+  },
+  {
+    "index_name": "Nifty Capital Goods",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Capital Goods Index",
+    "instruction": "Download Nifty Capital Goods from nse.com"
+  },
+  {
+    "index_name": "Nifty Commercial & Transport Services",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Commercial & Transport Services Index",
+    "instruction": "Download Nifty Commercial & Transport Services from nse.com"
+  },
+  {
+    "index_name": "Nifty Construction",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Construction Index",
+    "instruction": "Download Nifty Construction from nse.com"
+  },
+  {
+    "index_name": "Nifty Consumer Services",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Consumer Services Index",
+    "instruction": "Download Nifty Consumer Services from nse.com"
+  },
+  {
+    "index_name": "Nifty Hospitals",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Hospitals Index",
+    "instruction": "Download Nifty Hospitals from nse.com"
+  },
+  {
+    "index_name": "Nifty Housing Finance",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Housing Finance Index",
+    "instruction": "Download Nifty Housing Finance from nse.com"
+  },
+  {
+    "index_name": "Nifty Insurance",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Insurance Index",
+    "instruction": "Download Nifty Insurance from nse.com"
+  },
+  {
+    "index_name": "Nifty NBFC",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty NBFC Index",
+    "instruction": "Download Nifty NBFC from nse.com"
+  },
+  {
+    "index_name": "Nifty Power",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Power Index",
+    "instruction": "Download Nifty Power from nse.com"
+  },
+  {
+    "index_name": "Nifty Retail",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Retail Index",
+    "instruction": "Download Nifty Retail from nse.com"
+  },
+  {
+    "index_name": "Nifty Telecommunications",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Telecommunications Index",
+    "instruction": "Download Nifty Telecommunications from nse.com"
+  },
+  {
+    "index_name": "BSE CAPITAL GOODS",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE CAPITAL GOODS Index",
+    "instruction": "Download BSE CAPITAL GOODS from bse.com"
+  },
+  {
+    "index_name": "BSE CONSUMER DURABLES",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE CONSUMER DURABLES Index",
+    "instruction": "Download BSE CONSUMER DURABLES from bse.com"
+  },
+  {
+    "index_name": "BSE PSU",
+    "exchange": "BSE",
+    "category": "Other Equity",
+    "full_name": "BSE PSU Index",
+    "instruction": "Download BSE PSU from bse.com"
+  },
+  {
+    "index_name": "BSE TECK",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE TECK Index",
+    "instruction": "Download BSE TECK from bse.com"
+  },
+  {
+    "index_name": "BSE BANKEX",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE BANKEX Index",
+    "instruction": "Download BSE BANKEX from bse.com"
+  },
+  {
+    "index_name": "BSE AUTO",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE AUTO Index",
+    "instruction": "Download BSE AUTO from bse.com"
+  },
+  {
+    "index_name": "BSE METAL",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE METAL Index",
+    "instruction": "Download BSE METAL from bse.com"
+  },
+  {
+    "index_name": "BSE OIL & GAS",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE OIL & GAS Index",
+    "instruction": "Download BSE OIL & GAS from bse.com"
+  },
+  {
+    "index_name": "BSE REALTY",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE REALTY Index",
+    "instruction": "Download BSE REALTY from bse.com"
+  },
+  {
+    "index_name": "BSE POWER",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE POWER Index",
+    "instruction": "Download BSE POWER from bse.com"
+  },
+  {
+    "index_name": "BSE IPO",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE IPO Index",
+    "instruction": "Download BSE IPO from bse.com"
+  },
+  {
+    "index_name": "BSE SME IPO",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE SME IPO Index",
+    "instruction": "Download BSE SME IPO from bse.com"
+  },
+  {
+    "index_name": "BSE INDIA INFRASTRUCTURE INDEX",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE INDIA INFRASTRUCTURE INDEX",
+    "instruction": "Download BSE INDIA INFRASTRUCTURE INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE CPSE",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE CPSE Index",
+    "instruction": "Download BSE CPSE from bse.com"
+  },
+  {
+    "index_name": "BSE MIDCAP",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE MIDCAP Index",
+    "instruction": "Download BSE MIDCAP from bse.com"
+  },
+  {
+    "index_name": "BSE SMALLCAP",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE SMALLCAP Index",
+    "instruction": "Download BSE SMALLCAP from bse.com"
+  },
+  {
+    "index_name": "BSE FAST MOVING CONSUMER GOODS",
+    "exchange": "BSE",
+    "category": "Other Equity",
+    "full_name": "BSE FAST MOVING CONSUMER GOODS Index",
+    "instruction": "Download BSE FAST MOVING CONSUMER GOODS from bse.com"
+  },
+  {
+    "index_name": "BSE HEALTHCARE",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE HEALTHCARE Index",
+    "instruction": "Download BSE HEALTHCARE from bse.com"
+  },
+  {
+    "index_name": "BSE INFORMATION TECHNOLOGY",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE INFORMATION TECHNOLOGY Index",
+    "instruction": "Download BSE INFORMATION TECHNOLOGY from bse.com"
+  },
+  {
+    "index_name": "BSE INDIA MANUFACTURING INDEX",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE INDIA MANUFACTURING INDEX",
+    "instruction": "Download BSE INDIA MANUFACTURING INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE ALLCAP",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE ALLCAP Index",
+    "instruction": "Download BSE ALLCAP from bse.com"
+  },
+  {
+    "index_name": "BSE COMMODITIES",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE COMMODITIES Index",
+    "instruction": "Download BSE COMMODITIES from bse.com"
+  },
+  {
+    "index_name": "BSE CONSUMER DISCRETIONARY",
+    "exchange": "BSE",
+    "category": "Other Equity",
+    "full_name": "BSE CONSUMER DISCRETIONARY Index",
+    "instruction": "Download BSE CONSUMER DISCRETIONARY from bse.com"
+  },
+  {
+    "index_name": "BSE ENERGY",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE ENERGY Index",
+    "instruction": "Download BSE ENERGY from bse.com"
+  },
+  {
+    "index_name": "BSE FINANCIAL SERVICES",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE FINANCIAL SERVICES Index",
+    "instruction": "Download BSE FINANCIAL SERVICES from bse.com"
+  },
+  {
+    "index_name": "BSE INDUSTRIALS",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE INDUSTRIALS Index",
+    "instruction": "Download BSE INDUSTRIALS from bse.com"
+  },
+  {
+    "index_name": "BSE LARGECAP",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE LARGECAP Index",
+    "instruction": "Download BSE LARGECAP from bse.com"
+  },
+  {
+    "index_name": "BSE MIDCAP SELECT INDEX",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE MIDCAP SELECT INDEX",
+    "instruction": "Download BSE MIDCAP SELECT INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE SMALLCAP SELECT INDEX",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE SMALLCAP SELECT INDEX",
+    "instruction": "Download BSE SMALLCAP SELECT INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE TELECOMMUNICATION",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE TELECOMMUNICATION Index",
+    "instruction": "Download BSE TELECOMMUNICATION from bse.com"
+  },
+  {
+    "index_name": "BSE UTILITIES",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE UTILITIES Index",
+    "instruction": "Download BSE UTILITIES from bse.com"
+  },
+  {
+    "index_name": "BSE SENSEX 50",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE SENSEX 50 Index",
+    "instruction": "Download BSE SENSEX 50 from bse.com"
+  },
+  {
+    "index_name": "BSE SENSEX NEXT 50",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE SENSEX NEXT 50 Index",
+    "instruction": "Download BSE SENSEX NEXT 50 from bse.com"
+  },
+  {
+    "index_name": "BSE BHARAT 22 INDEX",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE BHARAT 22 INDEX",
+    "instruction": "Download BSE BHARAT 22 INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE 100 ESG INDEX",
+    "exchange": "BSE",
+    "category": "ESG / Shariah / Ethical",
+    "full_name": "BSE 100 ESG INDEX",
+    "instruction": "Download BSE 100 ESG INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE 150 MIDCAP INDEX",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE 150 MIDCAP INDEX",
+    "instruction": "Download BSE 150 MIDCAP INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE 250 SMALLCAP INDEX",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE 250 SMALLCAP INDEX",
+    "instruction": "Download BSE 250 SMALLCAP INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE 250 LARGEMIDCAP INDEX",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE 250 LARGEMIDCAP INDEX",
+    "instruction": "Download BSE 250 LARGEMIDCAP INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE 400 MIDSMALLCAP INDEX",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE 400 MIDSMALLCAP INDEX",
+    "instruction": "Download BSE 400 MIDSMALLCAP INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE DIVIDEND STABILITY INDEX",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE DIVIDEND STABILITY INDEX",
+    "instruction": "Download BSE DIVIDEND STABILITY INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE ENHANCED VALUE INDEX",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE ENHANCED VALUE INDEX",
+    "instruction": "Download BSE ENHANCED VALUE INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE LOW VOLATILITY INDEX",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE LOW VOLATILITY INDEX",
+    "instruction": "Download BSE LOW VOLATILITY INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE MOMENTUM INDEX",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE MOMENTUM INDEX",
+    "instruction": "Download BSE MOMENTUM INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE QUALITY INDEX",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE QUALITY INDEX",
+    "instruction": "Download BSE QUALITY INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE DIVERSIFIED FINANCIALS REVENUE GROWTH INDEX",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE DIVERSIFIED FINANCIALS REVENUE GROWTH INDEX",
+    "instruction": "Download BSE DIVERSIFIED FINANCIALS REVENUE GROWTH INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE 100 LARGECAP TMC",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE 100 LARGECAP TMC Index",
+    "instruction": "Download BSE 100 LARGECAP TMC from bse.com"
+  },
+  {
+    "index_name": "BSE PRIVATE BANKS INDEX",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE PRIVATE BANKS INDEX",
+    "instruction": "Download BSE PRIVATE BANKS INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE SERVICES",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE SERVICES Index",
+    "instruction": "Download BSE SERVICES from bse.com"
+  },
+  {
+    "index_name": "BSE SENSEX NEXT 30",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE SENSEX NEXT 30 Index",
+    "instruction": "Download BSE SENSEX NEXT 30 from bse.com"
+  },
+  {
+    "index_name": "BSE SENSEX SIXTY",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE SENSEX SIXTY Index",
+    "instruction": "Download BSE SENSEX SIXTY from bse.com"
+  },
+  {
+    "index_name": "BSE SENSEX SIXTY 65:35",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE SENSEX SIXTY 65:35 Index",
+    "instruction": "Download BSE SENSEX SIXTY 65:35 from bse.com"
+  },
+  {
+    "index_name": "BSE POWER & ENERGY",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE POWER & ENERGY Index",
+    "instruction": "Download BSE POWER & ENERGY from bse.com"
+  },
+  {
+    "index_name": "BSE 200 EQUAL WEIGHT",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE 200 EQUAL WEIGHT Index",
+    "instruction": "Download BSE 200 EQUAL WEIGHT from bse.com"
+  },
+  {
+    "index_name": "BSE INTERNET ECONOMY",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE INTERNET ECONOMY Index",
+    "instruction": "Download BSE INTERNET ECONOMY from bse.com"
+  },
+  {
+    "index_name": "BSE CAPITAL MARKETS & INSURANCE",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE CAPITAL MARKETS & INSURANCE Index",
+    "instruction": "Download BSE CAPITAL MARKETS & INSURANCE from bse.com"
+  },
+  {
+    "index_name": "BSE FOCUSED IT",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE FOCUSED IT Index",
+    "instruction": "Download BSE FOCUSED IT from bse.com"
+  },
+  {
+    "index_name": "BSE PREMIUM CONSUMPTION",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE PREMIUM CONSUMPTION Index",
+    "instruction": "Download BSE PREMIUM CONSUMPTION from bse.com"
+  },
+  {
+    "index_name": "BSE FOCUSED MIDCAP",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE FOCUSED MIDCAP Index",
+    "instruction": "Download BSE FOCUSED MIDCAP from bse.com"
+  },
+  {
+    "index_name": "BSE SELECT BUSINESS GROUPS",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE SELECT BUSINESS GROUPS Index",
+    "instruction": "Download BSE SELECT BUSINESS GROUPS from bse.com"
+  },
+  {
+    "index_name": "BSE SENSEX EQUAL WEIGHT",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE SENSEX EQUAL WEIGHT Index",
+    "instruction": "Download BSE SENSEX EQUAL WEIGHT from bse.com"
+  },
+  {
+    "index_name": "BSE SELECT IPO",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE SELECT IPO Index",
+    "instruction": "Download BSE SELECT IPO from bse.com"
+  },
+  {
+    "index_name": "BSE PSU BANK",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE PSU BANK Index",
+    "instruction": "Download BSE PSU BANK from bse.com"
+  },
+  {
+    "index_name": "BSE INDIA SECTOR LEADERS",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE INDIA SECTOR LEADERS Index",
+    "instruction": "Download BSE INDIA SECTOR LEADERS from bse.com"
+  },
+  {
+    "index_name": "BSE 1000",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE 1000 Index",
+    "instruction": "Download BSE 1000 from bse.com"
+  },
+  {
+    "index_name": "BSE NEXT 500",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE NEXT 500 Index",
+    "instruction": "Download BSE NEXT 500 from bse.com"
+  },
+  {
+    "index_name": "BSE 250 MICROCAP",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE 250 MICROCAP Index",
+    "instruction": "Download BSE 250 MICROCAP from bse.com"
+  },
+  {
+    "index_name": "BSE NEXT 250 MICROCAP",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE NEXT 250 MICROCAP Index",
+    "instruction": "Download BSE NEXT 250 MICROCAP from bse.com"
+  },
+  {
+    "index_name": "BSE 1000 MULTICAP EQUAL SIZE WEIGHTED (25%)",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE 1000 MULTICAP EQUAL SIZE WEIGHTED (25%) Index",
+    "instruction": "Download BSE 1000 MULTICAP EQUAL SIZE WEIGHTED (25%) from bse.com"
+  },
+  {
+    "index_name": "BSE 500 ENHANCED VALUE 50",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE 500 ENHANCED VALUE 50 Index",
+    "instruction": "Download BSE 500 ENHANCED VALUE 50 from bse.com"
+  },
+  {
+    "index_name": "BSE 500 QUALITY 50",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE 500 QUALITY 50 Index",
+    "instruction": "Download BSE 500 QUALITY 50 from bse.com"
+  },
+  {
+    "index_name": "BSE INDIA 150",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE INDIA 150 Index",
+    "instruction": "Download BSE INDIA 150 from bse.com"
+  },
+  {
+    "index_name": "BSE 500 DIVIDEND LEADERS 50",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE 500 DIVIDEND LEADERS 50 Index",
+    "instruction": "Download BSE 500 DIVIDEND LEADERS 50 from bse.com"
+  },
+  {
+    "index_name": "BSE 500 LOW VOLATILITY 50",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE 500 LOW VOLATILITY 50 Index",
+    "instruction": "Download BSE 500 LOW VOLATILITY 50 from bse.com"
+  },
+  {
+    "index_name": "BSE 500 MOMENTUM 50",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE 500 MOMENTUM 50 Index",
+    "instruction": "Download BSE 500 MOMENTUM 50 from bse.com"
+  },
+  {
+    "index_name": "BSE INSURANCE",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE INSURANCE Index",
+    "instruction": "Download BSE INSURANCE from bse.com"
+  },
+  {
+    "index_name": "BSE INDIA DEFENCE",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE INDIA DEFENCE Index",
+    "instruction": "Download BSE INDIA DEFENCE from bse.com"
+  },
+  {
+    "index_name": "BSE CAPITAL MARKETS",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE CAPITAL MARKETS Index",
+    "instruction": "Download BSE CAPITAL MARKETS from bse.com"
+  },
+  {
+    "index_name": "BSE HOSPITALS",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE HOSPITALS Index",
+    "instruction": "Download BSE HOSPITALS from bse.com"
+  },
+  {
+    "index_name": "BSE MULTICAP CONSUMPTION (50:30:20)",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE MULTICAP CONSUMPTION (50:30:20) Index",
+    "instruction": "Download BSE MULTICAP CONSUMPTION (50:30:20) from bse.com"
+  },
+  {
+    "index_name": "BSE TOP 10 BANKS",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE TOP 10 BANKS Index",
+    "instruction": "Download BSE TOP 10 BANKS from bse.com"
+  },
+  {
+    "index_name": "BSE LARGECAP 100 MOMENTUM 30",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE LARGECAP 100 MOMENTUM 30 Index",
+    "instruction": "Download BSE LARGECAP 100 MOMENTUM 30 from bse.com"
+  },
+  {
+    "index_name": "BSE LARGECAP 100 LOW VOLATILITY 30",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE LARGECAP 100 LOW VOLATILITY 30 Index",
+    "instruction": "Download BSE LARGECAP 100 LOW VOLATILITY 30 from bse.com"
+  },
+  {
+    "index_name": "BSE LARGECAP 100 ENHANCED VALUE 30",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE LARGECAP 100 ENHANCED VALUE 30 Index",
+    "instruction": "Download BSE LARGECAP 100 ENHANCED VALUE 30 from bse.com"
+  },
+  {
+    "index_name": "BSE LARGECAP 100 QUALITY 30",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE LARGECAP 100 QUALITY 30 Index",
+    "instruction": "Download BSE LARGECAP 100 QUALITY 30 from bse.com"
+  },
+  {
+    "index_name": "BSE 500 EQUAL WEIGHT",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE 500 EQUAL WEIGHT Index",
+    "instruction": "Download BSE 500 EQUAL WEIGHT from bse.com"
+  },
+  {
+    "index_name": "BSE ALL DERIVATIVE STOCKS",
+    "exchange": "BSE",
+    "category": "Other Equity",
+    "full_name": "BSE ALL DERIVATIVE STOCKS Index",
+    "instruction": "Download BSE ALL DERIVATIVE STOCKS from bse.com"
+  },
+  {
+    "index_name": "BSE MIDCAP 150 MOMENTUM 30",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE MIDCAP 150 MOMENTUM 30 Index",
+    "instruction": "Download BSE MIDCAP 150 MOMENTUM 30 from bse.com"
+  },
+  {
+    "index_name": "BSE MIDCAP 150 ENHANCED VALUE 30",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE MIDCAP 150 ENHANCED VALUE 30 Index",
+    "instruction": "Download BSE MIDCAP 150 ENHANCED VALUE 30 from bse.com"
+  },
+  {
+    "index_name": "BSE MIDCAP 150 LOW VOLATILITY 30",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE MIDCAP 150 LOW VOLATILITY 30 Index",
+    "instruction": "Download BSE MIDCAP 150 LOW VOLATILITY 30 from bse.com"
+  },
+  {
+    "index_name": "BSE MIDCAP 150 QUALITY 30",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE MIDCAP 150 QUALITY 30 Index",
+    "instruction": "Download BSE MIDCAP 150 QUALITY 30 from bse.com"
+  },
+  {
+    "index_name": "BSE CLEAN ENVIRONMENT",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE CLEAN ENVIRONMENT Index",
+    "instruction": "Download BSE CLEAN ENVIRONMENT from bse.com"
+  },
+  {
+    "index_name": "BSE MIDSMALL PRIVATE BANKS QUALITY TILT",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE MIDSMALL PRIVATE BANKS QUALITY TILT Index",
+    "instruction": "Download BSE MIDSMALL PRIVATE BANKS QUALITY TILT from bse.com"
+  },
+  {
+    "index_name": "BSE SMALLCAP 500",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE SMALLCAP 500 Index",
+    "instruction": "Download BSE SMALLCAP 500 from bse.com"
+  },
+  {
+    "index_name": "BSE SMALLCAP 500 QUALITY 50",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE SMALLCAP 500 QUALITY 50 Index",
+    "instruction": "Download BSE SMALLCAP 500 QUALITY 50 from bse.com"
+  },
+  {
+    "index_name": "BSE SMALLCAP 500 MOMENTUM 50",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE SMALLCAP 500 MOMENTUM 50 Index",
+    "instruction": "Download BSE SMALLCAP 500 MOMENTUM 50 from bse.com"
+  },
+  {
+    "index_name": "BSE SMALLCAP 500 LOW VOLATILITY 50",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE SMALLCAP 500 LOW VOLATILITY 50 Index",
+    "instruction": "Download BSE SMALLCAP 500 LOW VOLATILITY 50 from bse.com"
+  },
+  {
+    "index_name": "BSE SMALLCAP 500 ENHANCED VALUE 50",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE SMALLCAP 500 ENHANCED VALUE 50 Index",
+    "instruction": "Download BSE SMALLCAP 500 ENHANCED VALUE 50 from bse.com"
+  },
+  {
+    "index_name": "BSE HOUSING FINANCE",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE HOUSING FINANCE Index",
+    "instruction": "Download BSE HOUSING FINANCE from bse.com"
+  },
+  {
+    "index_name": "BSE SAATVIK 100",
+    "exchange": "BSE",
+    "category": "ESG / Shariah / Ethical",
+    "full_name": "BSE SAATVIK 100 Index",
+    "instruction": "Download BSE SAATVIK 100 from bse.com"
+  },
+  {
+    "index_name": "BSE LARGEMIDCAP",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE LARGEMIDCAP Index",
+    "instruction": "Download BSE LARGEMIDCAP from bse.com"
+  },
+  {
+    "index_name": "BSE MIDSMALLCAP",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE MIDSMALLCAP Index",
+    "instruction": "Download BSE MIDSMALLCAP from bse.com"
+  },
+  {
+    "index_name": "BSE SENSEX 50 TMC",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE SENSEX 50 TMC Index",
+    "instruction": "Download BSE SENSEX 50 TMC from bse.com"
+  },
+  {
+    "index_name": "BSE SENSEX Next 50 TMC",
+    "exchange": "BSE",
+    "category": "Strategy / Factor",
+    "full_name": "BSE SENSEX Next 50 TMC Index",
+    "instruction": "Download BSE SENSEX Next 50 TMC from bse.com"
+  },
+  {
+    "index_name": "BSE 500 SHARIAH",
+    "exchange": "BSE",
+    "category": "ESG / Shariah / Ethical",
+    "full_name": "BSE 500 SHARIAH Index",
+    "instruction": "Download BSE 500 SHARIAH from bse.com"
+  },
+  {
+    "index_name": "BSE SENSEX FUTURES INDEX",
+    "exchange": "BSE",
+    "category": "Derivative / Strategy",
+    "full_name": "BSE SENSEX FUTURES INDEX",
+    "instruction": "Download BSE SENSEX FUTURES INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE SENSEX 2X LEVERAGE DAILY INDEX",
+    "exchange": "BSE",
+    "category": "Derivative / Strategy",
+    "full_name": "BSE SENSEX 2X LEVERAGE DAILY INDEX",
+    "instruction": "Download BSE SENSEX 2X LEVERAGE DAILY INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE SENSEX 1X INVERSE DAILY INDEX",
+    "exchange": "BSE",
+    "category": "Derivative / Strategy",
+    "full_name": "BSE SENSEX 1X INVERSE DAILY INDEX",
+    "instruction": "Download BSE SENSEX 1X INVERSE DAILY INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE SENSEX 2X INVERSE DAILY INDEX",
+    "exchange": "BSE",
+    "category": "Derivative / Strategy",
+    "full_name": "BSE SENSEX 2X INVERSE DAILY INDEX",
+    "instruction": "Download BSE SENSEX 2X INVERSE DAILY INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE REALVOL-1MTH",
+    "exchange": "BSE",
+    "category": "Volatility",
+    "full_name": "BSE REALVOL-1MTH Index",
+    "instruction": "Download BSE REALVOL-1MTH from bse.com"
+  },
+  {
+    "index_name": "BSE REALVOL-2MTH",
+    "exchange": "BSE",
+    "category": "Volatility",
+    "full_name": "BSE REALVOL-2MTH Index",
+    "instruction": "Download BSE REALVOL-2MTH from bse.com"
+  },
+  {
+    "index_name": "BSE REALVOL-3MTH",
+    "exchange": "BSE",
+    "category": "Volatility",
+    "full_name": "BSE REALVOL-3MTH Index",
+    "instruction": "Download BSE REALVOL-3MTH from bse.com"
+  },
+  {
+    "index_name": "BSE 250 LARGEMIDCAP 65:35 INDEX",
+    "exchange": "BSE",
+    "category": "Broad Market",
+    "full_name": "BSE 250 LARGEMIDCAP 65:35 INDEX",
+    "instruction": "Download BSE 250 LARGEMIDCAP 65:35 INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE ARBITRAGE RATE INDEX",
+    "exchange": "BSE",
+    "category": "Derivative / Strategy",
+    "full_name": "BSE ARBITRAGE RATE INDEX",
+    "instruction": "Download BSE ARBITRAGE RATE INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE Financials Ex-Banks 30 Index",
+    "exchange": "BSE",
+    "category": "Sectoral",
+    "full_name": "BSE Financials Ex-Banks 30 Index",
+    "instruction": "Download BSE Financials Ex-Banks 30 Index from bse.com"
+  },
+  {
+    "index_name": "BSE Housing (INR)",
+    "exchange": "BSE",
+    "category": "Other Equity",
+    "full_name": "BSE Housing (INR) Index",
+    "instruction": "Download BSE Housing (INR) from bse.com"
+  },
+  {
+    "index_name": "BSE 500 AND ARBITRAGE RATE 50/50 BLEND INDEX",
+    "exchange": "BSE",
+    "category": "Derivative / Strategy",
+    "full_name": "BSE 500 AND ARBITRAGE RATE 50/50 BLEND INDEX",
+    "instruction": "Download BSE 500 AND ARBITRAGE RATE 50/50 BLEND INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE REITS AND INVITS INDEX",
+    "exchange": "BSE",
+    "category": "Thematic",
+    "full_name": "BSE REITS AND INVITS INDEX",
+    "instruction": "Download BSE REITS AND INVITS INDEX from bse.com"
+  },
+  {
+    "index_name": "BSE 500 LONG + 200 1X INVERSE 80:20",
+    "exchange": "BSE",
+    "category": "Derivative / Strategy",
+    "full_name": "BSE 500 LONG + 200 1X INVERSE 80:20 Index",
+    "instruction": "Download BSE 500 LONG + 200 1X INVERSE 80:20 from bse.com"
+  },
+  {
+    "index_name": "BSE 500 LONG + 150 MIDCAP 1X INVERSE 80:20",
+    "exchange": "BSE",
+    "category": "Derivative / Strategy",
+    "full_name": "BSE 500 LONG + 150 MIDCAP 1X INVERSE 80:20 Index",
+    "instruction": "Download BSE 500 LONG + 150 MIDCAP 1X INVERSE 80:20 from bse.com"
+  },
+  {
+    "index_name": "BSE 150 MIDCAP 1X INVERSE DAILY",
+    "exchange": "BSE",
+    "category": "Derivative / Strategy",
+    "full_name": "BSE 150 MIDCAP 1X INVERSE DAILY Index",
+    "instruction": "Download BSE 150 MIDCAP 1X INVERSE DAILY from bse.com"
+  },
+  {
+    "index_name": "BSE 200 1X INVERSE DAILY",
+    "exchange": "BSE",
+    "category": "Derivative / Strategy",
+    "full_name": "BSE 200 1X INVERSE DAILY Index",
+    "instruction": "Download BSE 200 1X INVERSE DAILY from bse.com"
+  },
+  {
+    "index_name": "India VIX",
+    "exchange": "NSE",
+    "category": "Volatility",
+    "full_name": "India Volatility Index",
+    "instruction": "Download India VIX from nse.com"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "sectors": ["IT", "Banks", "Auto", "Pharma"],
+  "primary_goal": null,
+  "views": [
+    {"asset": "nifty_it", "return": 0.25, "confidence": 0.7},
+    {"asset": "nifty_bank", "return": 0.12, "confidence": 0.5},
+    {"asset": "nifty_auto", "return": 0.18, "confidence": 0.6}
+  ],
+  "bl_tau": 0.05,
+  "lookback_years": 5
+}

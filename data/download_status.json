@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-07-10T23:36:49",
+  "total_in_csv": 270,
+  "downloaded": 264,
+  "nse_missing": [
+    "Nifty Healthcare Index"
+  ],
+  "bse_missing": [
+    "BSE SENSEX FUTURES INDEX",
+    "BSE SENSEX 2X LEVERAGE DAILY INDEX",
+    "BSE SENSEX 1X INVERSE DAILY INDEX",
+    "BSE SENSEX 2X INVERSE DAILY INDEX",
+    "BSE REALVOL-1MTH",
+    "BSE REALVOL-2MTH",
+    "BSE REALVOL-3MTH",
+    "BSE 500 AND ARBITRAGE RATE 50/50 BLEND INDEX"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "sectors": ["Largecap", "Midcap", "Broad", "FMCG", "Pharma"],
+  "target_return": 0.15,
+  "max_volatility": 0.18,
+  "max_drawdown": 0.25,
+  "w_max": 0.20,
+  "lookback_years": 5
+}

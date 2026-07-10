@@ -1,0 +1,7 @@
+{
+  "sectors": ["Largecap", "Midcap", "Broad", "IT", "Banks", "Auto", "Pharma", "FMCG", "Consumer", "Energy"],
+  "primary_goal": null,
+  "target_return": 0.20,
+  "max_volatility": 0.20,
+  "lookback_years": 5
+}

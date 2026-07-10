@@ -1,0 +1,10 @@
+{
+  "sectors": ["IT", "Banks", "Auto", "Pharma", "FMCG", "Energy"],
+  "views": [
+    {"asset": "nifty_it", "return": 0.20, "confidence": 0.65},
+    {"long": ["nifty_bank"], "short": ["nifty_pharma"], "return": 0.04, "confidence": 0.5}
+  ],
+  "bl_tau": 0.05,
+  "lookback_years": 5,
+  "w_max": 0.30
+}

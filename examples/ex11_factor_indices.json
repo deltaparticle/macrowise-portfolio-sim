@@ -1,0 +1,6 @@
+{
+  "sectors": ["Momentum", "Quality", "LowVolatility", "Value"],
+  "primary_goal": "max_sharpe",
+  "w_max": 0.20,
+  "lookback_years": 5
+}

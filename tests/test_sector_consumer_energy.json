@@ -1,0 +1,5 @@
+{
+  "sectors": ["Consumer", "Energy"],
+  "primary_goal": "max_sharpe",
+  "lookback_years": 5
+}

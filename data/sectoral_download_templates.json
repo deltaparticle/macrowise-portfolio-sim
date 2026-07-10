@@ -1,0 +1,146 @@
+[
+  {
+    "index_name": "Nifty Auto",
+    "symbol": "NIFTY AUTO",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTY AUTO&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty Auto"
+  },
+  {
+    "index_name": "Nifty Bank",
+    "symbol": "NIFTY BANK",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTY BANK&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty Bank"
+  },
+  {
+    "index_name": "Nifty Cement",
+    "symbol": "NIFTYCEMENT",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTYCEMENT&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty Cement"
+  },
+  {
+    "index_name": "Nifty Consumer Durables",
+    "symbol": "NIFTYCONSUMERDURABLES",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTYCONSUMERDURABLES&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty Consumer Durables"
+  },
+  {
+    "index_name": "Nifty Financial Services",
+    "symbol": "NIFTYFINANCIALSERVICES",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTYFINANCIALSERVICES&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty Financial Services"
+  },
+  {
+    "index_name": "Nifty FMCG",
+    "symbol": "NIFTY FMCG",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTY FMCG&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty FMCG"
+  },
+  {
+    "index_name": "Nifty Healthcare",
+    "symbol": "NIFTYHEALTHCARE",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTYHEALTHCARE&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty Healthcare"
+  },
+  {
+    "index_name": "Nifty IT",
+    "symbol": "NIFTY IT",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTY IT&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty IT"
+  },
+  {
+    "index_name": "Nifty Media",
+    "symbol": "NIFTYMEDIA",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTYMEDIA&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty Media"
+  },
+  {
+    "index_name": "Niddle Small Financial Services",
+    "symbol": "NIFTY FIN SERVICES",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTY FIN SERVICES&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Niddle Small Financial Services"
+  },
+  {
+    "index_name": "Niddle Small Healthcare",
+    "symbol": "NIFTY HEALTHCARE",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTY HEALTHCARE&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Niddle Small Healthcare"
+  },
+  {
+    "index_name": "Niddle Small IT & Telecom",
+    "symbol": "NIFTY IT",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTY IT&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Niddle Small IT & Telecom"
+  },
+  {
+    "index_name": "Niddle Small Realty",
+    "symbol": "NIFTY REALTY",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTY REALTY&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Niddle Small Realty"
+  },
+  {
+    "index_name": "Nifty Oil & Gas",
+    "symbol": "NIFTYOIL&GAS",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTYOIL&GAS&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty Oil & Gas"
+  },
+  {
+    "index_name": "Niddle Small Power",
+    "symbol": "NIFTY POWER",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTY POWER&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Niddle Small Power"
+  },
+  {
+    "index_name": "Nifty Private Bank",
+    "symbol": "NIFTYPRIVATEBANK",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTYPRIVATEBANK&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty Private Bank"
+  },
+  {
+    "index_name": "Nifty PSU Bank",
+    "symbol": "NIFTYPSUBANK",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTYPSUBANK&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty PSU Bank"
+  },
+  {
+    "index_name": "Nifty Realty",
+    "symbol": "NIFTYREALTY",
+    "start_date": "2010-01-01",
+    "end_date": "2026-07-10",
+    "url": "https://www.nseindia.com/api/historical/indices?symbol=NIFTYREALTY&from=01-01-2010&to=10-07-2026",
+    "instruction": "Manual download needed for Nifty Realty"
+  }
+]

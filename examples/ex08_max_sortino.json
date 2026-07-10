@@ -1,0 +1,6 @@
+{
+  "sectors": ["IT", "Banks", "FinancialServices", "Auto", "Pharma", "FMCG"],
+  "primary_goal": "max_sortino",
+  "w_max": 0.25,
+  "lookback_years": 5
+}

@@ -1,0 +1,6 @@
+{
+  "sectors": ["Largecap", "Midcap", "Broad"],
+  "primary_goal": null,
+  "max_drawdown": 0.12,
+  "lookback_years": 10
+}

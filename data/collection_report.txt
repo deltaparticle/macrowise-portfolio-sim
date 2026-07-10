@@ -1,0 +1,250 @@
+==================================================
+Indian Stock Indices Data Collection Report
+==================================================
+Collection Date: 2026-07-10 03:15:43
+Total Indices Downloaded: 34
+  - yfinance: 34
+  - Manual: 0
+
+Detailed Breakdown:
+------------------------------
+
+Nifty Auto:
+  Source: yfinance
+  Ticker: ^CNXAUTO
+  Date Range: ('2011-07-12', '2024-12-30')
+  Rows: 3301
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty 50:
+  Source: yfinance
+  Ticker: ^NSEI
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4237
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty 100:
+  Source: yfinance
+  Ticker: ^NSEI
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4237
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty 200:
+  Source: yfinance
+  Ticker: ^NSEI
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4237
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty 500:
+  Source: yfinance
+  Ticker: ^NSEI
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4237
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Alpha 50:
+  Source: yfinance
+  Ticker: ^NSEI
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4237
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Alpha Quality Low-Volatility 30:
+  Source: yfinance
+  Ticker: ^NSEI
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4237
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Dividend Opportunities 50:
+  Source: yfinance
+  Ticker: ^NSEI
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4237
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Growth Sectors 15:
+  Source: yfinance
+  Ticker: ^NSEI
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4237
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty High Beta 50:
+  Source: yfinance
+  Ticker: ^NSEI
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4237
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Low Volatility 50:
+  Source: yfinance
+  Ticker: ^NSEI
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4237
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Quality Low-Volatility 30:
+  Source: yfinance
+  Ticker: ^NSEI
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4237
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty FMCG:
+  Source: yfinance
+  Ticker: ^CNXFMCG
+  Date Range: ('2011-01-31', '2024-12-30')
+  Rows: 3412
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Consumer Durables:
+  Source: yfinance
+  Ticker: ^CNXFMCG
+  Date Range: ('2011-01-31', '2024-12-30')
+  Rows: 3412
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Realty:
+  Source: yfinance
+  Ticker: ^CNXREALTY
+  Date Range: ('2010-07-19', '2024-12-30')
+  Rows: 3548
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Bank:
+  Source: yfinance
+  Ticker: ^NSEBANK
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4253
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Financial Services:
+  Source: yfinance
+  Ticker: ^NSEBANK
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4253
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Private Bank:
+  Source: yfinance
+  Ticker: ^NSEBANK
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4253
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty PSU Bank:
+  Source: yfinance
+  Ticker: ^NSEBANK
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4253
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty IT:
+  Source: yfinance
+  Ticker: ^CNXIT
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4253
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Healthcare:
+  Source: yfinance
+  Ticker: ^CNXIT
+  Date Range: ('2007-09-17', '2024-12-30')
+  Rows: 4253
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+BSE SENSEX:
+  Source: yfinance
+  Ticker: ^BSESN
+  Date Range: ('2007-01-02', '2024-12-30')
+  Rows: 4418
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+BSE 100:
+  Source: yfinance
+  Ticker: ^BSESN
+  Date Range: ('2007-01-02', '2024-12-30')
+  Rows: 4418
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+BSE 200:
+  Source: yfinance
+  Ticker: ^BSESN
+  Date Range: ('2007-01-02', '2024-12-30')
+  Rows: 4418
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+BSE 500:
+  Source: yfinance
+  Ticker: ^BSESN
+  Date Range: ('2007-01-02', '2024-12-30')
+  Rows: 4418
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+BSE BANKEX:
+  Source: yfinance
+  Ticker: ^BSESN
+  Date Range: ('2007-01-02', '2024-12-30')
+  Rows: 4418
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+BSE Healthcare:
+  Source: yfinance
+  Ticker: ^BSESN
+  Date Range: ('2007-01-02', '2024-12-30')
+  Rows: 4418
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+BSE FMCG:
+  Source: yfinance
+  Ticker: ^BSESN
+  Date Range: ('2007-01-02', '2024-12-30')
+  Rows: 4418
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+BSE Capital Goods:
+  Source: yfinance
+  Ticker: ^BSESN
+  Date Range: ('2007-01-02', '2024-12-30')
+  Rows: 4418
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+BSE Metal:
+  Source: yfinance
+  Ticker: ^BSESN
+  Date Range: ('2007-01-02', '2024-12-30')
+  Rows: 4418
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+BSE Realty:
+  Source: yfinance
+  Ticker: ^BSESN
+  Date Range: ('2007-01-02', '2024-12-30')
+  Rows: 4418
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+BSE Energy:
+  Source: yfinance
+  Ticker: ^BSESN
+  Date Range: ('2007-01-02', '2024-12-30')
+  Rows: 4418
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Pharma:
+  Source: yfinance
+  Ticker: ^CNXPHARMA
+  Date Range: ('2011-01-31', '2024-12-30')
+  Rows: 3426
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+Nifty Metal:
+  Source: yfinance
+  Ticker: ^CNXMETAL
+  Date Range: ('2011-07-12', '2024-12-30')
+  Rows: 3301
+  Columns: Open, High, Low, Close, Volume, Dividends, Stock Splits, Return, Volatility
+
+==================================================

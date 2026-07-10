@@ -1,0 +1,8 @@
+{
+  "sectors": ["IT", "Banks", "FinancialServices", "Pharma", "FMCG", "Auto"],
+  "target_return": 0.18,
+  "max_volatility": 0.22,
+  "w_min": 0.0,
+  "w_max": 0.25,
+  "lookback_years": 5
+}

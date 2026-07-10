@@ -1,0 +1,785 @@
+{
+  "run_at": "2026-07-10T05:18:56",
+  "date_range": [
+    "2000-01-01",
+    "2026-07-10"
+  ],
+  "already_had": [
+    "bse_100",
+    "bse_200",
+    "bse_500",
+    "bse_bankex",
+    "bse_capital_goods",
+    "bse_energy",
+    "bse_fmcg",
+    "bse_healthcare",
+    "bse_metal",
+    "bse_realty",
+    "bse_sensex",
+    "nifty_100",
+    "nifty_200",
+    "nifty_50",
+    "nifty_500",
+    "nifty_alpha_50",
+    "nifty_alpha_quality_low-volatility_30",
+    "nifty_auto",
+    "nifty_bank",
+    "nifty_consumer_durables",
+    "nifty_dividend_opportunities_50",
+    "nifty_financial_services",
+    "nifty_fmcg",
+    "nifty_growth_sectors_15",
+    "nifty_healthcare",
+    "nifty_high_beta_50",
+    "nifty_it",
+    "nifty_low_volatility_50",
+    "nifty_metal",
+    "nifty_midcap_100",
+    "nifty_midcap_150",
+    "nifty_next_50",
+    "nifty_pharma",
+    "nifty_private_bank",
+    "nifty_psu_bank",
+    "nifty_quality_low-volatility_30",
+    "nifty_realty",
+    "nifty_smallcap_100",
+    "nifty_smallcap_250"
+  ],
+  "downloaded": [
+    {
+      "name": "Nifty Midcap 50",
+      "source": "nse",
+      "rows": 5590
+    },
+    {
+      "name": "Nifty Smallcap 50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Smallcap 500",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty LargeMidcap 250",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty500 Multicap 50:25:25",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Microcap 250",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Total Market",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty MidSmallcap 400",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty MidSmallcap400 50:50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Midcap Select",
+      "source": "nse",
+      "rows": 5147
+    },
+    {
+      "name": "Nifty500 LargeMidSmall Equal-Cap Weighted",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty India FPI 150",
+      "source": "nse",
+      "rows": 933
+    },
+    {
+      "name": "Nifty Cement",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Financial Services 25/50",
+      "source": "nse",
+      "rows": 5590
+    },
+    {
+      "name": "Nifty Financial Services Ex-Bank",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty India Infrastructure & Logistics",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Media",
+      "source": "nse",
+      "rows": 5086
+    },
+    {
+      "name": "Nifty MidSmall Financial Services",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty MidSmall Healthcare",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty MidSmall IT & Telecom",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Oil & Gas",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty REITs & Realty",
+      "source": "nse",
+      "rows": 1245
+    },
+    {
+      "name": "Nifty500 Healthcare",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Alpha Low-Volatility 30",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Alpha Quality Low-Volatility 30",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Alpha Quality Value Low-Volatility 30",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Midcap150 Momentum 50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Midcap150 Quality 50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty MidSmallcap400 Momentum Quality 100",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Quality Low-Volatility 30",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Smallcap250 Momentum Quality 100",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Smallcap250 Quality 50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Top 10 Equal Weight",
+      "source": "nse",
+      "rows": 5045
+    },
+    {
+      "name": "Nifty Top 15 Equal Weight",
+      "source": "nse",
+      "rows": 5045
+    },
+    {
+      "name": "Nifty Top 20 Equal Weight",
+      "source": "nse",
+      "rows": 5045
+    },
+    {
+      "name": "Nifty Total Market Momentum Quality 50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty100 Alpha 30",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty100 Equal Weight",
+      "source": "nse",
+      "rows": 5844
+    },
+    {
+      "name": "Nifty100 Low Volatility 30",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty100 Quality 30",
+      "source": "nse",
+      "rows": 4158
+    },
+    {
+      "name": "Nifty200 Alpha 30",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty200 Momentum 30",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty200 Quality 30",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty200 Value 30",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty50 Equal Weight",
+      "source": "nse",
+      "rows": 6593
+    },
+    {
+      "name": "Nifty50 Value 20",
+      "source": "nse",
+      "rows": 4340
+    },
+    {
+      "name": "Nifty500 Equal Weight",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty500 Flexicap Quality 30",
+      "source": "nse",
+      "rows": 4158
+    },
+    {
+      "name": "Nifty500 Low Volatility 50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty500 Momentum 50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty500 Multicap Momentum Quality 50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty500 Multifactor MQVLv 50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty500 Quality 50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty500 Value 50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Capital Markets",
+      "source": "nse",
+      "rows": 1802
+    },
+    {
+      "name": "Nifty Chemicals",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Commodities",
+      "source": "nse",
+      "rows": 5590
+    },
+    {
+      "name": "Nifty Conglomerate 50",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Core Housing",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty CPSE",
+      "source": "nse",
+      "rows": 4340
+    },
+    {
+      "name": "Nifty Energy",
+      "source": "nse",
+      "rows": 6343
+    },
+    {
+      "name": "Nifty EV & New Age Automotive",
+      "source": "nse",
+      "rows": 2050
+    },
+    {
+      "name": "Nifty Housing",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty India Consumption",
+      "source": "nse",
+      "rows": 5085
+    },
+    {
+      "name": "Nifty India Corporate Group Index - Aditya Birla Group",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty India Corporate Group Index - Mahindra Group",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty India Corporate Group Index - Tata Group",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty India Corporate Group Index - Tata Group 25% Cap",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty India Defence",
+      "source": "nse",
+      "rows": 2050
+    },
+    {
+      "name": "Nifty India Digital",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty India Internet",
+      "source": "nse",
+      "rows": 1182
+    },
+    {
+      "name": "Nifty India Manufacturing",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty India New Age Consumption",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty India Railways PSU",
+      "source": "nse",
+      "rows": 1306
+    },
+    {
+      "name": "Nifty India Select 5 Corporate Groups (MAATR)",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty India Tourism",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Infrastructure",
+      "source": "nse",
+      "rows": 5590
+    },
+    {
+      "name": "Nifty IPO",
+      "source": "nse",
+      "rows": 2358
+    },
+    {
+      "name": "Nifty Midcap Liquid 15",
+      "source": "nse",
+      "rows": 4340
+    },
+    {
+      "name": "Nifty MidSmall India Consumption",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty MNC",
+      "source": "nse",
+      "rows": 6593
+    },
+    {
+      "name": "Nifty Mobility",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Non-Cyclical Consumer",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty PSE",
+      "source": "nse",
+      "rows": 6593
+    },
+    {
+      "name": "Nifty REITs & InvITs",
+      "source": "nse",
+      "rows": 1742
+    },
+    {
+      "name": "Nifty Rural",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Services Sector",
+      "source": "nse",
+      "rows": 6593
+    },
+    {
+      "name": "Nifty Shariah 25",
+      "source": "nse",
+      "rows": 4340
+    },
+    {
+      "name": "Nifty SME EMERGE",
+      "source": "nse",
+      "rows": 2380
+    },
+    {
+      "name": "Nifty Transportation & Logistics",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Waves",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty100 Enhanced ESG",
+      "source": "nse",
+      "rows": 3783
+    },
+    {
+      "name": "Nifty100 ESG",
+      "source": "nse",
+      "rows": 3783
+    },
+    {
+      "name": "Nifty100 ESG Sector Leaders",
+      "source": "nse",
+      "rows": 3097
+    },
+    {
+      "name": "Nifty100 Liquid 15",
+      "source": "nse",
+      "rows": 4340
+    },
+    {
+      "name": "Nifty50 Shariah",
+      "source": "nse",
+      "rows": 4836
+    },
+    {
+      "name": "Nifty500 Multicap India Manufacturing 50:30:20",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty500 Multicap Infrastructure 50:30:20",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty500 Shariah",
+      "source": "nse",
+      "rows": 4836
+    },
+    {
+      "name": "Nifty50 USD",
+      "source": "nse",
+      "rows": 6588
+    },
+    {
+      "name": "Nifty 50 Futures Index",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty 50 Futures TR Index",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty50 Dividend Points",
+      "source": "nse",
+      "rows": 3474
+    },
+    {
+      "name": "Nifty50 PR 1x Inverse",
+      "source": "nse",
+      "rows": 4280
+    },
+    {
+      "name": "Nifty50 PR 2x Leverage",
+      "source": "nse",
+      "rows": 4280
+    },
+    {
+      "name": "Nifty50 TR 1x Inverse",
+      "source": "nse",
+      "rows": 4280
+    },
+    {
+      "name": "Nifty50 TR 2x Leverage",
+      "source": "nse",
+      "rows": 4280
+    },
+    {
+      "name": "Nifty Capital Goods",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Commercial & Transport Services",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Construction",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Consumer Services",
+      "source": "nse",
+      "rows": 1496
+    },
+    {
+      "name": "Nifty Hospitals",
+      "source": "nse",
+      "rows": 1307
+    },
+    {
+      "name": "Nifty Housing Finance",
+      "source": "nse",
+      "rows": 2050
+    },
+    {
+      "name": "Nifty Insurance",
+      "source": "nse",
+      "rows": 1682
+    },
+    {
+      "name": "Nifty NBFC",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Power",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "Nifty Retail",
+      "source": "nse",
+      "rows": 2050
+    },
+    {
+      "name": "Nifty Telecommunications",
+      "source": "nse",
+      "rows": 5275
+    },
+    {
+      "name": "India VIX",
+      "source": "nse",
+      "rows": 2102
+    },
+    {
+      "name": "BSE PSU BANK",
+      "source": "bse",
+      "rows": 3297
+    },
+    {
+      "name": "BSE NEXT 500",
+      "source": "bse",
+      "rows": 347
+    },
+    {
+      "name": "BSE INDIA 150",
+      "source": "bse",
+      "rows": 305
+    },
+    {
+      "name": "BSE CAPITAL MARKETS",
+      "source": "bse",
+      "rows": 212
+    }
+  ],
+  "failures": {
+    "nse": [
+      "Nifty Healthcare Index"
+    ],
+    "bse_no_mapping": [
+      "BSE IPO",
+      "BSE SME IPO",
+      "BSE INDIA INFRASTRUCTURE INDEX",
+      "BSE CPSE",
+      "BSE FAST MOVING CONSUMER GOODS",
+      "BSE INFORMATION TECHNOLOGY",
+      "BSE INDIA MANUFACTURING INDEX",
+      "BSE ALLCAP",
+      "BSE COMMODITIES",
+      "BSE CONSUMER DISCRETIONARY",
+      "BSE MIDCAP SELECT INDEX",
+      "BSE SMALLCAP SELECT INDEX",
+      "BSE DIVERSIFIED FINANCIALS REVENUE GROWTH INDEX",
+      "BSE 100 LARGECAP TMC",
+      "BSE SENSEX NEXT 30",
+      "BSE SENSEX SIXTY",
+      "BSE SENSEX SIXTY 65:35",
+      "BSE CAPITAL MARKETS & INSURANCE",
+      "BSE 250 MICROCAP",
+      "BSE NEXT 250 MICROCAP",
+      "BSE 1000 MULTICAP EQUAL SIZE WEIGHTED (25%)",
+      "BSE 500 ENHANCED VALUE 50",
+      "BSE 500 QUALITY 50",
+      "BSE 500 DIVIDEND LEADERS 50",
+      "BSE 500 LOW VOLATILITY 50",
+      "BSE 500 MOMENTUM 50",
+      "BSE MULTICAP CONSUMPTION (50:30:20)",
+      "BSE TOP 10 BANKS",
+      "BSE LARGECAP 100 MOMENTUM 30",
+      "BSE LARGECAP 100 LOW VOLATILITY 30",
+      "BSE LARGECAP 100 ENHANCED VALUE 30",
+      "BSE LARGECAP 100 QUALITY 30",
+      "BSE ALL DERIVATIVE STOCKS",
+      "BSE MIDCAP 150 MOMENTUM 30",
+      "BSE MIDCAP 150 ENHANCED VALUE 30",
+      "BSE MIDCAP 150 LOW VOLATILITY 30",
+      "BSE MIDCAP 150 QUALITY 30",
+      "BSE CLEAN ENVIRONMENT",
+      "BSE MIDSMALL PRIVATE BANKS QUALITY TILT",
+      "BSE SMALLCAP 500",
+      "BSE SMALLCAP 500 QUALITY 50",
+      "BSE SMALLCAP 500 MOMENTUM 50",
+      "BSE SMALLCAP 500 LOW VOLATILITY 50",
+      "BSE SMALLCAP 500 ENHANCED VALUE 50",
+      "BSE SAATVIK 100",
+      "BSE SENSEX 50 TMC",
+      "BSE SENSEX Next 50 TMC",
+      "BSE SENSEX FUTURES INDEX",
+      "BSE SENSEX 2X LEVERAGE DAILY INDEX",
+      "BSE SENSEX 1X INVERSE DAILY INDEX",
+      "BSE SENSEX 2X INVERSE DAILY INDEX",
+      "BSE REALVOL-1MTH",
+      "BSE REALVOL-2MTH",
+      "BSE REALVOL-3MTH",
+      "BSE 250 LARGEMIDCAP 65:35 INDEX",
+      "BSE ARBITRAGE RATE INDEX",
+      "BSE Financials Ex-Banks 30 Index",
+      "BSE Housing (INR)",
+      "BSE 500 AND ARBITRAGE RATE 50/50 BLEND INDEX",
+      "BSE REITS AND INVITS INDEX",
+      "BSE 500 LONG + 200 1X INVERSE 80:20",
+      "BSE 500 LONG + 150 MIDCAP 1X INVERSE 80:20",
+      "BSE 150 MIDCAP 1X INVERSE DAILY",
+      "BSE 200 1X INVERSE DAILY"
+    ],
+    "bse_download": [
+      "BSE CONSUMER DURABLES",
+      "BSE PSU",
+      "BSE TECK",
+      "BSE AUTO",
+      "BSE OIL & GAS",
+      "BSE POWER",
+      "BSE MIDCAP",
+      "BSE SMALLCAP",
+      "BSE FINANCIAL SERVICES",
+      "BSE INDUSTRIALS",
+      "BSE LARGECAP",
+      "BSE TELECOMMUNICATION",
+      "BSE UTILITIES",
+      "BSE SENSEX 50",
+      "BSE SENSEX NEXT 50",
+      "BSE BHARAT 22 INDEX",
+      "BSE 100 ESG INDEX",
+      "BSE 150 MIDCAP INDEX",
+      "BSE 250 SMALLCAP INDEX",
+      "BSE 250 LARGEMIDCAP INDEX",
+      "BSE 400 MIDSMALLCAP INDEX",
+      "BSE DIVIDEND STABILITY INDEX",
+      "BSE ENHANCED VALUE INDEX",
+      "BSE LOW VOLATILITY INDEX",
+      "BSE MOMENTUM INDEX",
+      "BSE QUALITY INDEX",
+      "BSE PRIVATE BANKS INDEX",
+      "BSE SERVICES",
+      "BSE POWER & ENERGY",
+      "BSE 200 EQUAL WEIGHT",
+      "BSE INTERNET ECONOMY",
+      "BSE FOCUSED IT",
+      "BSE PREMIUM CONSUMPTION",
+      "BSE FOCUSED MIDCAP",
+      "BSE SELECT BUSINESS GROUPS",
+      "BSE SENSEX EQUAL WEIGHT",
+      "BSE SELECT IPO",
+      "BSE INDIA SECTOR LEADERS",
+      "BSE 1000",
+      "BSE INSURANCE",
+      "BSE INDIA DEFENCE",
+      "BSE HOSPITALS",
+      "BSE 500 EQUAL WEIGHT",
+      "BSE HOUSING FINANCE",
+      "BSE LARGEMIDCAP",
+      "BSE MIDSMALLCAP",
+      "BSE 500 SHARIAH"
+    ]
+  }
+}

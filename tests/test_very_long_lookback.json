@@ -1,0 +1,5 @@
+{
+  "sectors": ["Largecap", "Midcap", "Broad"],
+  "primary_goal": "max_sharpe",
+  "lookback_years": 15
+}

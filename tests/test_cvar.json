@@ -1,0 +1,7 @@
+{
+  "sectors": ["Largecap", "Midcap", "Broad"],
+  "primary_goal": null,
+  "max_cvar": 0.025,
+  "cvar_alpha": 0.05,
+  "lookback_years": 5
+}

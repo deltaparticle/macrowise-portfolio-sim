@@ -1,0 +1,8 @@
+{
+  "sectors": ["IT", "Banks", "Auto", "Pharma", "FMCG"],
+  "primary_goal": "max_sharpe",
+  "w_min": 0.0,
+  "w_max": 0.30,
+  "lookback_years": 5,
+  "risk_free_rate": 0.065
+}

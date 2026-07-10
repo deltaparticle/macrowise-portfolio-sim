@@ -1,0 +1,6 @@
+{
+  "sectors": ["Largecap", "Midcap", "Smallcap", "Broad"],
+  "primary_goal": "max_diversification",
+  "w_max": 0.15,
+  "lookback_years": 5
+}

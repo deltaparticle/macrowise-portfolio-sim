@@ -1,0 +1,50 @@
+[
+  {
+    "index_name": "Nifty Auto",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Auto Index",
+    "instruction": "Download Nifty Auto from nse.com",
+    "priority": "HIGH"
+  },
+  {
+    "index_name": "Nifty Bank",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Bank Index",
+    "instruction": "Download Nifty Bank from nse.com",
+    "priority": "HIGH"
+  },
+  {
+    "index_name": "Nifty Oil & Gas",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Oil & Gas Index",
+    "instruction": "Download Nifty Oil & Gas from nse.com",
+    "priority": "HIGH"
+  },
+  {
+    "index_name": "Nifty Private Bank",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Private Bank Index",
+    "instruction": "Download Nifty Private Bank from nse.com",
+    "priority": "HIGH"
+  },
+  {
+    "index_name": "Nifty PSU Bank",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty PSU Bank Index",
+    "instruction": "Download Nifty PSU Bank from nse.com",
+    "priority": "HIGH"
+  },
+  {
+    "index_name": "Nifty Cement",
+    "exchange": "NSE",
+    "category": "Sectoral",
+    "full_name": "Nifty Cement Index",
+    "instruction": "Download Nifty Cement from nse.com",
+    "priority": "HIGH"
+  }
+]

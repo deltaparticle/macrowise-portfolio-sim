@@ -1,0 +1,50 @@
+{
+  "total_packages": 6,
+  "created_date": "2026-07-10T04:46:45.253280",
+  "packages": [
+    {
+      "index_name": "Nifty Auto",
+      "exchange": "NSE",
+      "symbol": "NIFTY AUTO",
+      "instruction": "\n            Download Instructions for Nifty Auto:\n\n            1. Visit: https://www.nseindia.com/reports-and-data/historical-data\n            2. Select \"Indices\" from the dropdown\n            3. Choose \"NIFTY AUTO\" from the indices list\n            4. Set date range: 2010-01-01 to 2024-12-31\n            5. Download the CSV file\n            6. Process using the function below\n\n            Symbol mapping: NIFTY AUTO\n            ",
+      "status": "manual_required"
+    },
+    {
+      "index_name": "Nifty Bank",
+      "exchange": "NSE",
+      "symbol": "NIFTY BANK",
+      "instruction": "\n            Download Instructions for Nifty Bank:\n\n            1. Visit: https://www.nseindia.com/reports-and-data/historical-data\n            2. Select \"Indices\" from the dropdown\n            3. Choose \"NIFTY BANK\" from the indices list\n            4. Set date range: 2010-01-01 to 2024-12-31\n            5. Download the CSV file\n            6. Process using the function below\n\n            Symbol mapping: NIFTY BANK\n            ",
+      "status": "manual_required"
+    },
+    {
+      "index_name": "Nifty Oil & Gas",
+      "exchange": "NSE",
+      "symbol": "NIFTY OIL & GAS",
+      "instruction": "\n            Download Instructions for Nifty Oil & Gas:\n\n            1. Visit: https://www.nseindia.com/reports-and-data/historical-data\n            2. Select \"Indices\" from the dropdown\n            3. Choose \"NIFTY OIL & GAS\" from the indices list\n            4. Set date range: 2010-01-01 to 2024-12-31\n            5. Download the CSV file\n            6. Process using the function below\n\n            Symbol mapping: NIFTY OIL & GAS\n            ",
+      "status": "manual_required"
+    },
+    {
+      "index_name": "Nifty Private Bank",
+      "exchange": "NSE",
+      "symbol": "NIFTY PRIVATE BANK",
+      "instruction": "\n            Download Instructions for Nifty Private Bank:\n\n            1. Visit: https://www.nseindia.com/reports-and-data/historical-data\n            2. Select \"Indices\" from the dropdown\n            3. Choose \"NIFTY PRIVATE BANK\" from the indices list\n            4. Set date range: 2010-01-01 to 2024-12-31\n            5. Download the CSV file\n            6. Process using the function below\n\n            Symbol mapping: NIFTY PRIVATE BANK\n            ",
+      "status": "manual_required"
+    },
+    {
+      "index_name": "Nifty PSU Bank",
+      "exchange": "NSE",
+      "symbol": "NIFTY PSU BANK",
+      "instruction": "\n            Download Instructions for Nifty PSU Bank:\n\n            1. Visit: https://www.nseindia.com/reports-and-data/historical-data\n            2. Select \"Indices\" from the dropdown\n            3. Choose \"NIFTY PSU BANK\" from the indices list\n            4. Set date range: 2010-01-01 to 2024-12-31\n            5. Download the CSV file\n            6. Process using the function below\n\n            Symbol mapping: NIFTY PSU BANK\n            ",
+      "status": "manual_required"
+    },
+    {
+      "index_name": "Nifty Cement",
+      "exchange": "NSE",
+      "symbol": "NIFTY CEMENT",
+      "instruction": "\n            Download Instructions for Nifty Cement:\n\n            1. Visit: https://www.nseindia.com/reports-and-data/historical-data\n            2. Select \"Indices\" from the dropdown\n            3. Choose \"NIFTY CEMENT\" from the indices list\n            4. Set date range: 2010-01-01 to 2024-12-31\n            5. Download the CSV file\n            6. Process using the function below\n\n            Symbol mapping: NIFTY CEMENT\n            ",
+      "status": "manual_required"
+    }
+  ],
+  "general_instructions": "\n        General Download Instructions:\n\n        1. Open the provided URLs in your browser\n        2. Follow the specific instructions for each index\n        3. Download CSV files for each index\n        4. Use the CSV processing template to format the data\n        5. Save processed files in the data/ directory with naming convention: [index_name]_manual.csv\n\n        Tips:\n        - Use incognito/private browsing mode\n        - Clear browser cache before downloading\n        - Download during off-peak hours (after 6:30 PM IST)\n        - Handle authentication prompts properly\n        ",
+  "csv_processing_template": "\n        CSV Processing Template:\n\n        def process_manual_csv(csv_path, output_path):\n            # Load the downloaded CSV\n            df = pd.read_csv(csv_path)\n\n            # Ensure date column is properly formatted\n            if 'Date' in df.columns:\n                df['Date'] = pd.to_datetime(df['Date'])\n                df.set_index('Date', inplace=True)\n\n            # Add required columns\n            df['Return'] = df['Close'].pct_change()\n            df['Volatility'] = df['Return'].rolling(window=252).std() * np.sqrt(252)\n\n            # Save processed data\n            df.to_csv(output_path)\n            return df\n\n        # Example usage:\n        # process_manual_csv('nifty_auto_manual_raw.csv', 'nifty_auto_manual.csv')\n        "
+}

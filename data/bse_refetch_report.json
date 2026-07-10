@@ -1,0 +1,78 @@
+{
+  "run_at": "2026-07-10T05:28:46",
+  "removed_duplicates": [
+    "bse_200_yfinance.csv",
+    "bse_500_yfinance.csv",
+    "bse_sensex_yfinance.csv",
+    "bse_capital_goods_yfinance.csv",
+    "bse_energy_yfinance.csv",
+    "bse_fmcg_yfinance.csv",
+    "bse_healthcare_yfinance.csv",
+    "bse_metal_yfinance.csv",
+    "bse_realty_yfinance.csv",
+    "bse_sensex_equal_weight_yfinance.csv",
+    "bse_sensex_next_30_yfinance.csv",
+    "bse_sensex_next_50_yfinance.csv",
+    "bse_sensex_sixty_65_35_yfinance.csv",
+    "bse_sensex_sixty_yfinance.csv"
+  ],
+  "downloaded": [
+    {
+      "name": "BSE SENSEX",
+      "code": "SENSEX",
+      "rows": 6593
+    },
+    {
+      "name": "BSE 100",
+      "code": "BSE100",
+      "rows": 6593
+    },
+    {
+      "name": "BSE 200",
+      "code": "BSE200",
+      "rows": 6593
+    },
+    {
+      "name": "BSE 500",
+      "code": "BSE500",
+      "rows": 6593
+    },
+    {
+      "name": "BSE MIDCAP",
+      "code": "BSEMID",
+      "rows": 5778
+    },
+    {
+      "name": "BSE PSU BANK",
+      "code": "PSUBNK",
+      "rows": 3297
+    },
+    {
+      "name": "BSE NEXT 500",
+      "code": "NXT500",
+      "rows": 347
+    },
+    {
+      "name": "BSE INDIA 150",
+      "code": "IND150",
+      "rows": 305
+    }
+  ],
+  "failed": [
+    "BSE SMALLCAP",
+    "BSE BANKEX",
+    "BSE AUTO",
+    "BSE IT",
+    "BSE METAL",
+    "BSE OIL & GAS",
+    "BSE REALTY",
+    "BSE POWER",
+    "BSE FMCG",
+    "BSE HEALTHCARE",
+    "BSE CAPITAL GOODS",
+    "BSE CONSUMER DURABLES",
+    "BSE TECK",
+    "BSE PSU",
+    "BSE 1000"
+  ]
+}
