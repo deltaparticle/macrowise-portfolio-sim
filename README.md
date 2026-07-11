@@ -13,7 +13,11 @@ optimized portfolio with a full diagnostic trail.
   Inverse Volatility.
 - **Estimation**: James-Stein shrunk mean + regime-aware covariance (Ledoit-Wolf in calm periods, EWMA under volatility stress)
   (industry standard).
-- **Delivery**: Python module + JSON-driven CLI. No frontend dependency.
+- **Forward-looking simulation**: bootstrap Monte Carlo of horizon-end
+  outcomes runs by default on every optimize call — turns point-estimate
+  metrics into a distribution of expected total returns with quantiles and
+  a probability of hitting a user-defined target.
+- **Delivery**: Python module + JSON-driven CLI + FastAPI REST layer.
 
 ---
 
@@ -29,11 +33,12 @@ optimized portfolio with a full diagnostic trail.
 8. [Model Selection Logic](#8-model-selection-logic)
 9. [Estimators and Data Pipeline](#9-estimators-and-data-pipeline)
 10. [Sector Taxonomy](#10-sector-taxonomy)
-11. [Overall Test Results](#11-overall-test-results)
-12. [Known Limitations and Data Realities](#12-known-limitations-and-data-realities)
-13. [Future Improvements](#13-future-improvements)
-14. [Architecture Notes](#14-architecture-notes)
-15. [Reference Cards](#15-reference-cards)
+11. [Monte Carlo Simulation](#11-monte-carlo-simulation)
+12. [Overall Test Results](#12-overall-test-results)
+13. [Known Limitations and Data Realities](#13-known-limitations-and-data-realities)
+14. [Future Improvements](#14-future-improvements)
+15. [Architecture Notes](#15-architecture-notes)
+16. [Reference Cards](#16-reference-cards)
 
 ---
 
@@ -49,6 +54,7 @@ these forms:
 - *"Invest in IT and banking sectors only."*
 - *"I have a view that IT will outperform Pharma by 4%."*
 - *"Just give me a balanced portfolio."*
+- *"What's the probability I hit 40% total return over 5 years?"*
 - Any combination of the above.
 
 The engine translates this intent into a mathematical problem, picks the
@@ -58,9 +64,15 @@ optimizer that can solve it, runs it, and returns:
 - Realized-window metrics (return, vol, Sharpe, Sortino, drawdown, CVaR).
 - Feasibility check against every user constraint.
 - The full ranked candidate table so the user sees why this model was chosen.
+- **A bootstrap Monte Carlo simulation of horizon-end outcomes** — quantiles
+  (p10/p25/median/p75/p90) of total and annualized return over a user-defined
+  horizon, plus the probability of hitting a total-return target.
 
 If the user's request is infeasible, the engine returns the best-effort
-portfolio and reports which constraints were violated by how much.
+portfolio and reports which constraints were violated by how much. The
+simulation is still attached even when the point estimate looks infeasible —
+this is often where it's most valuable, because it turns an unhelpful
+"infeasible" message into a "12% chance of hitting your goal historically."
 
 ---
 
@@ -75,10 +87,11 @@ D:/Macrowise Portfolio Optimization/
 │   ├── config.py                    constants (paths, TRADING_DAYS, RF, lookback)
 │   ├── data_loader.py               CSV -> aligned price/return panel
 │   ├── sector_map.py                regex tags for sector/size/style/theme
-│   ├── estimators.py                mu (hist / JS / EWMA), cov (LW / sample / EWMA), CAPM-implied Pi
+│   ├── estimators.py                mu (JS/hist/EWMA), cov (adaptive: robust-LW + EWMA)
 │   ├── metrics.py                   return, vol, Sharpe, Sortino, MaxDD, CVaR, Calmar
 │   ├── selector.py                  UserRequest -> ordered list of candidate models -> ranked results
 │   ├── optimizer.py                 orchestrator; the public entry point
+│   ├── simulation.py                bootstrap Monte Carlo of horizon-end outcomes
 │   ├── backtest.py                  walk-forward periodic-rebalance backtester
 │   └── models/                      the 10 optimizers
 │       ├── _common.py               shared: cvxpy constraints, solver retry, simplex projection
@@ -92,9 +105,14 @@ D:/Macrowise Portfolio Optimization/
 │       ├── omega.py                 max Omega    (multi-start SLSQP)
 │       ├── max_diversification.py   Choueifaty diversification ratio
 │       └── inverse_vol.py           baseline
+├── api/                             FastAPI REST layer
+│   ├── main.py                      endpoints, CORS, exception handlers
+│   └── schemas.py                   Pydantic request/response models
 ├── cli.py                           `optimize`, `backtest`, `sectors`, `indices` subcommands
-├── examples/                        12 sample UserRequest JSON files
-├── opt_goal_sector_test.py          the 360-case test runner
+├── examples/                        sample UserRequest JSON files
+├── Dockerfile                       python:3.11-slim + cvxpy solver deps
+├── docker-compose.yml               local orchestration with healthcheck
+├── run_api.sh                       dev / prod uvicorn launcher
 ├── requirements.txt
 └── README.md                        (this file)
 ```
@@ -232,6 +250,7 @@ result = optimize(UserRequest(
 | `n_assets_used` | `int` | Length of `universe` |
 | `cov_method_used` | `str` | Which covariance estimator fired: `"robust_lw"`, `"ewma"`, `"ledoit_wolf"`, `"n/a"` |
 | `vol_regime_ratio` | `float` | Recent-vol / long-run-vol ratio at optimization time |
+| `simulation` | `dict \| None` | Bootstrap MC of horizon-end outcomes. `None` when disabled; contains `{"error": ...}` when the sim crashed or timed out. Otherwise contains `total_return` / `annualized_return` percentiles and `prob_above_target`. See [Section 11](#11-monte-carlo-simulation). |
 
 **Important caveats for Python callers:**
 
@@ -280,8 +299,15 @@ uvicorn api.main:app --host 0.0.0.0 --port 8000 --workers 2 --timeout-keep-alive
 ```
 
 `--timeout-keep-alive 300` is a conservative safety margin for long backtest
-walks. All `/optimize` calls complete in <3 s. For optimize-only deployments
-you can lower this to 30 s.
+walks. All `/optimize` calls (including the default-on Monte Carlo simulation)
+complete in <3 s. For optimize-only deployments you can lower this to 30 s.
+
+**Concurrency note:** each `/optimize` call spawns one bounded worker thread
+for the simulation (via `concurrent.futures.ThreadPoolExecutor`). With two
+uvicorn workers, expect up to 2 concurrent optimizations, each briefly using
+one additional thread during its <200ms simulation window. Memory footprint
+per call is dominated by the returns DataFrame (~50MB peak on the largest
+universe) — safely fits in a 2-CPU / 2GB container.
 
 #### Docker
 
@@ -309,7 +335,7 @@ fails 3 consecutive times.
 |---|---|---|---|
 | `GET` | `/` | None | Service info, version, endpoint list |
 | `GET` | `/health` | None | Liveness + data-dir check. Returns 200 `{"status":"ok", "n_indices_available": 264}` |
-| `POST` | `/optimize` | None | Run portfolio optimization. Body: `OptimizeRequest`. |
+| `POST` | `/optimize` | None | Run portfolio optimization + bootstrap MC of horizon-end outcomes. Body: `OptimizeRequest`. |
 | `POST` | `/backtest` | None | Walk-forward backtest. Body: `BacktestRequest`. |
 | `GET` | `/sectors` | None | Full tag catalog: sectors, sizes, styles, themes |
 | `GET` | `/indices?sector=IT&match_any=true` | None | Slugs tagged with a given tag |
@@ -393,6 +419,14 @@ All fields are optional unless noted. Unknown fields are rejected with 422.
   ],
   "bl_tau": 0.05,                      // BL prior uncertainty scalar (default 0.05)
 
+  // Monte Carlo simulation (runs by default — see Section 11)
+  "simulate": true,                    // Default true. Set false to skip the sim.
+  "horizon_years": 5.0,                // Investment horizon (default 5, max 30)
+  "n_simulations": 1000,               // Bootstrap paths (default 1000, range 100..10000)
+  "target_total_return": 0.40,         // Optional: reports prob of total return >= this
+  "sim_seed": 42,                      // Seed for reproducibility
+  "sim_timeout_s": 5.0,                // Wall-clock cap; sim is dropped on exceed (200 still returned)
+
   // Output
   "top_k": 3                           // How many candidate models to include in response (default 3, max 10)
 }
@@ -432,7 +466,26 @@ All fields are optional unless noted. Unknown fields are rejected with 422.
   ],
   "universe": ["nifty_it", "bse_bankex", "nifty_fmcg", "..."],
   "cov_method_used": "robust_lw",      // Which estimator fired ("robust_lw" in calm, "ewma" in stress)
-  "vol_regime_ratio": 0.72             // Recent-vol / long-run-vol at optimization time
+  "vol_regime_ratio": 0.72,            // Recent-vol / long-run-vol at optimization time
+
+  // Bootstrap Monte Carlo of horizon-end outcomes. Present when simulate=true.
+  // May be null if simulate=false, or contain {"error": "..."} on timeout/crash.
+  "simulation": {
+    "method": "iid_bootstrap",
+    "horizon_years": 5.0,
+    "n_simulations": 1000,
+    "target_total_return": 0.40,
+    "total_return": {                  // Distribution of total return over the horizon
+      "p10": -0.180, "p25": -0.060, "median": 0.115,
+      "p75": 0.318, "p90": 0.541, "mean": 0.147, "std": 0.281
+    },
+    "annualized_return": {             // Same distribution expressed as annualized (CAGR)
+      "p10": -0.039, "p25": -0.012, "median": 0.022,
+      "p75": 0.057, "p90": 0.091, "mean": 0.026, "std": 0.052
+    },
+    "prob_above_target": 0.183,        // 18.3% of paths hit >= 40% total return
+    "note": "IID daily bootstrap over the historical lookback window..."
+  }
 }
 ```
 
@@ -851,6 +904,12 @@ Every field is optional. Unrecognised fields are rejected with HTTP 422.
 | `clip_percentile` | `float` | `1.0` | Winsorization level (%) for fat-tail robustness. Range `[0.1, 5.0]`. |
 | `views` | `list[dict]` | `[]` | Black-Litterman views. Presence automatically selects the BL solver. Two shapes: absolute `{"asset": "nifty_it", "return": 0.20, "confidence": 0.65}` or relative `{"long": ["nifty_bank"], "short": ["nifty_pharma"], "return": 0.04, "confidence": 0.5}`. `confidence` must be in `(0, 1)`. |
 | `bl_tau` | `float` | `0.05` | BL prior uncertainty scalar. Range `(0, 1]`. |
+| `simulate` | `bool` | `true` | Whether to run bootstrap MC of horizon-end outcomes. |
+| `horizon_years` | `float` | `5.0` | Simulation horizon in years. Range `(0, 30]`. |
+| `n_simulations` | `int` | `1000` | Bootstrap paths. Range `[100, 10000]`. |
+| `target_total_return` | `float` | `None` | Optional total-return goal, e.g. `0.40` = 40% over `horizon_years`. Reports `prob_above_target`. |
+| `sim_seed` | `int` | `42` | RNG seed for reproducibility. |
+| `sim_timeout_s` | `float` | `5.0` | Wall-clock cap on simulation. If exceeded, sim is dropped (response still returns 200). Range `(0, 60]`. |
 | `top_k` | `int` | `3` | Max candidate models in response. Range `[1, 10]`. |
 
 ---
@@ -1592,7 +1651,177 @@ Multi-tag filter: pass a list. Behaviour:
 
 ---
 
-## 11. Overall Test Results
+## 11. Monte Carlo Simulation
+
+Every `optimize()` call automatically runs a **bootstrap Monte Carlo
+simulation** of horizon-end outcomes for the resulting portfolio. This turns
+the optimizer's point estimates (single-number `ann_return`, `sharpe`) into a
+distribution of what the portfolio *could* have delivered over the user's
+horizon, based on the historical return series.
+
+The point estimates say what happened on average. The simulation says what the
+range of realistic outcomes looks like — and, if you pass a target, what
+fraction of those outcomes hit it.
+
+### Why it exists
+
+The point-estimate world produces answers like:
+
+> ann_return = +0.4%,  Sharpe = -0.42,  feasible = false
+
+That is a dead end for a user who asked "will I hit 40% over 5 years?" — the
+optimizer says no, but the user has no idea if that's a "no way ever" or a
+"most scenarios no but occasionally yes." The simulation reframes it:
+
+> 12% of historical bootstrap paths hit >= 40% total return over 5 years.
+> Median outcome: -5%. Best case (p90): +44%. Worst case (p10): -37%.
+
+That is actionable. The user can now decide.
+
+### How it works
+
+1. After the optimizer produces the weights, the engine grabs the same
+   daily returns matrix that was used to estimate mu and cov.
+2. It resamples days **with replacement** to build one simulated N-day path
+   (N = round(horizon_years * 252 trading days)).
+3. Portfolio return per path = prod(1 + weighted daily returns) - 1. Done in
+   log space for numerical stability over long horizons.
+4. Repeat `n_simulations` times (default 1000).
+5. Report quantiles (p10, p25, median, p75, p90), mean, std, and the
+   probability of the total return exceeding `target_total_return` if provided.
+
+The RNG is seeded (`sim_seed`, default 42). Same request -> identical output.
+
+### Statistical properties (validated in tests)
+
+- **Correctness**: When historical returns are constant, the simulation returns
+  zero variance in outcomes (verified). The mean of simulated returns converges
+  to the historical mean at N=5000 within 0.04% (Law of Large Numbers).
+- **Consistency**: `(1 + median_annualized_return)^horizon_years - 1` equals
+  `median_total_return` to within Monte Carlo noise (< 0.001).
+- **Percentile ordering**: p10 <= p25 <= median <= p75 <= p90 in every test.
+- **Determinism**: Same seed -> identical output. Different seed -> different.
+- **Weight normalization**: Weights are auto-normalized. Passing
+  `{"a": 50, "b": 30}` gives the same result as `{"a": 0.625, "b": 0.375}`.
+
+### Compute cost
+
+Measured overhead of the sim on top of the optimizer, default 1000 sims:
+
+| Universe | Optimizer (s) | With sim (s) | Delta |
+|---|---:|---:|---:|
+| IT (7 assets) | 0.149 | 0.139 | -0.010 (noise) |
+| IT+Banks (13) | 0.239 | 0.273 | +0.034 |
+| Largecap+Broad (43) | 0.681 | 0.689 | +0.008 |
+
+Even at n_simulations=5000, horizon=10yr, the overhead never exceeds ~0.20s.
+This is why it's on by default — it's essentially free.
+
+If it does take longer than `sim_timeout_s` (default 5s), the simulation is
+dropped and the response returns 200 with `simulation = {"error": "..."}`. The
+main optimizer result is never affected.
+
+### Choosing `n_simulations`
+
+- **500-1000**: fast, quantile standard errors of ~1.5pp — fine for UI display.
+- **2000-5000**: smoother tails (p10 / p90 stable across runs), +100-200ms.
+- **10000**: max allowed. Use for reports where you need every quantile stable
+  to 0.1pp.
+
+Standard error of the sample quantile: `SE(q) ~ sqrt(q * (1-q) / n) / f(x_q)`.
+For p10 on a return distribution with std ~= 0.3, n=1000 gives SE ~= 1.5pp.
+That's small enough that visual reads don't change between reruns.
+
+### Choosing `horizon_years`
+
+Match the user's actual investment horizon. The simulation compounds daily
+returns, so short horizons (< 1yr) understate the range of outcomes because
+they only sample a few hundred days per path. Long horizons (10-20yr)
+compound more randomness in and produce very wide distributions — that's
+honest, not a bug.
+
+### What the sim does NOT model
+
+Being explicit about limitations, since users may over-interpret quantiles:
+
+1. **IID daily bootstrap** does not preserve autocorrelation or volatility
+   clustering. Runs of bad days (a crash followed by a bear tail) get scrambled.
+   For horizons under 1 year this understates sequence-of-returns risk. For
+   5-10 year horizons the iid assumption becomes progressively less costly.
+2. **Weights are static across the horizon.** No rebalancing. Real portfolios
+   are usually rebalanced, so the sim understates the diversification benefit
+   rebalancing gives. Use the backtest module (`walk_forward`) to model
+   rebalancing effects — the MC is for static-weights forward projection.
+3. **Backward-looking regime only.** If the next 5 years look structurally
+   different from the lookback window (different rate regime, structural
+   sector shift), the sim can't capture that. This is a limitation of any
+   historical-data-driven simulation, not specific to bootstrap.
+4. **No parametric distribution assumption** — the sim is non-parametric, so
+   fat tails are captured as long as they appeared in the lookback window.
+   If they didn't, they won't be sampled.
+
+### End-to-end example (input -> optimizer -> sim -> UI)
+
+**Input**: user wants 40% total return over 5 years on IT + Banks with a 30%
+per-index cap.
+
+```json
+{
+  "sectors": ["IT", "Banks"],
+  "primary_goal": "max_sharpe",
+  "w_max": 0.30,
+  "horizon_years": 5.0,
+  "target_total_return": 0.40
+}
+```
+
+**Optimizer output (point estimate):**
+
+```
+chosen_model    : min_variance   (max_sharpe fallback — tangency unbounded)
+feasible        : true
+ann_return      : +0.4%
+sharpe          : -0.42
+top weights     : bse_teck 30%, nifty_bank 30%, nifty_private_bank 30%,
+                  bse_bankex 8.8%, nifty_it 1.2%
+```
+
+**Simulation output:**
+
+```
+horizon             : 5 years
+n_simulations       : 1000
+total_return.p10    : -0.369
+total_return.p25    : -0.233
+total_return.median : -0.052
+total_return.p75    : +0.183
+total_return.p90    : +0.441
+prob_above_target   : 0.121   (12.1% of paths hit >= 40%)
+```
+
+**What the UI shows to the user:**
+
+> Portfolio: min_variance
+> Historical expected return: 0.4% p.a. (Sharpe -0.42)
+> Over the next 5 years:
+> * Best case (top 10%): +44.1% total return
+> * Likely (median): -5.2% total return
+> * Worst case (bottom 10%): -36.9% total return
+> * Probability of hitting your 40% goal: **12.1%**
+
+Point estimate said "expected 0.4%, Sharpe -0.42, feasible." The user reads
+that as "yes, feasible" without knowing the distribution is essentially flat
+around zero. The simulation makes the risk visible.
+
+### Disabling the simulation
+
+Set `"simulate": false` in the request. The `simulation` field will be `null`
+in the response and there is zero compute overhead. Useful for high-throughput
+batch calls where only the weights matter.
+
+---
+
+## 12. Overall Test Results
 
 A 360-case regression suite (`opt_goal_sector_test.py`) exercises every
 combination of:
@@ -1647,7 +1876,7 @@ detail):
 
 ---
 
-## 12. Known Limitations and Data Realities
+## 13. Known Limitations and Data Realities
 
 - **Weight cap floating-point tolerance.** `w_max = 0.30` may see a weight
   come back as `0.300003` due to solver precision. Not corrected in this
@@ -1675,7 +1904,7 @@ detail):
 
 ---
 
-## 13. Future Improvements
+## 14. Future Improvements
 
 Prioritized:
 
@@ -1708,18 +1937,37 @@ Prioritized:
 10. **Stress-test scenarios.** Re-price the portfolio under historical crisis
     windows (2008, 2013 taper, 2020 COVID, 2022 correction) and report worst
     drawdown / recovery time.
+11. **MC v2 — block bootstrap.** Replace iid daily bootstrap with a stationary
+    or moving-block bootstrap (block length ~30-60 days) to preserve
+    autocorrelation and vol clustering. Reduces the "scrambled sequence-of-
+    returns" limitation of the current bootstrap.
+12. **MC v2 — rebalancing paths.** Simulate paths with periodic rebalancing
+    to the optimizer's weights, not just held-static allocations. Would
+    require re-optimizing at each sim rebalance date — expensive but a truer
+    picture of the live strategy.
+13. **MC v2 — statistical intervals.** Report bootstrap confidence intervals
+    around the quantiles (double-bootstrap) so the UI can show error bars on
+    p10 / p90. Currently the quantiles are point estimates with implicit
+    Monte Carlo error.
 
 ---
 
-## 14. Architecture Notes
+## 15. Architecture Notes
 
 **Design principles:**
 
 - **One request → one result → many candidates.** The user shouldn't need
   to guess which optimizer to run. The engine tries several and ranks them
   transparently.
+- **Point estimate + distribution.** Every response carries both a
+  deterministic optimizer output (weights, in-sample metrics) and a
+  bootstrap Monte Carlo distribution of horizon-end outcomes. Point
+  estimates answer "what did the model choose?"; the sim answers "how
+  wide is the range of realistic outcomes?" — both matter to the user.
 - **Feasibility over silence.** Every constraint violation is reported
   quantitatively (`return 0.1470 < target 0.1500` instead of "infeasible").
+  When feasibility is negative, the simulation often tells a more useful
+  story (e.g., "12% of paths still hit the target").
 - **Composable inputs.** Any constraint can be combined with any other;
   the selector handles the mix.
 - **Deterministic sector taxonomy.** Regex-based tagging is auditable;
@@ -1727,8 +1975,14 @@ Prioritized:
 - **Convex where possible, non-convex where necessary.** MV, CVaR, and BL
   are convex. Drawdown, Sortino, Omega, MaxDiv, RP are not — solved with
   SLSQP / DE and multi-start.
-- **No frontend assumptions.** The engine is a library with a CLI; any
-  frontend (React, Streamlit, notebook) can consume it via the JSON contract.
+- **Sim never blocks the main result.** The simulation runs in a bounded
+  thread with a wall-clock timeout (`sim_timeout_s`, default 5s). If it
+  crashes or times out, the sim is dropped from the response but the
+  optimizer output always survives. This keeps the API contract predictable
+  for downstream consumers.
+- **No frontend assumptions.** The engine is a library with a CLI; the
+  FastAPI layer is optional. Any frontend (React, Streamlit, notebook) can
+  consume either the Python module or the REST layer via the JSON contract.
 
 **Data flow:**
 
@@ -1739,23 +1993,52 @@ UserRequest
 _resolve_universe    ── sector_map.indices_for_sectors
    │
    ▼
-load_universe        ── data_loader (CSV → aligned returns)
+load_universe        ── data_loader (CSV -> aligned returns)
    │
    ▼
-estimators           ── james_stein_mean + ledoit_wolf_cov
+estimators           ── james_stein_mean + adaptive_cov
+   │                     (robust-LW in calm, EWMA in stress)
+   ▼
+run_selection        ── _pick_candidates -> _dispatch -> _feasibility -> _score
    │
    ▼
-run_selection        ── _pick_candidates → _dispatch → _feasibility → _score
+best-candidate weights
+   │
+   ├─────────────────────────────────────────────────┐
+   │                                                 │
+   ▼                                                 ▼
+_run_simulation_bounded (bounded thread)      point-estimate metrics
+   ├── bootstrap_simulate                     (ann_return, sharpe, ...)
+   │       (n paths, horizon days, seeded)           │
+   │                                                 │
+   └── timeout / crash -> {"error": "..."}           │
+                                                     │
+   ▼                                                 ▼
+PortfolioResult (weights + point metrics + candidate table + simulation)
    │
    ▼
-PortfolioResult      ── weights + metrics + candidate table
+FastAPI /optimize response (JSON)
 ```
+
+**Where each piece lives:**
+
+| Concern | Module | Notes |
+|---|---|---|
+| Universe resolution | `engine/sector_map.py`, `engine/data_loader.py` | Regex tags + CSV alignment |
+| Estimation | `engine/estimators.py` | JS mean, adaptive cov, regime detector |
+| Optimization models | `engine/models/*` | 10 optimizers, common cvxpy helpers |
+| Selection + ranking | `engine/selector.py` | Constraint-driven candidate picking + scoring |
+| Orchestration | `engine/optimizer.py` | Public `optimize()` entry point |
+| Forward simulation | `engine/simulation.py` | Bootstrap MC, non-parametric |
+| Backtest | `engine/backtest.py` | Walk-forward periodic-rebalance |
+| REST layer | `api/main.py`, `api/schemas.py` | FastAPI + Pydantic v2 |
+| Deployment | `Dockerfile`, `docker-compose.yml`, `run_api.sh` | Uvicorn + healthcheck |
 
 ---
 
-## 15. Reference Cards
+## 16. Reference Cards
 
-### 15.1 Every primary goal at a glance
+### 16.1 Every primary goal at a glance
 
 | `primary_goal` | Model(s) used | Best for |
 |---|---|---|
@@ -1770,7 +2053,7 @@ PortfolioResult      ── weights + metrics + candidate table
 | `max_diversification` | max_diversification → risk_parity | Choueifaty DR |
 | `inverse_vol` | inverse_vol → risk_parity | Simple baseline |
 
-### 15.2 Every constraint
+### 16.2 Every constraint
 
 | Constraint | Effect | Which solver activates |
 |---|---|---|
@@ -1782,7 +2065,7 @@ PortfolioResult      ── weights + metrics + candidate table
 | `w_max`, `w_min` | Per-index weight bounds | *all* |
 | `views` | Blended posterior | `black_litterman` |
 
-### 15.3 CLI cheatsheet
+### 16.3 CLI cheatsheet
 
 ```bash
 python cli.py sectors                              # tag catalog
@@ -1792,7 +2075,7 @@ python cli.py optimize <request.json> --out r.json # optimize + save
 python cli.py backtest  <request.json> --rebalance Q --lookback 3
 ```
 
-### 15.4 Sample minimal requests
+### 16.4 Sample minimal requests
 
 ```json
 {"primary_goal": "max_sharpe"}

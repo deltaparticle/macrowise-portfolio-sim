@@ -95,6 +95,21 @@ class OptimizeRequest(BaseModel):
         description="List of AbsoluteView or RelativeView dicts. Presence forces Black-Litterman.")
     bl_tau: float = Field(0.05, gt=0, le=1)
 
+    # Forward simulation (bootstrap). Runs by default; set simulate=false to
+    # skip. Output is dropped only if the sim crashes or exceeds sim_timeout_s.
+    simulate: bool = Field(True,
+                           description="If true (default), appends a Monte Carlo simulation of horizon-end outcomes.")
+    horizon_years: float = Field(5.0, gt=0, le=30,
+                                 description="Investment horizon in years for the simulation")
+    n_simulations: int = Field(1000, ge=100, le=10000,
+                               description="Number of bootstrap paths")
+    target_total_return: Optional[float] = Field(
+        None,
+        description="Optional total-return target (e.g. 0.40 for 40%); reports prob_above_target.")
+    sim_seed: int = Field(42, description="RNG seed for reproducibility")
+    sim_timeout_s: float = Field(5.0, gt=0, le=60,
+                                 description="Wall-clock cap on simulation. On timeout, sim is dropped (200 still returned).")
+
     # Output
     top_k: int = Field(3, ge=1, le=10)
 
@@ -160,6 +175,27 @@ class PortfolioMetrics(BaseModel):
     calmar: float
 
 
+class SimulationPercentiles(BaseModel):
+    p10: float
+    p25: float
+    median: float
+    p75: float
+    p90: float
+    mean: float
+    std: float
+
+
+class SimulationSummary(BaseModel):
+    horizon_years: float
+    n_simulations: int
+    target_total_return: Optional[float] = None
+    total_return: SimulationPercentiles
+    annualized_return: SimulationPercentiles
+    prob_above_target: Optional[float] = None
+    method: str = "iid_bootstrap"
+    note: str = ""
+
+
 class OptimizeResponse(BaseModel):
     chosen_model: str
     feasible: bool
@@ -171,6 +207,7 @@ class OptimizeResponse(BaseModel):
     universe: list[str]
     cov_method_used: str = "ledoit_wolf"
     vol_regime_ratio: float = 1.0
+    simulation: Optional[SimulationSummary] = None
 
 
 class BacktestResponse(BaseModel):

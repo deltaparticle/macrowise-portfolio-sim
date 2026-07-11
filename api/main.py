@@ -78,6 +78,31 @@ def _to_user_request(body: S.OptimizeRequest) -> UserRequest:
     return UserRequest(**d)
 
 
+def _sim_payload(sim: dict[str, Any] | None) -> S.SimulationSummary | None:
+    """Convert engine SimulationResult dict to API SimulationSummary.
+    Returns None if the engine did not run a simulation, or if the sim
+    failed internally (in which case we log-and-drop rather than fail
+    the whole response)."""
+    if not sim or "error" in sim:
+        if sim and "error" in sim:
+            log.warning("simulation error dropped from response: %s", sim["error"])
+        return None
+    try:
+        return S.SimulationSummary(
+            horizon_years=sim["horizon_years"],
+            n_simulations=sim["n_simulations"],
+            target_total_return=sim.get("target_total_return"),
+            total_return=S.SimulationPercentiles(**sim["total_return"]),
+            annualized_return=S.SimulationPercentiles(**sim["annualized_return"]),
+            prob_above_target=sim.get("prob_above_target"),
+            method=sim.get("method", "iid_bootstrap"),
+            note=sim.get("note", ""),
+        )
+    except Exception as e:  # pragma: no cover
+        log.warning("could not serialize simulation payload: %s", e)
+        return None
+
+
 def _metrics_payload(metrics: dict[str, Any]) -> S.PortfolioMetrics:
     return S.PortfolioMetrics(
         ann_return=float(metrics.get("ann_return", 0.0)),
@@ -177,6 +202,7 @@ def optimize_endpoint(body: S.OptimizeRequest) -> S.OptimizeResponse:
         universe=result.universe,
         cov_method_used=result.cov_method_used,
         vol_regime_ratio=float(result.vol_regime_ratio),
+        simulation=_sim_payload(result.simulation),
     )
 
 

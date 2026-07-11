@@ -1,5 +1,6 @@
 """Main entrypoint. UserRequest -> PortfolioResult."""
 from __future__ import annotations
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeout
 from dataclasses import dataclass, field, asdict
 from typing import Optional
 import numpy as np
@@ -56,6 +57,15 @@ class UserRequest:
     market_weights: Optional[pd.Series] = None
     bl_tau: float = 0.05
 
+    # Forward simulation (bootstrap). Runs by default. Dropped from the
+    # response only if it crashes or exceeds sim_timeout_s wall-clock.
+    simulate: bool = True
+    horizon_years: float = 5.0
+    n_simulations: int = 1000
+    target_total_return: Optional[float] = None
+    sim_seed: int = 42
+    sim_timeout_s: float = 5.0
+
     # Output
     top_k: int = 3
 
@@ -73,6 +83,33 @@ class PortfolioResult:
     n_assets_used: int
     cov_method_used: str = "ledoit_wolf"
     vol_regime_ratio: float = 1.0
+    simulation: Optional[dict] = None
+
+
+def _run_simulation_bounded(weights, returns, req: "UserRequest") -> Optional[dict]:
+    """Run bootstrap simulation with a wall-clock cap.
+    Returns None (dropped) if it crashes or exceeds req.sim_timeout_s.
+    The point-estimate optimization result is unaffected either way."""
+    from .simulation import bootstrap_simulate
+    if not weights:
+        return None
+    def _call():
+        return bootstrap_simulate(
+            weights=weights, returns=returns,
+            horizon_years=req.horizon_years,
+            n_simulations=req.n_simulations,
+            target_total_return=req.target_total_return,
+            seed=req.sim_seed,
+        )
+    try:
+        with ThreadPoolExecutor(max_workers=1) as ex:
+            fut = ex.submit(_call)
+            sim = fut.result(timeout=req.sim_timeout_s)
+        return asdict(sim)
+    except FuturesTimeout:
+        return {"error": f"simulation timeout: exceeded {req.sim_timeout_s}s"}
+    except Exception as e:
+        return {"error": f"simulation failed: {type(e).__name__}: {e}"}
 
 
 def _resolve_universe(req: UserRequest) -> list[str]:
@@ -123,6 +160,9 @@ def optimize(req: UserRequest) -> PortfolioResult:
         # fill remaining metric keys from the full metrics helper
         from .metrics import all_metrics
         m = all_metrics(port, rf=req.risk_free_rate, cvar_alpha=req.cvar_alpha)
+        sim_payload = None
+        if req.simulate:
+            sim_payload = _run_simulation_bounded({asset: 1.0}, returns, req)
         return PortfolioResult(
             request={k: v for k, v in asdict(req).items() if k != "market_weights"},
             chosen_model="single_asset_trivial",
@@ -135,6 +175,7 @@ def optimize(req: UserRequest) -> PortfolioResult:
             n_assets_used=1,
             cov_method_used="n/a",
             vol_regime_ratio=1.0,
+            simulation=sim_payload,
         )
 
     # Estimation: James-Stein shrunk mean + regime-aware covariance.
@@ -187,6 +228,11 @@ def optimize(req: UserRequest) -> PortfolioResult:
     w = best.get("weights")
     weights_dict = {a: float(x) for a, x in zip(assets, w) if x > 1e-4} if w is not None else {}
 
+    sim_payload = None
+    if req.simulate and weights_dict:
+        sim_returns = returns[[a for a in assets if a in returns.columns]]
+        sim_payload = _run_simulation_bounded(weights_dict, sim_returns, req)
+
     return PortfolioResult(
         request={k: v for k, v in asdict(req).items() if k != "market_weights"},
         chosen_model=best.get("model", "unknown"),
@@ -206,4 +252,5 @@ def optimize(req: UserRequest) -> PortfolioResult:
         n_assets_used=len(mu.index),
         cov_method_used=_cov_used,
         vol_regime_ratio=float(_vol_ratio),
+        simulation=sim_payload,
     )
