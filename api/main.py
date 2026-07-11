@@ -7,8 +7,8 @@ OpenAPI UI:
     http://localhost:8000/docs
 
 Design choices:
-- Sync endpoints. Longest optimizer (min_max_drawdown DE) runs in ~40s;
-  we set uvicorn's keep-alive / worker timeouts wide enough to fit.
+- Sync endpoints. Longest optimizer (min_max_drawdown DE) runs in <3s
+  after DE tuning; keep-alive is wide for long backtest walks.
 - No auth for v1. Deploy behind Macrowise's gateway.
 - CORS permissive; tighten allowed_origins for production.
 - All engine errors are translated to HTTP 400/422 with a JSON payload the

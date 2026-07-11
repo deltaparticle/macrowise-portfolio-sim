@@ -202,166 +202,492 @@ python cli.py indices --sector IT
 
 ### 4.2 Python API
 
+The engine is a pure Python library. Import and call directly — no server required.
+
 ```python
 from engine.optimizer import UserRequest, optimize
 
-request = UserRequest(
+result = optimize(UserRequest(
     sectors=["IT", "Banks", "FMCG"],   # any tag from `python cli.py sectors`
-    target_return=0.15,                # optional: minimum annualized return
-    max_volatility=0.20,               # optional: annualized vol cap
-    max_drawdown=0.25,                 # optional: max drawdown cap
-    w_max=0.25,                        # optional: per-index cap (default 1.0)
-    lookback_years=5,                  # data window
-    primary_goal="max_sharpe",         # optional: nudge the selector
+    target_return=0.15,                # minimum annualized return (hard constraint)
+    max_volatility=0.20,               # annualized vol cap
+    max_drawdown=0.25,                 # max drawdown cap (positive number)
+    w_max=0.25,                        # per-index weight cap (default 1.0)
+    lookback_years=5,                  # rolling data window
+    primary_goal="max_sharpe",         # optional override; auto-selected if omitted
+))
+```
+
+**`PortfolioResult` fields:**
+
+| Field | Type | Description |
+|---|---|---|
+| `chosen_model` | `str` | Model that was actually run, e.g. `"max_sharpe"`, `"min_max_drawdown"` |
+| `feasible` | `bool` | Whether all hard constraints were satisfied |
+| `reason` | `str` | Human-readable explanation (infeasibility detail, fallback reason, etc.) |
+| `weights` | `dict[str, float]` | Asset → weight, only non-trivial weights included (threshold 1e-4). Sums to ~1.0. |
+| `metrics` | `dict[str, float]` | `ann_return`, `ann_vol`, `sharpe`, `sortino`, `max_drawdown`, `cvar`, `calmar` |
+| `all_candidates` | `list[dict]` | Ranked list of all models tried: `model`, `feasible`, `reason`, `score`, `metrics` |
+| `universe` | `list[str]` | All index slugs in the resolved universe (after history filtering) |
+| `n_assets_used` | `int` | Length of `universe` |
+| `cov_method_used` | `str` | Which covariance estimator fired: `"robust_lw"`, `"ewma"`, `"ledoit_wolf"`, `"n/a"` |
+| `vol_regime_ratio` | `float` | Recent-vol / long-run-vol ratio at optimization time |
+
+**Important caveats for Python callers:**
+
+- `weights` only contains entries above 1e-4. Always use `.get(slug, 0.0)` not direct indexing.
+- `metrics` values are annualized floats (e.g. `ann_return=0.18` means 18%). `max_drawdown` is positive (e.g. `0.16` = 16% drawdown).
+- `feasible=False` does not mean the result is unusable — the engine returns the best-effort solution and explains the violation in `reason`. Always check `reason` before discarding an infeasible result.
+- `UserRequest.market_weights` accepts a `pd.Series` but cannot be sent over the REST API (no JSON representation of a Series). The API uses inverse-vol fallback automatically.
+
+**Backtest (Python):**
+
+```python
+from engine.backtest import walk_forward
+
+bt = walk_forward(
+    UserRequest(sectors=["Largecap", "Broad"], primary_goal="max_sharpe", w_max=0.30),
+    rebalance="Q",          # "W" | "M" | "Q" | "A"
+    lookback_years=3,       # rolling estimation window at each rebalance
+    initial_capital=100.0,
 )
 
-result = optimize(request)
-
-print(result.chosen_model)     # e.g. "max_sharpe" or "min_max_drawdown"
-print(result.feasible)         # bool
-print(result.metrics)          # {"ann_return", "ann_vol", "sharpe", "sortino", "max_drawdown", "cvar", "calmar"}
-print(result.weights)          # {"nifty_it": 0.18, "bse_bankex": 0.14, ...}
-print(result.all_candidates)   # ranked list of all models tried
+bt["metrics"]          # same keys as PortfolioResult.metrics
+bt["equity_curve"]     # pd.Series indexed by date, rebased to initial_capital
+bt["daily_returns"]    # pd.Series of daily portfolio returns
+bt["rebalance_log"]    # list of {"date", "model", "weights"} per rebalance
 ```
+
+---
 
 ### 4.3 REST API (FastAPI)
 
-The engine also ships with a FastAPI backend at `api/main.py` for frontend
-integration. Endpoints:
+The FastAPI layer at `api/main.py` wraps the engine for frontend integration.
+All endpoints return JSON. All errors return `{"error": "...", "detail": "..."}`.
 
-| Method | Path | Purpose |
-|---|---|---|
-| GET  | `/`         | Service info + endpoint list |
-| GET  | `/health`   | Health check (data-dir status, index count) |
-| POST | `/optimize` | Run an optimization; body is an `OptimizeRequest` JSON |
-| POST | `/backtest` | Walk-forward backtest; body wraps the same request plus `rebalance` + `lookback_years` |
-| GET  | `/sectors`  | Full tag catalog |
-| GET  | `/indices?sector=IT` | List indices in a tag |
-| GET  | `/models`   | Metadata for every optimizer (family, solver, which constraints it supports) |
-| GET  | `/examples` | Every example JSON bundled with the repo |
-| GET  | `/docs`     | Swagger UI (auto-generated from Pydantic schemas) |
-| GET  | `/redoc`    | ReDoc UI |
-| GET  | `/openapi.json` | Machine-readable OpenAPI spec (for frontend type generation) |
-
-#### Local development
+#### Starting the server
 
 ```bash
-# reload on file change
+# Development — hot reload on file changes
 ./run_api.sh
-# or explicitly
+# or explicitly:
 uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload --timeout-keep-alive 300
-```
 
-Open `http://localhost:8000/docs` to try requests interactively.
-
-#### Production (uvicorn workers)
-
-```bash
+# Production — 2 workers, no reload
 ./run_api.sh prod
-# or
+# or explicitly:
 uvicorn api.main:app --host 0.0.0.0 --port 8000 --workers 2 --timeout-keep-alive 300
 ```
 
-The `--timeout-keep-alive 300` flag is a conservative safety margin. After
-DE parameter tuning (`popsize=15, maxiter=5, tol=2e-3`), `min_max_drawdown`
-runs in under 3 s on all tested universes (worst case 2.80 s, down from
-~40 s). The flag keeps long-running backtest calls alive; for optimize-only
-deployments a lower value (e.g. 30 s) is sufficient.
+`--timeout-keep-alive 300` is a conservative safety margin for long backtest
+walks. All `/optimize` calls complete in <3 s. For optimize-only deployments
+you can lower this to 30 s.
 
 #### Docker
 
 ```bash
+# Build and run
 docker build -t macrowise-portfolio-api .
-docker run -p 8000:8000 macrowise-portfolio-api
-```
+docker run -p 8000:8000 -v "$(pwd)/data:/app/data" macrowise-portfolio-api
 
-Or with compose:
-
-```bash
+# Or with compose (includes healthcheck)
 docker compose up -d
 docker compose logs -f api
-docker compose down
 ```
 
-The image is `python:3.11-slim` + system deps for cvxpy solvers, ~600 MB.
-The healthcheck hits `/health` every 30 s.
+The image is `python:3.11-slim` + build tools for cvxpy solvers (~600 MB).
+Healthcheck hits `/health` every 30 s; container is marked unhealthy if it
+fails 3 consecutive times.
 
-#### Example request
+**The `data/` directory must be bind-mounted** — it is not baked into the image
+(264 CSV files, ~150 MB). Without the mount, `/health` will report
+`data_dir_present: false` and all optimize calls will fail with 500.
 
-```bash
-curl -X POST http://localhost:8000/optimize \
-     -H 'Content-Type: application/json' \
-     -d '{
-       "sectors": ["IT", "Banks", "FMCG"],
-       "target_return": 0.15,
-       "max_volatility": 0.20,
-       "w_max": 0.25,
-       "lookback_years": 5
-     }'
+#### Endpoint reference
+
+| Method | Path | Auth | Description |
+|---|---|---|---|
+| `GET` | `/` | None | Service info, version, endpoint list |
+| `GET` | `/health` | None | Liveness + data-dir check. Returns 200 `{"status":"ok", "n_indices_available": 264}` |
+| `POST` | `/optimize` | None | Run portfolio optimization. Body: `OptimizeRequest`. |
+| `POST` | `/backtest` | None | Walk-forward backtest. Body: `BacktestRequest`. |
+| `GET` | `/sectors` | None | Full tag catalog: sectors, sizes, styles, themes |
+| `GET` | `/indices?sector=IT&match_any=true` | None | Slugs tagged with a given tag |
+| `GET` | `/models` | None | Every optimizer: family, solver, supported constraints |
+| `GET` | `/examples` | None | Pre-built example requests (use for UI "try it" buttons) |
+| `GET` | `/docs` | None | Swagger UI — interactive browser for all endpoints |
+| `GET` | `/redoc` | None | ReDoc documentation UI |
+| `GET` | `/openapi.json` | None | Machine-readable OpenAPI 3.1 schema |
+
+#### HTTP status codes
+
+| Code | Meaning |
+|---|---|
+| 200 | Success |
+| 422 | Validation error — unknown field, wrong type, or out-of-range value. Body: Pydantic error detail. |
+| 400 | Engine rejected the request — e.g. sector tag not found, incompatible constraints. Body: `{"error": "bad_request", "detail": "..."}` |
+| 500 | Engine internal error — solver crash, data loading failure. Body: `{"error": "engine_error", "detail": "..."}` |
+
+**422 vs 400:** 422 is a schema-level rejection before the engine runs (wrong
+field name, wrong type). 400 is a semantic rejection from the engine itself
+(e.g. `"No indices tagged with sectors=['XYZ']"`). The frontend should surface
+the `detail` string from both directly to the user.
+
+#### CORS
+
+CORS is currently set to `allow_origins=["*"]`. The frontend can call the API
+from any origin with no extra configuration. Before going to production, replace
+`"*"` with your actual frontend domain in `api/main.py`:
+
+```python
+allow_origins=["https://app.macrowise.ai"],
 ```
 
-Returns:
+#### `POST /optimize` — full reference
 
-```json
+**Request body (`OptimizeRequest`):**
+
+All fields are optional unless noted. Unknown fields are rejected with 422.
+
+```jsonc
 {
-  "chosen_model": "max_return_for_vol",
-  "feasible": true,
-  "reason": "",
-  "universe_size": 24,
-  "weights": {"nifty_fmcg": 0.19, "bse_bankex": 0.14, "...": "..."},
-  "metrics": {"ann_return": 0.18, "ann_vol": 0.19, "sharpe": 0.61,
-              "sortino": 0.86, "max_drawdown": 0.16,
-              "cvar": 0.024, "calmar": 1.13},
-  "candidates": [{"model": "max_return_for_vol", "feasible": true, "...": "..."}],
-  "universe": ["nifty_it", "bse_bankex", "..."]
+  // Universe — at least one of these should be set
+  "sectors": ["IT", "Banks"],          // Tag filter. Get valid tags from GET /sectors
+  "universe": ["nifty_it", "nse_it"],  // Explicit slugs (overrides sectors). Get slugs from GET /indices
+  "sector_match_all": false,           // true = index must have ALL listed tags (default false = any)
+
+  // Goal — all optional, any combination is valid
+  "primary_goal": "max_sharpe",        // Explicit model override. If omitted, auto-selected from constraints.
+                                       // Values: max_sharpe | max_return | min_risk | balanced |
+                                       //         min_tail_risk | min_drawdown | max_sortino | max_omega |
+                                       //         max_diversification | inverse_vol | black_litterman
+  "target_return": 0.15,               // Minimum annualized return (hard constraint), e.g. 0.15 = 15%
+  "max_volatility": 0.20,              // Annualized volatility cap, e.g. 0.20 = 20%
+  "max_drawdown": 0.25,                // Max drawdown cap (positive number), e.g. 0.25 = 25%
+  "max_cvar": 0.03,                    // Max daily CVaR at cvar_alpha level, e.g. 0.03 = 3%
+  "cvar_alpha": 0.05,                  // Tail probability for CVaR (default 0.05 = 5%)
+
+  // Weight bounds
+  "w_min": 0.0,                        // Per-index minimum weight (default 0.0 = long-only)
+  "w_max": 0.30,                       // Per-index maximum weight (default 1.0 = uncapped)
+
+  // Data window
+  "start": "2020-01-01",              // ISO date. If omitted, lookback_years back from latest.
+  "end": "2024-12-31",                // ISO date. If omitted, latest available date.
+  "lookback_years": 5,                 // Rolling window length (default 5, max 25)
+
+  // Model knobs
+  "risk_free_rate": 0.065,             // Annualized risk-free rate for Sharpe (default 6.5%)
+
+  // Covariance method (default "auto" is recommended — do not change unless you have a reason)
+  "cov_method": "auto",                // "auto" | "ledoit_wolf" | "robust_lw" | "ewma"
+  "ewma_halflife": 63,                 // EWMA halflife in trading days (default ~3 months)
+  "regime_threshold": 1.3,            // Vol ratio above which auto switches to EWMA (default 1.3)
+  "clip_percentile": 1.0,             // Winsorization level for fat-tail robustness (default 1%)
+
+  // Black-Litterman views (presence forces BL solver)
+  "views": [
+    {"asset": "nifty_it", "return": 0.20, "confidence": 0.65},
+    {"long": ["nifty_bank"], "short": ["nifty_pharma"], "return": 0.04, "confidence": 0.5}
+  ],
+  "bl_tau": 0.05,                      // BL prior uncertainty scalar (default 0.05)
+
+  // Output
+  "top_k": 3                           // How many candidate models to include in response (default 3, max 10)
 }
 ```
 
-Every field of `UserRequest` is optional; leave it out to accept the default.
-Unknown fields are rejected with HTTP 422 (Pydantic `extra="forbid"`).
+**Response body (`OptimizeResponse`):**
 
-### 4.4 Backtest API
+```jsonc
+{
+  "chosen_model": "max_sharpe",        // Model that ran
+  "feasible": true,                    // Whether all hard constraints were satisfied
+  "reason": "",                        // Non-empty when infeasible or a fallback was used
+  "universe_size": 24,                 // Number of indices in the resolved universe
+  "weights": {                         // Only non-trivial weights (> 0.01%). Sums to ~1.0.
+    "nifty_it": 0.2341,
+    "bse_bankex": 0.1872,
+    "nifty_fmcg": 0.1654
+  },
+  "metrics": {
+    "ann_return": 0.182,               // Annualized return (in-sample, on the lookback window)
+    "ann_vol": 0.187,                  // Annualized volatility
+    "sharpe": 0.621,                   // Sharpe ratio (using risk_free_rate)
+    "sortino": 0.864,                  // Sortino ratio
+    "max_drawdown": 0.163,             // Maximum drawdown (positive number)
+    "cvar": 0.024,                     // Daily CVaR at cvar_alpha level
+    "calmar": 1.117                    // Calmar ratio (ann_return / max_drawdown)
+  },
+  "candidates": [                      // top_k ranked candidates
+    {
+      "model": "max_sharpe",
+      "status": "optimal",
+      "feasible": true,
+      "reason": "",
+      "score": 0.621,
+      "metrics": { "ann_return": 0.182, "..." : "..." }
+    }
+  ],
+  "universe": ["nifty_it", "bse_bankex", "nifty_fmcg", "..."],
+  "cov_method_used": "robust_lw",      // Which estimator fired ("robust_lw" in calm, "ewma" in stress)
+  "vol_regime_ratio": 0.72             // Recent-vol / long-run-vol at optimization time
+}
+```
+
+**Checking for infeasibility:**
+
+```javascript
+const res = await fetch('/optimize', { method: 'POST', ... })
+const data = await res.json()
+
+if (!data.feasible) {
+  // Show data.reason to the user — it explains which constraint was violated
+  // e.g. "return 0.147 < target 0.15" or "volatility 0.22 > cap 0.20"
+  // The weights are still present and represent the best-effort solution
+}
+```
+
+#### `POST /backtest` — full reference
+
+**Request body (`BacktestRequest`):**
+
+```jsonc
+{
+  "request": { /* same OptimizeRequest as above */ },
+  "rebalance": "Q",          // "W" (weekly) | "M" (monthly) | "Q" (quarterly) | "A" (annual)
+  "lookback_years": 3,       // Rolling estimation window at each rebalance (default 3, max 15)
+  "initial_capital": 100.0   // Starting value for equity curve (default 100)
+}
+```
+
+**Response body (`BacktestResponse`):**
+
+```jsonc
+{
+  "rebalance": "Q",
+  "lookback_years": 3,
+  "n_rebalances": 20,
+  "metrics": {
+    "ann_return": 0.117,
+    "ann_vol": 0.135,
+    "sharpe": 0.387,
+    "sortino": 0.521,
+    "max_drawdown": 0.183,
+    "cvar": 0.018,
+    "calmar": 0.638
+  },
+  "equity_curve": [             // One entry per trading day
+    {"date": "2019-04-01", "value": 100.0},
+    {"date": "2019-04-02", "value": 100.3},
+    "..."
+  ],
+  "rebalance_log": [            // One entry per rebalance
+    {
+      "date": "2019-04-01",
+      "model": "max_sharpe",
+      "weights": {"nifty_it": 0.23, "bse_bankex": 0.19, "...": "..."}
+    }
+  ]
+}
+```
+
+**Note:** Backtest `metrics` are computed on the out-of-sample equity curve,
+not on any single optimization window. They represent realized portfolio
+performance across all rebalance periods.
+
+#### `GET /sectors`
+
+```jsonc
+{
+  "sectors": ["IT", "Banks", "Auto", "..."],   // 20 sector tags
+  "sizes":   ["Largecap", "Midcap", "..."],    // 7 size tags
+  "styles":  ["Momentum", "Quality", "..."],   // 13 style tags
+  "themes":  ["ESG", "Shariah", "PSU", "..."]  // 7 theme tags
+}
+```
+
+Use this endpoint to populate tag-selection dropdowns in the UI. Any of these
+values can be passed in the `sectors` array of an `OptimizeRequest`.
+
+#### `GET /indices?sector=IT&match_any=true`
+
+```jsonc
+{
+  "sector": "IT",
+  "match_any": true,
+  "count": 7,
+  "indices": ["nifty_it", "nse_it", "bse_teck", "..."]
+}
+```
+
+Use this to show the user which specific indices will be included when they
+select a tag — helpful for a "preview universe" panel in the UI.
+
+#### `GET /models`
+
+Returns metadata for every optimizer. Use this to build a model-selection UI
+or to show the user which constraints a chosen model supports:
+
+```jsonc
+{
+  "count": 13,
+  "models": [
+    {
+      "name": "max_sharpe",
+      "family": "mean_variance",
+      "solver": "cvxpy",
+      "handles_target_return": true,
+      "handles_max_vol": true,
+      "handles_max_dd": false,
+      "handles_max_cvar": false,
+      "handles_views": false,
+      "description": "Maximizes Sharpe ratio via convex tangency-portfolio reformulation."
+    },
+    "..."
+  ]
+}
+```
+
+#### TypeScript type generation (recommended)
+
+The OpenAPI spec at `/openapi.json` is machine-readable. Generate TypeScript
+interfaces from it so the frontend gets compile-time type safety on all
+request/response shapes:
+
+```bash
+# Install once
+npm install -g openapi-typescript
+
+# Generate types (run whenever the backend schema changes)
+npx openapi-typescript http://localhost:8000/openapi.json -o src/types/macrowise-api.d.ts
+```
+
+Then in your frontend code:
+
+```typescript
+import type { components } from '../types/macrowise-api'
+
+type OptimizeRequest  = components['schemas']['OptimizeRequest']
+type OptimizeResponse = components['schemas']['OptimizeResponse']
+
+const body: OptimizeRequest = {
+  sectors: ['IT', 'Banks'],
+  primary_goal: 'max_sharpe',
+  w_max: 0.30,
+}
+
+const res = await fetch(`${API_BASE}/optimize`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(body),
+})
+
+if (!res.ok) {
+  const err = await res.json()
+  throw new Error(err.detail ?? err.error)
+}
+
+const data: OptimizeResponse = await res.json()
+// data.weights, data.metrics, data.chosen_model are all typed
+```
+
+**Common frontend pitfall:** the API rejects unknown fields with 422
+(`extra="forbid"` on all Pydantic models). If you add a field to the UI that
+doesn't exist in the schema, you'll get a 422, not a silent ignore. This is
+intentional — it forces schema discipline.
+
+#### Full working curl examples
+
+```bash
+# 1. Basic max-Sharpe on IT + Banks, 30% cap per index
+curl -s -X POST http://localhost:8000/optimize \
+  -H 'Content-Type: application/json' \
+  -d '{"sectors":["IT","Banks"],"primary_goal":"max_sharpe","w_max":0.30}' | python -m json.tool
+
+# 2. Auto-select model from constraints only (no primary_goal)
+curl -s -X POST http://localhost:8000/optimize \
+  -H 'Content-Type: application/json' \
+  -d '{"sectors":["Largecap","Broad"],"target_return":0.15,"max_volatility":0.20,"w_max":0.25}'
+
+# 3. Black-Litterman with views
+curl -s -X POST http://localhost:8000/optimize \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "sectors": ["IT","Banks","Pharma"],
+    "views": [
+      {"asset": "nifty_it", "return": 0.22, "confidence": 0.70},
+      {"long": ["nifty_bank"], "short": ["nifty_pharma"], "return": 0.05, "confidence": 0.55}
+    ],
+    "w_max": 0.30
+  }'
+
+# 4. Quarterly walk-forward backtest
+curl -s -X POST http://localhost:8000/backtest \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "request": {"sectors":["Largecap","Broad"],"primary_goal":"max_sharpe","w_max":0.30},
+    "rebalance": "Q",
+    "lookback_years": 3,
+    "initial_capital": 100
+  }'
+
+# 5. Health check
+curl -s http://localhost:8000/health
+
+# 6. List all available sector tags
+curl -s http://localhost:8000/sectors
+
+# 7. List all IT indices
+curl -s 'http://localhost:8000/indices?sector=IT'
+```
+
+### 4.4 Backtest Python API
 
 ```python
 from engine.backtest import walk_forward
 from engine.optimizer import UserRequest
 
-result = walk_forward(
-    UserRequest(sectors=["Largecap", "Broad"], primary_goal="max_sharpe"),
-    rebalance="Q",       # M / Q / A / W
+bt = walk_forward(
+    UserRequest(sectors=["Largecap", "Broad"], primary_goal="max_sharpe", w_max=0.30),
+    rebalance="Q",       # "W" | "M" | "Q" | "A"
     lookback_years=3,
     initial_capital=100.0,
 )
-print(result["metrics"])
-result["equity_curve"].plot()   # if you have matplotlib
+print(bt["metrics"])
+bt["equity_curve"].plot()   # pandas Series, plot directly with matplotlib
 ```
 
 ---
 
 ## 5. The Request Schema
 
-Every field is optional. Leave fields out to accept the default.
+Every field is optional. Unrecognised fields are rejected with HTTP 422.
 
-| Field | Type | Default | What it does |
+| Field | Type | Default | Notes |
 |---|---|---|---|
-| `sectors` | `list[str]` | `None` | Tag filter. Any tag from `python cli.py sectors`. |
-| `universe` | `list[str]` | `None` | Explicit slug list (overrides `sectors`). |
-| `sector_match_all` | `bool` | `False` | If True, require an index to have ALL of the listed tags. Falls back to any-match if empty. |
-| `primary_goal` | `str` | `None` | One of `max_sharpe`, `max_return`, `min_risk`, `balanced`, `min_tail_risk`, `min_drawdown`, `max_sortino`, `max_omega`, `max_diversification`, `inverse_vol`. |
-| `target_return` | `float` | `None` | Minimum annualized return, e.g. 0.15. Becomes a hard constraint. |
-| `max_volatility` | `float` | `None` | Annualized vol cap. |
-| `max_drawdown` | `float` | `None` | Max drawdown cap (positive number). |
-| `max_cvar` | `float` | `None` | Max daily 5%-CVaR (positive number). |
-| `cvar_alpha` | `float` | `0.05` | Tail probability level for CVaR. |
-| `w_min` | `float` | `0.0` | Per-index minimum weight. |
-| `w_max` | `float` | `1.0` | Per-index maximum weight (soft cap in current build — see limitations). |
-| `start`, `end` | `str` | `None` | Data window (`YYYY-MM-DD`). If unset, `lookback_years` back from latest. |
-| `lookback_years` | `int` | `5` | Data window length. |
-| `risk_free_rate` | `float` | `0.065` | Annualized RF for Sharpe / max_sharpe. |
-| `views` | `list[dict]` | `[]` | Black-Litterman views. Two shapes: `{"asset": "nifty_it", "return": 0.20, "confidence": 0.65}` or `{"long": ["nifty_bank"], "short": ["nifty_pharma"], "return": 0.04, "confidence": 0.5}`. Presence forces the Black-Litterman solver. |
-| `market_weights` | `pd.Series` | `None` | Optional BL prior weights. Falls back to a broad-market index if present in universe, else inverse-vol proxy. |
-| `bl_tau` | `float` | `0.05` | BL prior uncertainty scalar. |
-| `top_k` | `int` | `3` | How many candidate models to keep in the output. |
+| `sectors` | `list[str]` | `None` | Tag filter. Valid values from `GET /sectors` or `python cli.py sectors`. |
+| `universe` | `list[str]` | `None` | Explicit index slugs — overrides `sectors` entirely. Get slugs from `GET /indices`. |
+| `sector_match_all` | `bool` | `false` | `true` = index must carry ALL listed tags. `false` = any tag match. Falls back to any-match if `true` yields nothing. |
+| `primary_goal` | `str` | `None` | Explicit model override. If omitted, auto-selected from constraints. Values: `max_sharpe`, `max_return`, `min_risk`, `balanced`, `min_tail_risk`, `min_drawdown`, `max_sortino`, `max_omega`, `max_diversification`, `inverse_vol`, `black_litterman`. |
+| `target_return` | `float` | `None` | Minimum annualized return, e.g. `0.15` = 15%. Hard constraint. |
+| `max_volatility` | `float` | `None` | Annualized volatility cap. |
+| `max_drawdown` | `float` | `None` | Max drawdown cap (positive number, e.g. `0.25` = 25%). |
+| `max_cvar` | `float` | `None` | Max daily CVaR at `cvar_alpha` level (positive number). |
+| `cvar_alpha` | `float` | `0.05` | Tail probability for CVaR (default 5%). |
+| `w_min` | `float` | `0.0` | Per-index minimum weight. Range `[0, 1]`. |
+| `w_max` | `float` | `1.0` | Per-index weight cap. Range `[0, 1]`. Soft cap in current build — convex solvers enforce it; DE-based drawdown model approximates it. |
+| `start` | `str` | `None` | Data window start as `YYYY-MM-DD`. If omitted, derived from `lookback_years`. |
+| `end` | `str` | `None` | Data window end as `YYYY-MM-DD`. If omitted, latest available date. |
+| `lookback_years` | `int` | `5` | Rolling window length in years. Range `[1, 25]`. |
+| `risk_free_rate` | `float` | `0.065` | Annualized risk-free rate for Sharpe calculation. Range `[0, 0.25]`. |
+| `cov_method` | `str` | `"auto"` | Covariance estimator. `"auto"` = winsorized LW in calm markets, EWMA in stress. Recommended — do not change unless you have a reason. |
+| `ewma_halflife` | `int` | `63` | EWMA halflife in trading days. Range `[5, 365]`. |
+| `regime_threshold` | `float` | `1.3` | Vol ratio above which `auto` switches to EWMA. Range `[1.0, 3.0]`. |
+| `clip_percentile` | `float` | `1.0` | Winsorization level (%) for fat-tail robustness. Range `[0.1, 5.0]`. |
+| `views` | `list[dict]` | `[]` | Black-Litterman views. Presence automatically selects the BL solver. Two shapes: absolute `{"asset": "nifty_it", "return": 0.20, "confidence": 0.65}` or relative `{"long": ["nifty_bank"], "short": ["nifty_pharma"], "return": 0.04, "confidence": 0.5}`. `confidence` must be in `(0, 1)`. |
+| `bl_tau` | `float` | `0.05` | BL prior uncertainty scalar. Range `(0, 1]`. |
+| `top_k` | `int` | `3` | Max candidate models in response. Range `[1, 10]`. |
 
 ---
 
