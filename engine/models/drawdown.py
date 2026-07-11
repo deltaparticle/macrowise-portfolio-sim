@@ -27,7 +27,7 @@ def _simplex_project(w: np.ndarray, w_min: float, w_max: float) -> np.ndarray:
 def min_max_drawdown(returns: pd.DataFrame, w_min: float = 0.0, w_max: float = 1.0,
                      target_return: float | None = None,
                      mu: pd.Series | None = None,
-                     seed: int = 42, maxiter: int = 200):
+                     seed: int = 42, maxiter: int = 5):
     """Non-convex — differential evolution over the simplex.
     If target_return supplied, penalize returns below it."""
     assets = list(returns.columns)
@@ -47,7 +47,7 @@ def min_max_drawdown(returns: pd.DataFrame, w_min: float = 0.0, w_max: float = 1
     bounds = [(w_min, w_max)] * n
     result = differential_evolution(
         obj, bounds, seed=seed, maxiter=maxiter,
-        popsize=15, tol=1e-6, polish=True, workers=1,
+        popsize=15, tol=2e-3, polish=True, workers=1,
         init="sobol",
     )
     w = _simplex_project(result.x, w_min, w_max)
