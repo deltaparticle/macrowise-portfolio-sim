@@ -174,6 +174,8 @@ def optimize_endpoint(body: S.OptimizeRequest) -> S.OptimizeResponse:
             for c in result.all_candidates
         ],
         universe=result.universe,
+        cov_method_used=result.cov_method_used,
+        vol_regime_ratio=float(result.vol_regime_ratio),
     )
 
 

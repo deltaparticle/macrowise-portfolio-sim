@@ -71,6 +71,42 @@ def ewma_cov(returns: pd.DataFrame, halflife: int = 63, annualize: bool = True) 
     return annualize_cov(c) if annualize else c
 
 
+def vol_regime_ratio(returns: pd.DataFrame, short_window: int = 30) -> float:
+    """Cross-sectional median of (recent short-window vol / full-window vol).
+    >1 means current volatility is elevated vs the full lookback.
+    Used to auto-switch between Ledoit-Wolf (calm) and EWMA (stressed) cov."""
+    r = returns.dropna()
+    if len(r) < short_window * 2:
+        return 1.0
+    recent = r.tail(short_window)
+    short_vol = recent.std(ddof=1)
+    long_vol = r.std(ddof=1)
+    ratio = (short_vol / long_vol.replace(0, np.nan)).dropna()
+    if ratio.empty:
+        return 1.0
+    return float(ratio.median())
+
+
+def adaptive_cov(
+    returns: pd.DataFrame,
+    threshold: float = 1.3,
+    short_window: int = 30,
+    ewma_halflife: int = 63,
+    annualize: bool = True,
+) -> tuple[pd.DataFrame, str, float]:
+    """Regime-aware covariance. Returns (cov, method_used, vol_ratio).
+
+    Rationale: Ledoit-Wolf averages across the full lookback, so during a
+    volatility regime shift it lags reality (underestimates current risk).
+    EWMA weights recent observations more heavily, tracking the current
+    regime. We switch when recent vol is materially above long-run vol.
+    """
+    ratio = vol_regime_ratio(returns, short_window=short_window)
+    if ratio >= threshold:
+        return ewma_cov(returns, halflife=ewma_halflife, annualize=annualize), "ewma", ratio
+    return ledoit_wolf_cov(returns, annualize=annualize), "ledoit_wolf", ratio
+
+
 def implied_equilibrium_returns(
     cov: pd.DataFrame,
     market_weights: pd.Series,

@@ -8,7 +8,9 @@ import pandas as pd
 from .config import RISK_FREE_RATE, DEFAULT_LOOKBACK_YEARS
 from .data_loader import load_universe
 from .sector_map import build_map, indices_for_sectors, market_proxy
-from .estimators import historical_mean, james_stein_mean, ledoit_wolf_cov
+from .estimators import (
+    historical_mean, james_stein_mean, ledoit_wolf_cov, ewma_cov, adaptive_cov,
+)
 from .selector import run_selection
 
 
@@ -39,6 +41,14 @@ class UserRequest:
     # Model knobs
     risk_free_rate: float = RISK_FREE_RATE
 
+    # Covariance estimation
+    # "auto": switch to EWMA when recent vol is elevated vs long-run vol
+    # "ledoit_wolf": always LW (stable, industry default)
+    # "ewma": always exponentially-weighted (regime-tracking)
+    cov_method: str = "auto"
+    ewma_halflife: int = 63
+    regime_threshold: float = 1.3   # vol_ratio above this triggers EWMA in auto mode
+
     # Black-Litterman
     views: list[dict] = field(default_factory=list)
     market_weights: Optional[pd.Series] = None
@@ -59,6 +69,8 @@ class PortfolioResult:
     all_candidates: list[dict]
     universe: list[str]
     n_assets_used: int
+    cov_method_used: str = "ledoit_wolf"
+    vol_regime_ratio: float = 1.0
 
 
 def _resolve_universe(req: UserRequest) -> list[str]:
@@ -119,13 +131,25 @@ def optimize(req: UserRequest) -> PortfolioResult:
             all_candidates=[],
             universe=[asset],
             n_assets_used=1,
+            cov_method_used="n/a",
+            vol_regime_ratio=1.0,
         )
 
-    # Estimation: James-Stein shrunk mean + Ledoit-Wolf shrunk covariance.
-    # Both shrink toward stable priors to control MV concentration from
-    # noisy sample estimates (Ledoit-Wolf 2003, James-Stein 1961).
+    # Estimation: James-Stein shrunk mean + regime-aware covariance.
+    # Cov default is "auto" — Ledoit-Wolf in calm regimes, EWMA when recent
+    # volatility is elevated vs long-run vol (see estimators.adaptive_cov).
     mu = james_stein_mean(returns, annualize=True)
-    cov = ledoit_wolf_cov(returns, annualize=True)
+    from .estimators import vol_regime_ratio
+    _vol_ratio = vol_regime_ratio(returns, short_window=30)
+    if req.cov_method == "ledoit_wolf":
+        cov = ledoit_wolf_cov(returns, annualize=True); _cov_used = "ledoit_wolf"
+    elif req.cov_method == "ewma":
+        cov = ewma_cov(returns, halflife=req.ewma_halflife, annualize=True); _cov_used = "ewma"
+    else:  # "auto"
+        cov, _cov_used, _vol_ratio = adaptive_cov(
+            returns, threshold=req.regime_threshold,
+            ewma_halflife=req.ewma_halflife, annualize=True,
+        )
 
     # Market proxy weights for Black-Litterman
     if req.views and req.market_weights is None:
@@ -173,4 +197,6 @@ def optimize(req: UserRequest) -> PortfolioResult:
         } for c in top],
         universe=list(mu.index),
         n_assets_used=len(mu.index),
+        cov_method_used=_cov_used,
+        vol_regime_ratio=float(_vol_ratio),
     )

@@ -11,7 +11,7 @@ optimized portfolio with a full diagnostic trail.
   return, target volatility), CVaR, Max Drawdown, Risk Parity, Hierarchical
   Risk Parity, Black-Litterman, Max Sortino, Max Omega, Max Diversification,
   Inverse Volatility.
-- **Estimation**: James-Stein shrunk mean + Ledoit-Wolf shrunk covariance
+- **Estimation**: James-Stein shrunk mean + regime-aware covariance (Ledoit-Wolf in calm periods, EWMA under volatility stress)
   (industry standard).
 - **Delivery**: Python module + JSON-driven CLI. No frontend dependency.
 
@@ -1019,11 +1019,36 @@ from beating a slightly-higher-risk but positive-return alternative.
 **Covariance (Σ):**
 
 - `sample_cov` — plain sample covariance.
-- `ledoit_wolf_cov` — **default in the optimizer.** Shrinkage estimator
-  from `sklearn.covariance.LedoitWolf`. Blends the sample covariance with
-  a scaled identity, minimizing Frobenius-norm distance to the true
+- `ledoit_wolf_cov` — Shrinkage estimator from
+  `sklearn.covariance.LedoitWolf`. Blends the sample covariance with a
+  scaled identity, minimizing Frobenius-norm distance to the true
   covariance. Standard for portfolio optimization since Ledoit & Wolf (2003).
-- `ewma_cov(halflife=63)` — exponentially weighted.
+- `ewma_cov(halflife=63)` — exponentially weighted. Weights recent
+  observations more heavily; tracks the current volatility regime rather
+  than averaging over the whole lookback.
+- `adaptive_cov` — **default in the optimizer (`cov_method="auto"`).**
+  Runs `vol_regime_ratio()` (median of recent 30-day vol / full-window vol
+  across assets) and switches to EWMA when the ratio exceeds
+  `regime_threshold` (default 1.3), otherwise uses Ledoit-Wolf. Prevents
+  Ledoit-Wolf from averaging stale calm-period data into risk estimates
+  during a volatility spike.
+
+Users can force a specific estimator via
+`UserRequest(cov_method="ledoit_wolf" | "ewma" | "auto")`. The result
+object reports `cov_method_used` and `vol_regime_ratio` so the caller can
+see which mode fired.
+
+**Walk-forward validation (Q rebalance, 3yr lookback, 2019–2024):**
+
+| Mode | AnnRet | AnnVol | Sharpe | MaxDD |
+|---|---:|---:|---:|---:|
+| ledoit_wolf | 11.71% | 13.47% | 0.387 | 18.35% |
+| ewma (always) | 10.92% | 13.61% | 0.325 | 19.22% |
+| **auto** | **11.76%** | **13.46%** | **0.391** | **18.35%** |
+
+Auto slightly dominates LW-only; always-EWMA underperforms both because
+noise cost dominates in calm regimes. Auto fired 3 of 24 quarters (COVID
+crash, 2019 mid-year, 2024 mid-year vol events).
 
 **CAPM-implied equilibrium returns:**
 
