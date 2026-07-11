@@ -157,6 +157,11 @@ scikit-learn>=1.3
 cvxpy>=1.4
 pyyaml>=6.0
 tabulate>=0.9
+
+# API
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2.5
 ```
 
 `cvxpy` installs three convex solvers alongside it (ECOS, SCS, Clarabel). The
@@ -219,7 +224,101 @@ print(result.weights)          # {"nifty_it": 0.18, "bse_bankex": 0.14, ...}
 print(result.all_candidates)   # ranked list of all models tried
 ```
 
-### 4.3 Backtest API
+### 4.3 REST API (FastAPI)
+
+The engine also ships with a FastAPI backend at `api/main.py` for frontend
+integration. Endpoints:
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET  | `/`         | Service info + endpoint list |
+| GET  | `/health`   | Health check (data-dir status, index count) |
+| POST | `/optimize` | Run an optimization; body is an `OptimizeRequest` JSON |
+| POST | `/backtest` | Walk-forward backtest; body wraps the same request plus `rebalance` + `lookback_years` |
+| GET  | `/sectors`  | Full tag catalog |
+| GET  | `/indices?sector=IT` | List indices in a tag |
+| GET  | `/models`   | Metadata for every optimizer (family, solver, which constraints it supports) |
+| GET  | `/examples` | Every example JSON bundled with the repo |
+| GET  | `/docs`     | Swagger UI (auto-generated from Pydantic schemas) |
+| GET  | `/redoc`    | ReDoc UI |
+| GET  | `/openapi.json` | Machine-readable OpenAPI spec (for frontend type generation) |
+
+#### Local development
+
+```bash
+# reload on file change
+./run_api.sh
+# or explicitly
+uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload --timeout-keep-alive 300
+```
+
+Open `http://localhost:8000/docs` to try requests interactively.
+
+#### Production (uvicorn workers)
+
+```bash
+./run_api.sh prod
+# or
+uvicorn api.main:app --host 0.0.0.0 --port 8000 --workers 2 --timeout-keep-alive 300
+```
+
+The 300-second keep-alive is important — the `min_max_drawdown` model uses
+differential evolution and can take ~40 s on larger universes. Default
+uvicorn timeouts will drop the connection.
+
+#### Docker
+
+```bash
+docker build -t macrowise-portfolio-api .
+docker run -p 8000:8000 macrowise-portfolio-api
+```
+
+Or with compose:
+
+```bash
+docker compose up -d
+docker compose logs -f api
+docker compose down
+```
+
+The image is `python:3.11-slim` + system deps for cvxpy solvers, ~600 MB.
+The healthcheck hits `/health` every 30 s.
+
+#### Example request
+
+```bash
+curl -X POST http://localhost:8000/optimize \
+     -H 'Content-Type: application/json' \
+     -d '{
+       "sectors": ["IT", "Banks", "FMCG"],
+       "target_return": 0.15,
+       "max_volatility": 0.20,
+       "w_max": 0.25,
+       "lookback_years": 5
+     }'
+```
+
+Returns:
+
+```json
+{
+  "chosen_model": "max_return_for_vol",
+  "feasible": true,
+  "reason": "",
+  "universe_size": 24,
+  "weights": {"nifty_fmcg": 0.19, "bse_bankex": 0.14, "...": "..."},
+  "metrics": {"ann_return": 0.18, "ann_vol": 0.19, "sharpe": 0.61,
+              "sortino": 0.86, "max_drawdown": 0.16,
+              "cvar": 0.024, "calmar": 1.13},
+  "candidates": [{"model": "max_return_for_vol", "feasible": true, "...": "..."}],
+  "universe": ["nifty_it", "bse_bankex", "..."]
+}
+```
+
+Every field of `UserRequest` is optional; leave it out to accept the default.
+Unknown fields are rejected with HTTP 422 (Pydantic `extra="forbid"`).
+
+### 4.4 Backtest API
 
 ```python
 from engine.backtest import walk_forward

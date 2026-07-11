@@ -28,3 +28,7 @@ Thumbs.db
 result.json
 scratch/
 tmp/
+sample_request.json
+
+# Redundant with data/ folder
+data.zip
