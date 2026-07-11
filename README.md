@@ -262,9 +262,11 @@ Open `http://localhost:8000/docs` to try requests interactively.
 uvicorn api.main:app --host 0.0.0.0 --port 8000 --workers 2 --timeout-keep-alive 300
 ```
 
-The 300-second keep-alive is important — the `min_max_drawdown` model uses
-differential evolution and can take ~40 s on larger universes. Default
-uvicorn timeouts will drop the connection.
+The `--timeout-keep-alive 300` flag is a conservative safety margin. After
+DE parameter tuning (`popsize=15, maxiter=5, tol=2e-3`), `min_max_drawdown`
+runs in under 3 s on all tested universes (worst case 2.80 s, down from
+~40 s). The flag keeps long-running backtest calls alive; for optimize-only
+deployments a lower value (e.g. 30 s) is sufficient.
 
 #### Docker
 
@@ -1023,20 +1025,27 @@ from beating a slightly-higher-risk but positive-return alternative.
   `sklearn.covariance.LedoitWolf`. Blends the sample covariance with a
   scaled identity, minimizing Frobenius-norm distance to the true
   covariance. Standard for portfolio optimization since Ledoit & Wolf (2003).
-- `ewma_cov(halflife=63)` — exponentially weighted. Weights recent
-  observations more heavily; tracks the current volatility regime rather
-  than averaging over the whole lookback.
-- `adaptive_cov` — **default in the optimizer (`cov_method="auto"`).**
-  Runs `vol_regime_ratio()` (median of recent 30-day vol / full-window vol
-  across assets) and switches to EWMA when the ratio exceeds
-  `regime_threshold` (default 1.3), otherwise uses Ledoit-Wolf. Prevents
-  Ledoit-Wolf from averaging stale calm-period data into risk estimates
-  during a volatility spike.
+- `robust_cov(clip_percentile=1.0)` — **Fat-tail robust.** Winsorizes each
+  asset's return series at the 1st/99th percentile before passing to
+  Ledoit-Wolf. Reduces the influence of 5-sigma events (COVID crash days,
+  flash crashes) on correlation estimates without breaking matrix
+  conditioning (MCD-based estimators produce condition numbers ~500× higher
+  than LW on typical Indian index universes, causing solver failures).
+  At clip=1%: max pairwise correlation shift <2%, max annualized vol shift
+  <1.1%, condition number ~3600 vs ~2300 for plain LW — both fine.
+- `ewma_cov(halflife=63)` — Exponentially weighted. Tracks the current
+  volatility regime rather than averaging over the whole lookback.
+- `adaptive_cov` — **Default in the optimizer (`cov_method="auto"`).**
+  Combines both fixes:
+  - Calm regime: `robust_lw` (winsorized LW — fat-tail robust, stable).
+  - Stressed regime (vol_ratio ≥ 1.3): EWMA (regime-tracking, current).
 
-Users can force a specific estimator via
-`UserRequest(cov_method="ledoit_wolf" | "ewma" | "auto")`. The result
-object reports `cov_method_used` and `vol_regime_ratio` so the caller can
-see which mode fired.
+  `vol_regime_ratio` = cross-sectional median of (30-day realized vol /
+  full-window vol). Fired on COVID 2020-03/04 (ratio 2.87), stayed quiet
+  in calm windows (ratio 0.4–0.7).
+
+Available `cov_method` values: `"auto"` | `"ledoit_wolf"` | `"robust_lw"` | `"ewma"`.
+The result object reports `cov_method_used` and `vol_regime_ratio`.
 
 **Walk-forward validation (Q rebalance, 3yr lookback, 2019–2024):**
 

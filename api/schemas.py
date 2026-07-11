@@ -75,13 +75,19 @@ class OptimizeRequest(BaseModel):
     risk_free_rate: float = Field(0.065, ge=0.0, le=0.25)
 
     # Covariance estimation
-    cov_method: Literal["auto", "ledoit_wolf", "ewma"] = Field(
+    cov_method: Literal["auto", "ledoit_wolf", "robust_lw", "ewma"] = Field(
         "auto",
-        description="'auto' switches LW->EWMA when recent vol is elevated (regime-aware).")
+        description=(
+            "'auto' = winsorized-LW in calm regimes, EWMA in stress. "
+            "'ledoit_wolf' = plain LW (no fat-tail correction). "
+            "'robust_lw' = always winsorized LW. "
+            "'ewma' = always regime-tracking."))
     ewma_halflife: int = Field(63, ge=5, le=365,
                                description="EWMA halflife in trading days")
     regime_threshold: float = Field(1.3, ge=1.0, le=3.0,
                                     description="Vol ratio above this triggers EWMA in auto mode")
+    clip_percentile: float = Field(1.0, ge=0.1, le=5.0,
+                                   description="Winsorization clip level (%) for fat-tail robustness")
 
     # Black-Litterman
     views: list[dict] = Field(

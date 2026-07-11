@@ -9,7 +9,7 @@ from .config import RISK_FREE_RATE, DEFAULT_LOOKBACK_YEARS
 from .data_loader import load_universe
 from .sector_map import build_map, indices_for_sectors, market_proxy
 from .estimators import (
-    historical_mean, james_stein_mean, ledoit_wolf_cov, ewma_cov, adaptive_cov,
+    historical_mean, james_stein_mean, ledoit_wolf_cov, ewma_cov, robust_cov, adaptive_cov,
 )
 from .selector import run_selection
 
@@ -42,12 +42,14 @@ class UserRequest:
     risk_free_rate: float = RISK_FREE_RATE
 
     # Covariance estimation
-    # "auto": switch to EWMA when recent vol is elevated vs long-run vol
-    # "ledoit_wolf": always LW (stable, industry default)
-    # "ewma": always exponentially-weighted (regime-tracking)
+    # "auto": winsorized-LW in calm, EWMA in stressed regime (recommended)
+    # "ledoit_wolf": plain LW (no fat-tail correction)
+    # "robust_lw": always winsorized LW (fat-tail robust, no regime switching)
+    # "ewma": always exponentially-weighted (regime-tracking only)
     cov_method: str = "auto"
     ewma_halflife: int = 63
     regime_threshold: float = 1.3   # vol_ratio above this triggers EWMA in auto mode
+    clip_percentile: float = 1.0    # winsorization level for robust_lw / auto calm-regime
 
     # Black-Litterman
     views: list[dict] = field(default_factory=list)
@@ -143,12 +145,17 @@ def optimize(req: UserRequest) -> PortfolioResult:
     _vol_ratio = vol_regime_ratio(returns, short_window=30)
     if req.cov_method == "ledoit_wolf":
         cov = ledoit_wolf_cov(returns, annualize=True); _cov_used = "ledoit_wolf"
+    elif req.cov_method == "robust_lw":
+        cov = robust_cov(returns, clip_percentile=req.clip_percentile, annualize=True)
+        _cov_used = "robust_lw"
     elif req.cov_method == "ewma":
         cov = ewma_cov(returns, halflife=req.ewma_halflife, annualize=True); _cov_used = "ewma"
     else:  # "auto"
         cov, _cov_used, _vol_ratio = adaptive_cov(
             returns, threshold=req.regime_threshold,
-            ewma_halflife=req.ewma_halflife, annualize=True,
+            ewma_halflife=req.ewma_halflife,
+            clip_percentile=req.clip_percentile,
+            annualize=True,
         )
 
     # Market proxy weights for Black-Litterman
