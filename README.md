@@ -644,19 +644,97 @@ curl -s 'http://localhost:8000/indices?sector=IT'
 
 ### 4.4 Backtest Python API
 
+`walk_forward` rolls through history, re-runs the optimizer at each rebalance
+date on a fixed lookback window, and tracks the resulting equity curve. It
+gives you a realistic picture of how the strategy would have performed if you
+had run it live, without look-ahead bias.
+
 ```python
 from engine.backtest import walk_forward
 from engine.optimizer import UserRequest
 
 bt = walk_forward(
-    UserRequest(sectors=["Largecap", "Broad"], primary_goal="max_sharpe", w_max=0.30),
-    rebalance="Q",       # "W" | "M" | "Q" | "A"
-    lookback_years=3,
-    initial_capital=100.0,
+    UserRequest(
+        sectors=["Largecap", "Broad"],
+        primary_goal="max_sharpe",
+        w_max=0.30,
+        cov_method="auto",   # uses regime-aware cov at each rebalance point
+    ),
+    rebalance="Q",           # "W" (weekly) | "M" (monthly) | "Q" (quarterly) | "A" (annual)
+    lookback_years=3,        # how much history the optimizer sees at each rebalance
+    initial_capital=100.0,   # starting NAV for the equity curve
 )
-print(bt["metrics"])
-bt["equity_curve"].plot()   # pandas Series, plot directly with matplotlib
 ```
+
+**Return value — `bt` is a plain dict:**
+
+| Key | Type | Description |
+|---|---|---|
+| `equity_curve` | `pd.Series` | Daily NAV, indexed by date, rebased to `initial_capital`. |
+| `daily_returns` | `pd.Series` | Daily portfolio returns (`equity_curve.pct_change()`). |
+| `metrics` | `dict[str, float]` | Full-period realized metrics: `ann_return`, `ann_vol`, `sharpe`, `sortino`, `max_drawdown`, `cvar`, `calmar`. Computed on `daily_returns`, not on any single optimization window. |
+| `rebalance_log` | `list[dict]` | One entry per rebalance: `{"date": Timestamp, "model": str, "weights": dict}`. Use this to audit which model was selected at each date. |
+| `rebalance_dates` | `list[Timestamp]` | Every date the portfolio was rebalanced. |
+
+**Common usage patterns:**
+
+```python
+import pandas as pd
+
+# 1. Print summary metrics
+print(bt["metrics"])
+# {'ann_return': 0.117, 'ann_vol': 0.135, 'sharpe': 0.387, ...}
+
+# 2. Plot equity curve
+bt["equity_curve"].plot(title="Portfolio NAV", ylabel="Value (rebased to 100)")
+
+# 3. Year-by-year return breakdown
+daily = bt["daily_returns"]
+for yr in range(2020, 2025):
+    yr_ret = (1 + daily[daily.index.year == yr]).prod() - 1
+    print(f"{yr}: {yr_ret:+.2%}")
+
+# 4. See which model was selected at each rebalance
+for entry in bt["rebalance_log"]:
+    if "model" in entry:
+        print(f"{entry['date'].date()}  {entry['model']}")
+
+# 5. Inspect weights at a specific rebalance
+log = bt["rebalance_log"]
+print(log[0]["weights"])   # first rebalance weights
+
+# 6. Compare rebalance frequencies
+for freq in ["M", "Q", "A"]:
+    result = walk_forward(
+        UserRequest(sectors=["Largecap","Broad"], primary_goal="max_sharpe", w_max=0.30),
+        rebalance=freq, lookback_years=3,
+    )
+    m = result["metrics"]
+    print(f"{freq}  sharpe={m['sharpe']:.3f}  maxdd={m['max_drawdown']:.3f}")
+```
+
+**Important caveats:**
+
+- `metrics` values are **realized out-of-sample** across the full equity curve,
+  not in-sample estimates from the last optimization window. They represent how
+  the strategy actually performed at each rebalance, which is a more honest
+  picture than the optimizer's own forward-return estimates.
+- If a rebalance window has insufficient history (less than `MIN_HISTORY_DAYS=252`
+  trading days for any index), that index is dropped from the universe for that
+  period. The `rebalance_log` entry will have a smaller `weights` dict than
+  others.
+- If the optimizer fails at a particular rebalance (e.g., solver crash on a
+  degenerate universe), the previous period's weights are carried forward and
+  the log entry will contain an `"error"` key instead of `"model"` and `"weights"`.
+  Check for this before using log entries:
+  ```python
+  for entry in bt["rebalance_log"]:
+      if "error" in entry:
+          print(f"Rebalance failed at {entry['date']}: {entry['error']}")
+  ```
+- Backtests via the REST API (`POST /backtest`) return `equity_curve` as a
+  list of `{"date": "YYYY-MM-DD", "value": float}` dicts (JSON-serializable).
+  The Python API returns a `pd.Series` directly.
 
 ---
 
