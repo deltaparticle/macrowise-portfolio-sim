@@ -125,6 +125,7 @@ def root() -> dict[str, Any]:
             "GET  /indices?sector=IT",
             "GET  /models",
             "GET  /examples",
+            "GET  /convert-return?total_return=0.40&years=5",
         ],
     }
 
@@ -263,7 +264,7 @@ def models_endpoint() -> S.ModelsResponse:
         S.ModelInfo(name="min_max_drawdown", family="drawdown", solver="scipy differential_evolution",
                     handles_target_return=True, handles_max_vol=False,
                     handles_max_dd=True, handles_max_cvar=False, handles_views=False,
-                    description="Minimize realized max drawdown; non-convex, slow (~40s)."),
+                    description="Minimize realized max drawdown via differential evolution (<3s)."),
         S.ModelInfo(name="risk_parity", family="risk_parity", solver="scipy SLSQP",
                     handles_target_return=False, handles_max_vol=False,
                     handles_max_dd=False, handles_max_cvar=False, handles_views=False,
@@ -295,6 +296,35 @@ def models_endpoint() -> S.ModelsResponse:
                     description="Weights proportional to 1/sigma. Baseline."),
     ]
     return S.ModelsResponse(count=len(catalog), models=catalog)
+
+
+@app.get("/convert-return", response_model=S.ConvertReturnResponse, tags=["helpers"])
+def convert_return(
+    total_return: float = Query(
+        ..., description="Total return as a decimal, e.g. 0.40 for 40%"),
+    years: int = Query(
+        ..., ge=1, le=50, description="Investment horizon in years"),
+) -> S.ConvertReturnResponse:
+    """Convert a total return over N years to an annualized return (CAGR).
+
+    Use this to translate a user's goal like "I want 40% return over 5 years"
+    into the annualized `target_return` value that `/optimize` expects.
+
+    Example: /convert-return?total_return=0.40&years=5  ->  annualized_return=0.0696
+    Then pass `"target_return": 0.0696` to `/optimize`.
+    """
+    annualized = (1 + total_return) ** (1 / years) - 1
+    return S.ConvertReturnResponse(
+        total_return=total_return,
+        years=years,
+        annualized_return=round(annualized, 6),
+        note=(
+            f"{total_return:.1%} total over {years} years = {annualized:.2%} annualized (CAGR). "
+            f"Pass this as target_return to /optimize. Note: the engine checks this against "
+            f"historical mean estimates, not forward predictions. The target is a floor on "
+            f"historical expected return, not a guarantee of future performance."
+        ),
+    )
 
 
 EXAMPLES_DIR = Path(__file__).resolve().parent.parent / "examples"

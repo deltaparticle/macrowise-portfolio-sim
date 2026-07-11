@@ -315,6 +315,7 @@ fails 3 consecutive times.
 | `GET` | `/indices?sector=IT&match_any=true` | None | Slugs tagged with a given tag |
 | `GET` | `/models` | None | Every optimizer: family, solver, supported constraints |
 | `GET` | `/examples` | None | Pre-built example requests (use for UI "try it" buttons) |
+| `GET` | `/convert-return?total_return=0.40&years=5` | None | Convert total return over N years to annualized CAGR for `target_return` |
 | `GET` | `/docs` | None | Swagger UI — interactive browser for all endpoints |
 | `GET` | `/redoc` | None | ReDoc documentation UI |
 | `GET` | `/openapi.json` | None | Machine-readable OpenAPI 3.1 schema |
@@ -495,6 +496,91 @@ if (!data.feasible) {
 **Note:** Backtest `metrics` are computed on the out-of-sample equity curve,
 not on any single optimization window. They represent realized portfolio
 performance across all rebalance periods.
+
+#### `GET /convert-return` — total return to annualized helper
+
+Users often think in total return ("I want 40% over 5 years"), but the engine's
+`target_return` field expects an annualized rate (CAGR). This endpoint does the
+conversion.
+
+```bash
+curl -s 'http://localhost:8000/convert-return?total_return=0.40&years=5'
+```
+
+```jsonc
+{
+  "total_return": 0.4,
+  "years": 5,
+  "annualized_return": 0.069610,
+  "note": "40.0% total over 5 years = 6.96% annualized (CAGR). Pass this as target_return to /optimize. ..."
+}
+```
+
+**Frontend integration pattern:**
+
+```javascript
+// User enters: "I want 40% return over 5 years"
+const conv = await fetch(`/convert-return?total_return=0.40&years=5`).then(r => r.json())
+
+// Now use the annualized value in the optimize call
+const result = await fetch('/optimize', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    sectors: ['IT', 'Banks'],
+    target_return: conv.annualized_return,   // 0.069610
+    w_max: 0.30,
+  }),
+}).then(r => r.json())
+```
+
+Or do it client-side — it's one line of math:
+
+```javascript
+const annualized = Math.pow(1 + totalReturn, 1 / years) - 1
+```
+
+**Common conversions:**
+
+| User goal | `total_return` | `years` | `annualized_return` |
+|---|---:|---:|---:|
+| 10% over 5 years | 0.10 | 5 | 0.0192 (1.92%) |
+| 20% over 3 years | 0.20 | 3 | 0.0627 (6.27%) |
+| 40% over 5 years | 0.40 | 5 | 0.0696 (6.96%) |
+| 100% over 10 years | 1.00 | 10 | 0.0718 (7.18%) |
+
+#### Important: what `target_return` actually means
+
+The engine is **backward-looking**. When you set `target_return: 0.07`, the
+engine does not predict or guarantee 7% future annual return. Here is exactly
+what happens:
+
+1. The engine loads historical daily returns for your selected indices over the
+   `lookback_years` window.
+2. It computes the **historical daily mean return** for each index and
+   annualizes it: `(1 + daily_mean) ^ 252 - 1`.
+3. It finds the minimum-variance portfolio where the **weighted historical mean**
+   exceeds 7%.
+
+The result is: "based on the past N years of data, this portfolio had an
+annualized mean return of at least 7%." It says nothing about what the portfolio
+will deliver going forward.
+
+**What `feasible: false` means for `target_return`:** If the engine returns
+`feasible: false` with a reason like `"return 0.024 < target 0.070"`, it means
+no combination of the selected indices achieved 7% annualized return over the
+lookback window. This is a data reality, not a bug. Possible responses:
+
+- **Widen the universe** — add higher-return sectors (Midcap, Smallcap, Momentum).
+- **Lengthen the lookback** — `lookback_years: 10` might capture a more favorable
+  period (but increases regime mixing).
+- **Lower the target** — the engine tells you the best achievable return in the
+  `reason` field. Use that as a realistic baseline.
+
+The `lookback_years` parameter controls **how much historical data the engine
+uses for estimation**. It is not your investment horizon. Setting
+`lookback_years: 5` does not mean "optimize for a 5-year investment." It means
+"use the last 5 years of daily return data to estimate means and covariances."
 
 #### `GET /sectors`
 

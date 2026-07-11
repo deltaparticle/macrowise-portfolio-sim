@@ -213,6 +213,13 @@ class ModelsResponse(BaseModel):
     models: list[ModelInfo]
 
 
+class ConvertReturnResponse(BaseModel):
+    total_return: float = Field(description="The total return input, e.g. 0.40 for 40%")
+    years: int = Field(description="Investment horizon in years")
+    annualized_return: float = Field(description="Equivalent annualized return (CAGR)")
+    note: str = Field(description="Explanation of what this number means")
+
+
 class HealthResponse(BaseModel):
     status: Literal["ok"]
     version: str
